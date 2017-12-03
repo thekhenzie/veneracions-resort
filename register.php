@@ -1,3 +1,49 @@
+<?php
+ob_start();
+session_start();
+if( isset($_SESSION['user'])!="" ){
+	header("Location: index.php");
+}
+include_once 'dbconnect.php';
+
+if(isset($_POST['signUp'])) {
+		
+	$username = trim($_POST['username']);
+	$emailAddress = trim($_POST['emailAddress']);
+	$password = trim($_POST['password']);
+	
+	$username = strip_tags($username);
+	$emailAddress = strip_tags($emailAddress);
+	$upassword = strip_tags($password);
+	
+	// password encrypt using SHA256();
+	//$password = hash('sha256', $password);
+	$password = $upassword;
+	// check emailAddress exist or not
+	$query = "SELECT emailAddress FROM admin WHERE emailAddress='$emailAddress'";
+	$result = mysql_query($query);
+	
+	$count = mysql_num_rows($result); // if emailAddress not found then proceed
+	if ($count==0) {
+		$query = "INSERT INTO admin(username, emailAddress, password) VALUES('$username','$emailAddress','$password')";
+		$res = mysql_query($query);
+		
+		if ($res) {
+			$errTyp = "success";
+			$errMSG = "Successfully registered, you may login now";
+		} else {
+			$errTyp = "danger";
+			$errMSG = "Something went wrong, try again later...";	
+		}	
+			
+	} else {
+		$errTyp = "warning";
+		$errMSG = "Email address already in use.";
+	}
+	
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -297,22 +343,34 @@
             <div class="awe-overlay"></div>
             <div class="container">
                 <div class="login-register">
-                    <div class="text text-center">
+                    <div class="text text-center">       
                         <h2>REGISTER FORM</h2>
                         <p>If you no have account in Veneracion's Resort! Register and feeling</p>
-                        <form action="#" class="account_form">
+                        <form method="post" class="account_form" autocomplete="off">
+                        <?php
+                        if ( isset($errMSG) ) {
+                            
+                            ?>
+                            <div class="form-group">
+                            <div class="alert alert-dismissable alert-<?php echo ($errTyp=="success") ? "success" : $errTyp; ?>">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info"></i> <?php echo $errMSG; ?>
+                            </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
                             <div class="field-form">
-                                <input type="text" class="field-text" placeholder="User name*">
+                                <input type="text" name="username" class="field-text" placeholder="User name*" required>
                             </div>
                             <div class="field-form">
-                                <input type="text" class="field-text" placeholder="Email*">
+                                <input type="email" name="emailAddress" class="field-text" placeholder="Email Address*" required>
                             </div>
-                            <div class="field-form">
-                                <input type="password" class="field-text" placeholder="Password*">
-                                <span class="view-pass"><i class="lotus-icon-view"></i></span>
+                            <div class="field-form"> 
+                                <input type="password" name="password" class="field-text" placeholder="Password*" required>
                             </div>
                             <div class="field-form field-submit">
-                                <button class="awe-btn awe-btn-13">REGISTER</button>
+                                <button name="signUp" class="awe-btn awe-btn-13">REGISTER</button>
                             </div>
                         </form>
                     </div>
@@ -335,7 +393,7 @@
                                 <h4>News &amp; Offers</h4>
                                 <div class="mailchimp-form">
                                     <form action="#" method="POST">
-                                        <input type="text" name="email" placeholder="Your email address" class="input-text">
+                                        <input type="text" name="emailAddress" placeholder="Your email address address" class="input-text">
                                         <button class="awe-btn">SIGN UP</button>
                                     </form>
                                 </div>
