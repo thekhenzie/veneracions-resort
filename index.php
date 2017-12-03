@@ -1,3 +1,16 @@
+<?php
+    ob_start();
+    session_start();
+    require_once 'dbconnect.php';
+    
+    if( !isset($_SESSION['user']) ) {
+        header("Location: index.php");
+        exit;
+    }
+    // select loggedin users detail
+    $res=mysql_query("SELECT * FROM admin WHERE adminID=".$_SESSION['user']);
+    $userRow=mysql_fetch_array($res);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,13 +78,22 @@
                         <span>
                             <i class="lotus-icon-phone"></i> +63 915 6789 321</span>
                     </div>
-                    <div class="header_right float-right">
-
-                        <span class="login-register">
-                            <a href="login.html">Login</a>
-                            <a href="register.html">register</a>
-                        </span>
-
+                    
+                    <?php
+                    if($_SESSION['isAdmin']){
+                        echo "
+                        <div class='header_left float-right'>
+                        <h4>Hi ".$userRow['username']."!</h4>";
+                    }
+                    else{
+                        echo "
+                        <div class='header_right float-right'>
+                        <span class='login-register'>
+                            <a href='login.html'>Login</a>
+                            <a href='register.html'>register</a>
+                        </span>";
+                    }
+                    ?>
                     </div>
                 </div>
             </div>
