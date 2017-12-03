@@ -98,8 +98,8 @@
                     <div class="header_right float-right">
 
                         <span class="login-register">
-                            <a class="active" href="login.html">Login</a>
-                            <a href="register.html">register</a>
+                            <a class="active" href="login.php">Login</a>
+                            <a href="register.php">register</a>
                         </span>
 
                     </div>
@@ -121,7 +121,7 @@
                     <nav class="header_menu">
                         <ul class="menu">
                             <li class="current-menu-item">
-                                <a href="index.html">Home</a>
+                                <a href="index.php">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">About</a>

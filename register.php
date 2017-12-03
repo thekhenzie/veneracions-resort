@@ -107,8 +107,8 @@ if(isset($_POST['signUp'])) {
                     <div class="header_right float-right">
 
                         <span class="login-register">
-                            <a href="login.html">Login</a>
-                            <a class="active" href="register.html">register</a>
+                            <a href="login.php">Login</a>
+                            <a class="active" href="register.php">register</a>
                         </span>
 
                     </div>
@@ -130,7 +130,7 @@ if(isset($_POST['signUp'])) {
                     <nav class="header_menu">
                         <ul class="menu">
                             <li class="current-menu-item">
-                                <a href="index.html">Home</a>
+                                <a href="index.php">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">About</a>

@@ -80,8 +80,8 @@
                         echo "
                         <div class='header_right float-right'>
                         <span class='login-register'>
-                            <a href='login.html'>Login</a>
-                            <a href='register.html'>register</a>
+                            <a href='login.php'>Login</a>
+                            <a href='register.php'>register</a>
                         </span>
                         </div>";
                     }
@@ -93,7 +93,6 @@
 
             <!-- HEADER LOGO & MENU -->
             <div class="header_content" id="header_content">
-
                 <div class="container">
                     <!-- HEADER LOGO -->
                     <div class="header_logo">
@@ -107,7 +106,7 @@
                     <nav class="header_menu">
                         <ul class="menu">
                             <li class="current-menu-item">
-                                <a href="index.html">Home</a>
+                                <a href="index.php">Home</a>
                             </li>
                             <li>
                                 <a href="about.html">About</a>
@@ -119,13 +118,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="room-1.html">Room 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-5.html">Room 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-6.html">Room 3</a>
+                                        <a href="room-5.html">Room List</a>
                                     </li>
                                     <li>
                                         <a href="room-detail.html">Room Detail</a>
@@ -157,15 +150,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#">Gallery
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="gallery.html">Gallery Style 1</a>
-                                    </li>
-                                </ul>
+                            <li>   
+                                <a href="gallery.html">Gallery List</a>     
                             </li>
                             <li>
                                 <a href="contact.html">Contact</a>
