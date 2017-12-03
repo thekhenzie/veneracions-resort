@@ -1,3 +1,40 @@
+<?php
+	ob_start();
+	session_start();
+	require_once 'dbconnect.php';
+	
+	// it will never let you open index(login) page if session is set
+	if (isset($_SESSION['isAdmin'])) {
+		header("Location: index.php");
+		exit;
+	}
+	
+	if( isset($_POST['signIn']) ) {	
+		
+		$username = $_POST['username'];
+		$upassword = $_POST['password'];
+		
+		$username = strip_tags(trim($username));
+		$upassword = strip_tags(trim($upassword));
+		
+		//$password = hash('sha256', $upass); // password hashing using SHA256
+		$password = $upassword;
+		$res=mysql_query("SELECT adminID, password FROM admin WHERE username='$username'");
+		
+		$row=mysql_fetch_array($res);
+
+		$count = mysql_num_rows($res); // if username/pass correct it returns must be 1 row
+		if( $count == 1 && $row['password']==$password ) {
+			$_SESSION['user'] = $row['adminID'];
+            $_SESSION['isAdmin'] = true; 
+            header("Location: index.php");
+        }
+        else {
+			$errMSG = "E-mail or Password is wrong.";
+		}
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -299,19 +336,26 @@
                 <div class="login-register">
                     <div class="text text-center">
                         <h2>LOGIN ACCOUNT</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing</p>
-                        <form action="#" class="account_form">
+                        <p>Login to your account now</p>
+                        <form method="post" autocomplete="off" class="account_form">
+                        <?php if ( isset($errMSG) ) { ?>
+                            <div class="form-group">
+                            <div class="alert alert-dismissable alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <?php echo $errMSG; ?>
+                            </div>
+                            </div>
+                        <?php } ?>
                             <div class="field-form">
-                                <input type="text" class="field-text" placeholder="User name">
+                                <input type="text" name="username" class="field-text" placeholder="User name">
                             </div>
                             <div class="field-form">
-                                <input type="password" class="field-text" placeholder="Password">
-                                <span class="view-pass"><i class="lotus-icon-view"></i></span>
+                                <input type="password" name="password" class="field-text" placeholder="Password">
                             </div>
                             <div class="field-form field-submit">
-                                <button class="awe-btn awe-btn-13">Login</button>
+                                <button type="submit" name="signIn" class="awe-btn awe-btn-13">Login</button>
                             </div>
-                            <span class="account-desc">I don’t have an account  -  <a href="#">Forgot Password</a></span>
+                            <span class="account-desc">I don’t have an account  -  <a href="register.php">Register here</a></span>
                         </form>
                     </div>
                 </div>
