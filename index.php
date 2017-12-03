@@ -3,10 +3,6 @@
     session_start();
     require_once 'dbconnect.php';
     
-    if( !isset($_SESSION['user']) ) {
-        header("Location: index.php");
-        exit;
-    }
     // select loggedin users detail
     $res=mysql_query("SELECT * FROM admin WHERE adminID=".$_SESSION['user']);
     $userRow=mysql_fetch_array($res);
