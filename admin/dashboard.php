@@ -143,7 +143,7 @@ function more3()
             
 			<li><a href="room.php"><i class="icon-key"></i> Rooms</a></li>
 			
-			<li><a href="http://www.hotel.gamboh.com.my"><i class="icon-share"></i> Booking Page</a></li>
+			<li><a href="http://veneracionsresort.site88.net/"><i class="icon-share"></i> Booking Page</a></li>
           </ul>
 
         </div>
