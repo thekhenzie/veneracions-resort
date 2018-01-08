@@ -186,7 +186,7 @@ function fnSearch()
 					  </div>
 					  <div class="form-group">
 						<label for="rate">Rate</label>
-						<input type="text" class="form-control"  nsme="rate" id="rate" placeholder="Write without MYR or RM" required>
+						<input type="number" class="form-control"  name="rate" id="rate" placeholder="Write without PHP" required>
 					  </div>
 					  <div class="form-group">
 						<label for="desc">Descriptions</label>

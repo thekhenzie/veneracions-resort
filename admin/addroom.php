@@ -25,9 +25,6 @@ $imgpath = $uploadDir . $imagename . $imageFileType;
 $uploadDirForSql = "img/";
 $imgpathForSQL = $uploadDirForSql . $imagename . $imageFileType;
 
-//check image dimension
-
-//end of check image dimension/
 $room_name = $_POST['room_name'];
 if (isset($_POST['total_room'])) {
     $total = $_POST['total_room'];
@@ -48,7 +45,7 @@ if (isset($_POST['occupancy'])) {
     $occupancy = $_POST['occupancy'];
 }
 
-$sql = "INSERT INTO room (room_id, total_room, occupancy, size, view, room_name, descriptions, rate, imgpath) VALUES (null, '" . $total . "', '" . $occupancy . "', '" . $size . "', '" . $view . "', '" . $room_name . "', '" . $desc . "', '" . $rate . "', '" . $imgpathForSQL . "')";
+$sql = "INSERT INTO room (total_room, occupancy, size, view, room_name, descriptions, rate, imgpath) VALUES ('" . $total . "', '" . $occupancy . "', '" . $size . "', '" . $view . "', '" . $room_name . "', '" . $desc . "', '" . $rate . "', '" . $imgpathForSQL . "')";
 $result = mysql_query($sql);
 echo mysql_error();
 move_uploaded_file($_FILES["img"]["tmp_name"], $imgpath);
@@ -82,6 +79,3 @@ echo "</div>\n";
 echo "\n";
 echo "\n";
 echo "</body></html>";
-?>
-Download Formatting took: 413 ms PHP Formatter made by Spark Labs
-Copyright Gerben van Veenendaal

@@ -2,16 +2,13 @@
 session_start();
 
 include './auth.php';
-$re = mysql_query("SELECT * from admin WHERE username='".$_SESSION['username']."' AND password='".$_SESSION['password']."'");
+$re = mysql_query("SELECT * from admin WHERE username='" . $_SESSION['username'] . "' AND password='" . $_SESSION['password'] . "'");
 echo mysql_error();
-if(mysql_num_rows($re) > 0)
-{
+if (mysql_num_rows($re) > 0) {
 
-} 
-else
-{
-session_destroy();
-header("location: index.htm");
+} else {
+    session_destroy();
+    header("location: index.htm");
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +19,7 @@ header("location: index.htm");
     <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
     <meta name="description" content="">
     <meta name="author" content="">
- 
+
 
     <title>Booking System</title>
 
@@ -57,8 +54,8 @@ header("location: index.htm");
 	  $(document).ready(function() {
 			$("#checkout").datepicker();
 			$("#checkin").datepicker();
-			
-		
+
+
 	  });
 
 function fnSearch()
@@ -71,7 +68,7 @@ function fnSearch()
 				type: "POST",
 				url: "search.php",
 				data: "checkin=" + checkin + "&checkout=" + checkout,
-				success: function(resPonsE) 
+				success: function(resPonsE)
 					{
 						document.getElementById('bookindetails').style.display='block'
 						document.getElementById('bookinginfo0').style.display='none'
@@ -93,7 +90,7 @@ function more1()
 						document.getElementById('bookinginfo1').style.display='none'
 						document.getElementById('bookinginfo2').style.display='none'
 						document.getElementById('statistics').style.display='none'
-						
+
 		}
 function more2()
 		{
@@ -102,7 +99,7 @@ function more2()
 						document.getElementById('bookinginfo0').style.display='none'
 						document.getElementById('bookinginfo2').style.display='none'
 						document.getElementById('statistics').style.display='none'
-						
+
 		}
 function more3()
 		{
@@ -111,8 +108,8 @@ function more3()
 						document.getElementById('bookinginfo0').style.display='none'
 						document.getElementById('bookinginfo1').style.display='none'
 						document.getElementById('statistics').style.display='none'
-						
-		}		
+
+		}
 	</script>
   <body>
 
@@ -134,107 +131,101 @@ function more3()
         </div>
       </div>
     </nav>
-	
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="dashboard.php"><i class="icon-gauge"></i> Dashboard <span class="sr-only">(current)</span></a></li>
-            
+
 			<li><a href="room.php"><i class="icon-key"></i> Rooms</a></li>
-			
+
 			<li><a href="http://veneracionsresort.site88.net/"><i class="icon-share"></i> Booking Page</a></li>
           </ul>
 
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-         
-		 
+
+
 			<div class="container-fluid">
 			 <h4 class="sub-header">Dashboard</h4>
-				<div class="row">	
+				<div class="row">
 					<?php
-					include './auth.php';
-					$re = mysql_query("select count(booking_id) as total_row from booking WHERE DATEDIFF(NOW(), booking_date) <= 7;");
-					$re2 = mysql_query("select count(booking_id) as total_row from booking WHERE payment_status like 'pend%';");
-					$re3 = mysql_query("select count(booking_id) as total_row from booking WHERE payment_status like 'conf%';");
-					if(mysql_num_rows($re) > 0)
-					{
-						while($row = mysql_fetch_array($re))
-						{
-						echo "					<div class=\"col-xs-4\">\n";
-						echo "							<div class=\"small-box bg-aqua\">\n";
-						echo "                                <div class=\"inner\">\n";
-						echo "                                    <h3>\n";
-						echo "                                        ".$row['total_row']."\n";
-						echo "                                    </h3>\n";
-						echo "                                    <p>\n";
-						echo "                                        New Booking in Last 7 days\n";
-						echo "                                    </p>\n";
-						echo "                                </div>\n";
-						echo "                                <div class=\"icon\">\n";
-						echo "                                    <i class=\"ion ion-person-add\"></i>\n";
-						echo "                                </div>                                <a href=\"#\" onClick='more1();' class=\"small-box-footer\">
+include './auth.php';
+$re = mysql_query("select count(booking_id) as total_row from booking WHERE DATEDIFF(NOW(), booking_date) <= 7;");
+$re2 = mysql_query("select count(booking_id) as total_row from booking WHERE payment_status like 'pend%';");
+$re3 = mysql_query("select count(booking_id) as total_row from booking WHERE payment_status like 'conf%';");
+if (mysql_num_rows($re) > 0) {
+    while ($row = mysql_fetch_array($re)) {
+        echo "					<div class=\"col-xs-4\">\n";
+        echo "							<div class=\"small-box bg-aqua\">\n";
+        echo "                                <div class=\"inner\">\n";
+        echo "                                    <h3>\n";
+        echo "                                        " . $row['total_row'] . "\n";
+        echo "                                    </h3>\n";
+        echo "                                    <p>\n";
+        echo "                                        New Booking in Last 7 days\n";
+        echo "                                    </p>\n";
+        echo "                                </div>\n";
+        echo "                                <div class=\"icon\">\n";
+        echo "                                    <i class=\"ion ion-person-add\"></i>\n";
+        echo "                                </div>                                <a href=\"#\" onClick='more1();' class=\"small-box-footer\">
                                     View Details <i class=\"fa fa-arrow-circle-right\"></i>
                                 </a>\n";
-						echo "\n";
-						echo "                            </div>			\n";
-						echo "					</div>";
+        echo "\n";
+        echo "                            </div>			\n";
+        echo "					</div>";
 
-						}
-					}
-					if(mysql_num_rows($re2) > 0)
-					{
-						while($row2 = mysql_fetch_array($re2))
-						{
-						echo "					<div class=\"col-xs-4\">\n";
-						echo "							<div class=\"small-box bg-green\">\n";
-						echo "                                <div class=\"inner\">\n";
-						echo "                                    <h3>\n";
-						echo "                                        ".$row2['total_row']."\n";
-						echo "                                    </h3>\n";
-						echo "                                    <p>\n";
-						echo "                                        Booking with Pending Payment\n";
-						echo "                                    </p>\n";
-						echo "                                </div>\n";
-						echo "                                <div class=\"icon\">\n";
-						echo "                                    <i class=\"ion ion-person-add\"></i>\n";
-						echo "                                </div>                                <a href=\"#\" onClick='more2();' class=\"small-box-footer\">
+    }
+}
+if (mysql_num_rows($re2) > 0) {
+    while ($row2 = mysql_fetch_array($re2)) {
+        echo "					<div class=\"col-xs-4\">\n";
+        echo "							<div class=\"small-box bg-green\">\n";
+        echo "                                <div class=\"inner\">\n";
+        echo "                                    <h3>\n";
+        echo "                                        " . $row2['total_row'] . "\n";
+        echo "                                    </h3>\n";
+        echo "                                    <p>\n";
+        echo "                                        Booking with Pending Payment\n";
+        echo "                                    </p>\n";
+        echo "                                </div>\n";
+        echo "                                <div class=\"icon\">\n";
+        echo "                                    <i class=\"ion ion-person-add\"></i>\n";
+        echo "                                </div>                                <a href=\"#\" onClick='more2();' class=\"small-box-footer\">
                                     View Details <i class=\"fa fa-arrow-circle-right\"></i>
                                 </a>\n";
-						echo "\n";
-						echo "                            </div>			\n";
-						echo "					</div>";
-						
-						}
-					}
-					if(mysql_num_rows($re3) > 0)
-					{
-						while($row3 = mysql_fetch_array($re3))
-						{
-						echo "					<div class=\"col-xs-4\">\n";
-						echo "							<div class=\"small-box bg-yellow\">\n";
-						echo "                                <div class=\"inner\">\n";
-						echo "                                    <h3>\n";
-						echo "                                        ".$row3['total_row']."\n";
-						echo "                                    </h3>\n";
-						echo "                                    <p>\n";
-						echo "                                        Paid Booking\n";
-						echo "                                    </p>\n";
-						echo "                                </div>\n";
-						echo "                                <div class=\"icon\">\n";
-						echo "                                    <i class=\"ion ion-person-add\"></i>\n";
-						echo "                                </div>                                <a href=\"#\" onClick='more3();' class=\"small-box-footer\">
+        echo "\n";
+        echo "                            </div>			\n";
+        echo "					</div>";
+
+    }
+}
+if (mysql_num_rows($re3) > 0) {
+    while ($row3 = mysql_fetch_array($re3)) {
+        echo "					<div class=\"col-xs-4\">\n";
+        echo "							<div class=\"small-box bg-yellow\">\n";
+        echo "                                <div class=\"inner\">\n";
+        echo "                                    <h3>\n";
+        echo "                                        " . $row3['total_row'] . "\n";
+        echo "                                    </h3>\n";
+        echo "                                    <p>\n";
+        echo "                                        Paid Booking\n";
+        echo "                                    </p>\n";
+        echo "                                </div>\n";
+        echo "                                <div class=\"icon\">\n";
+        echo "                                    <i class=\"ion ion-person-add\"></i>\n";
+        echo "                                </div>                                <a href=\"#\" onClick='more3();' class=\"small-box-footer\">
                                     View Details <i class=\"fa fa-arrow-circle-right\"></i>
                                 </a>\n";
-						echo "\n";
-						echo "                            </div>			\n";
-						echo "					</div>";
-						
-						}
-					}
-					
-					?>
+        echo "\n";
+        echo "                            </div>			\n";
+        echo "					</div>";
+
+    }
+}
+
+?>
 
 
 					<!--div class="col-xs-4">
@@ -253,7 +244,7 @@ function more3()
                                 <a href="#" class="small-box-footer">
                                     View Details <i class="fa fa-arrow-circle-right"></i>
                                 </a>
-                            </div>						
+                            </div>
 					</div>
 
 					<div class="col-xs-4">
@@ -272,39 +263,39 @@ function more3()
                                 <a href="#" class="small-box-footer">
                                     View Details <i class="fa fa-arrow-circle-right"></i>
                                 </a>
-                            </div>						
-					
+                            </div>
+
 					</div-->
 
-				
+
 				</div>
-				
+
 				<div class="row">
 						<div class="col-xs-6" >
 						<h4 class="sub-header">Search Booking</h4>
 									<form class="form-inline" method="post" action="" >
 									  <div class="form-group">
-										 
+
 										<input class="form-control datepicker" name="checkin" id="checkin" placeholder="Start Date">
 									  </div>
 									  <div class="form-group">
-										
+
 										<input  class="form-control datepicker" name="checkout" id="checkout" placeholder="End Date">
 									  </div>
 									  <input class="btn" id="search" name="search" value="Search" onClick="return fnSearch();" style="width: 100px; background-color: #4aa3df; color: white;" type="button">
-									  
+
 									</form>
-						</div>	
-		
+						</div>
+
 						<div class="col-xs-6" id="statistics" style="display:block;">
 						<h4 class="sub-header">Booking Made</h4>
 								<div id="bookingstat" style="height: 250px;"></div>
 						</div>
-						
+
 				</div>
 				<div class="row" id="bookindetails" style="display:none;">
 					<hr>        <div class="col-xs-12 "  >
-							  
+
 							  <div class="table-responsive">
 								<table class="table table-striped">
 								  <thead>
@@ -321,9 +312,9 @@ function more3()
 									</tr>
 								  </thead>
 								  <tbody id="bookinginfo"  >
-									
-									
-								   
+
+
+
 								  </tbody>
 								</table>
 							  </div>
@@ -331,7 +322,7 @@ function more3()
 				</div>
 				<div class="row" id="bookinginfo0" style="display:none;">
 					<hr>        <div class="col-xs-12 "  >
-							  
+
 							  <div class="table-responsive">
 								<table class="table table-striped">
 								  <thead>
@@ -349,33 +340,31 @@ function more3()
 								  </thead>
 								  <tbody id="info0"  >
 				<?php include './auth.php';
-					$re = mysql_query("select booking.* from booking WHERE DATEDIFF(NOW(), booking_date) <= 7 ;");
-					if(mysql_num_rows($re) > 0){
-								while ($row = mysql_fetch_array($re) ){
-											
-											
-											print "<tr style=\"\">		 <td>".$row['booking_id']."</td>\n";
-											print "                  <td>".$row['checkin_date']."</td>\n";
-											print "                  <td>".$row['checkout_date']."</td>\n";
-											print "<td>";
-											$q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
+$re = mysql_query("select booking.* from booking WHERE DATEDIFF(NOW(), booking_date) <= 7 ;");
+if (mysql_num_rows($re) > 0) {
+    while ($row = mysql_fetch_array($re)) {
+
+        print "<tr style=\"\">		 <td>" . $row['booking_id'] . "</td>\n";
+        print "                  <td>" . $row['checkin_date'] . "</td>\n";
+        print "                  <td>" . $row['checkout_date'] . "</td>\n";
+        print "<td>";
+        $q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
 																FROM roombook
 																LEFT JOIN room ON roombook.room_id = room.room_id
-																WHERE roombook.booking_id =".$row['booking_id'].";");
-											while($r = mysql_fetch_array($q))
-											{
-											print "                  ".$r['total']." ".$r['name']." <br>\n";
-											}
-											print "</td>";
-											print "                  <td>Adult:".$row['total_adult']."<br>Child:".$row['total_children']."</td>\n";
-											print "                  <td>".$row['total_amount']."</td>\n";
-											print "                  <td>".$row['deposit']."</td>\n";
-											print "                  <td>".($row['total_amount']-$row['deposit'])."</td>\n";
-											print "                  <td>".$row['payment_status']."</td><td><a href=\"detail.php?booking=".$row['booking_id']."\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=".$row['booking_id']."\"  onclick=\"return confirm('Are you sure want to delete this?')\">Delete</a></td></tr>";					
-							
-								}
-					}
-				?>
+																WHERE roombook.booking_id =" . $row['booking_id'] . ";");
+        while ($r = mysql_fetch_array($q)) {
+            print "                  " . $r['total'] . " " . $r['name'] . " <br>\n";
+        }
+        print "</td>";
+        print "                  <td>Adult:" . $row['total_adult'] . "<br>Child:" . $row['total_children'] . "</td>\n";
+        print "                  <td>" . $row['total_amount'] . "</td>\n";
+        print "                  <td>" . $row['deposit'] . "</td>\n";
+        print "                  <td>" . ($row['total_amount'] - $row['deposit']) . "</td>\n";
+        print "                  <td>" . $row['payment_status'] . "</td><td><a href=\"detail.php?booking=" . $row['booking_id'] . "\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=" . $row['booking_id'] . "\"  onclick=\"return confirm('Are you sure want to delete this?')\">Delete</a></td></tr>";
+
+    }
+}
+?>
 								  </tbody>
 								</table>
 							  </div>
@@ -383,7 +372,7 @@ function more3()
 				</div>
 				<div class="row" id="bookinginfo1" style="display:none;">
 					 <hr>       <div class="col-xs-12 "  >
-							  
+
 							  <div class="table-responsive">
 								<table class="table table-striped">
 								  <thead>
@@ -401,31 +390,30 @@ function more3()
 								  </thead>
 								  <tbody id="info1"  >
 				<?php include './auth.php';
-					$re = mysql_query("select * from booking WHERE payment_status like 'pend%';");
-					if(mysql_num_rows($re) > 0){
-								while ($row = mysql_fetch_array($re) ){
-											print "<tr style=\"\">		 <td>".$row['booking_id']."</td>\n";
-											print "                  <td>".$row['checkin_date']."</td>\n";
-											print "                  <td>".$row['checkout_date']."</td>\n";
-											$q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
+$re = mysql_query("select * from booking WHERE payment_status like 'pend%';");
+if (mysql_num_rows($re) > 0) {
+    while ($row = mysql_fetch_array($re)) {
+        print "<tr style=\"\">		 <td>" . $row['booking_id'] . "</td>\n";
+        print "                  <td>" . $row['checkin_date'] . "</td>\n";
+        print "                  <td>" . $row['checkout_date'] . "</td>\n";
+        $q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
 																FROM roombook
 																LEFT JOIN room ON roombook.room_id = room.room_id
-																WHERE roombook.booking_id =".$row['booking_id'].";");
-											print "<td>";
-											while($r = mysql_fetch_array($q))
-											{
-											print "                  ".$r['total']." ".$r['name']."<br> \n";
-											}
-											print "</td>";
-											print "                  <td>Adult:".$row['total_adult']."<br>Child:".$row['total_children']."</td>\n";
-											print "                  <td>".$row['total_amount']."</td>\n";
-											print "                  <td>".$row['deposit']."</td>\n";
-											print "                  <td>".($row['total_amount']-$row['deposit'])."</td>\n";
-											print "                  <td>".$row['payment_status']."</td><td><a href=\"detail.php?booking=".$row['booking_id']."\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=".$row['booking_id']."\"  onclick=\"return confirm('Are you sure want to delete this?')\">Delete</a></td></tr>";					
-							
-								}
-							}
-				?>
+																WHERE roombook.booking_id =" . $row['booking_id'] . ";");
+        print "<td>";
+        while ($r = mysql_fetch_array($q)) {
+            print "                  " . $r['total'] . " " . $r['name'] . "<br> \n";
+        }
+        print "</td>";
+        print "                  <td>Adult:" . $row['total_adult'] . "<br>Child:" . $row['total_children'] . "</td>\n";
+        print "                  <td>" . $row['total_amount'] . "</td>\n";
+        print "                  <td>" . $row['deposit'] . "</td>\n";
+        print "                  <td>" . ($row['total_amount'] - $row['deposit']) . "</td>\n";
+        print "                  <td>" . $row['payment_status'] . "</td><td><a href=\"detail.php?booking=" . $row['booking_id'] . "\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=" . $row['booking_id'] . "\"  onclick=\"return confirm('Are you sure want to delete this?')\">Delete</a></td></tr>";
+
+    }
+}
+?>
 								  </tbody>
 								</table>
 							  </div>
@@ -433,7 +421,7 @@ function more3()
 				</div>
 				<div class="row" id="bookinginfo2" style="display:none;">
 					      <hr>  <div class="col-xs-12 "  >
-							  
+
 							  <div class="table-responsive">
 								<table class="table table-striped">
 								  <thead>
@@ -451,37 +439,36 @@ function more3()
 								  </thead>
 								  <tbody id="info2"  >
 				<?php include './auth.php';
-					$re = mysql_query("select * from booking WHERE payment_status like 'conf%';");
-					if(mysql_num_rows($re) > 0){
-								while ($row = mysql_fetch_array($re) ){
-											print "<tr style=\"\">		 <td>".$row['booking_id']."</td>\n";
-											print "                  <td>".$row['checkin_date']."</td>\n";
-											print "                  <td>".$row['checkout_date']."</td>\n";
-											print "<td>";
-											$q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
+$re = mysql_query("select * from booking WHERE payment_status like 'conf%';");
+if (mysql_num_rows($re) > 0) {
+    while ($row = mysql_fetch_array($re)) {
+        print "<tr style=\"\">		 <td>" . $row['booking_id'] . "</td>\n";
+        print "                  <td>" . $row['checkin_date'] . "</td>\n";
+        print "                  <td>" . $row['checkout_date'] . "</td>\n";
+        print "<td>";
+        $q = mysql_query("SELECT roombook.totalroombook AS total, room.room_name AS name
 																FROM roombook
 																LEFT JOIN room ON roombook.room_id = room.room_id
-																WHERE roombook.booking_id =".$row['booking_id'].";");
-											while($r = mysql_fetch_array($q))
-											{
-											print "                  ".$r['total']." ".$r['name']." <br>\n";
-											}
-											print "</td>";
-											print "                  <td>Adult:".$row['total_adult']."<br>Child:".$row['total_children']."</td>\n";
-											print "                  <td>".$row['total_amount']."</td>\n";
-											print "                  <td>".$row['deposit']."</td>\n";
-											print "                  <td>".($row['total_amount']-$row['deposit'])."</td>\n";
-											print "                  <td>".$row['payment_status']."</td><td><a href=\"detail.php?booking=".$row['booking_id']."\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=".$row['booking_id']."\" onclick=\"return confirm('Are you sure want to delete this?')\" >Delete</a></td></tr>";					
-							
-								}
-							}
-				?>
+																WHERE roombook.booking_id =" . $row['booking_id'] . ";");
+        while ($r = mysql_fetch_array($q)) {
+            print "                  " . $r['total'] . " " . $r['name'] . " <br>\n";
+        }
+        print "</td>";
+        print "                  <td>Adult:" . $row['total_adult'] . "<br>Child:" . $row['total_children'] . "</td>\n";
+        print "                  <td>" . $row['total_amount'] . "</td>\n";
+        print "                  <td>" . $row['deposit'] . "</td>\n";
+        print "                  <td>" . ($row['total_amount'] - $row['deposit']) . "</td>\n";
+        print "                  <td>" . $row['payment_status'] . "</td><td><a href=\"detail.php?booking=" . $row['booking_id'] . "\"  \">More Details</a></td><td><a class=\"delete\" href=\"deletebooking.php?booking=" . $row['booking_id'] . "\" onclick=\"return confirm('Are you sure want to delete this?')\" >Delete</a></td></tr>";
+
+    }
+}
+?>
 								  </tbody>
 								</table>
 							  </div>
 							</div>
 				</div>
-				
+
 			</div>
 
 
@@ -505,22 +492,20 @@ function more3()
 		  // the chart.
 		  data: [
 		  <?php
-					include './auth.php';
-					$re = mysql_query("select MONTH(booking_date) as month, YEAR(booking_date) as year, count(booking_date) as value from booking group by MONTH(booking_date);");
+include './auth.php';
+$re = mysql_query("select MONTH(booking_date) as month, YEAR(booking_date) as year, count(booking_date) as value from booking group by MONTH(booking_date);");
 
-					if(mysql_num_rows($re) > 0)
-					{
-						echo "{ month: '2014-09', value: 0},";
-						echo "{ month: '2014-10', value: 0},";
-						$count=0;
-						while($row = mysql_fetch_array($re))
-						{
-						echo "{ month: '".$row['year']."-".$row['month']."', value: ".$row['value']." },";
-						}
-						
-					}
-			?>
-			
+if (mysql_num_rows($re) > 0) {
+    echo "{ month: '2014-09', value: 0},";
+    echo "{ month: '2014-10', value: 0},";
+    $count = 0;
+    while ($row = mysql_fetch_array($re)) {
+        echo "{ month: '" . $row['year'] . "-" . $row['month'] . "', value: " . $row['value'] . " },";
+    }
+
+}
+?>
+
 		  ],
 		  // The name of the data record attribute that contains x-values.
 		  xkey: 'month',
