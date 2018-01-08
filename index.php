@@ -1,11 +1,11 @@
 <?php
-    ob_start();
-    session_start();
-    require_once 'dbconnect.php';
-    
-    // select loggedin users detail
-    $res=mysql_query("SELECT * FROM admin WHERE adminID=".$_SESSION['user']);
-    $userRow=mysql_fetch_array($res);
+ob_start();
+session_start();
+require_once 'dbconnect.php';
+
+// select loggedin users detail
+$res = mysql_query("SELECT * FROM admin WHERE adminID=" . $_SESSION['user']);
+$userRow = mysql_fetch_array($res);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,19 +74,19 @@
                         <span>
                             <i class="lotus-icon-phone"></i> +63 915 6789 321</span>
                     </div>
-                    
+
                     <?php
-                    if(!$_SESSION['isAdmin']){
-                        echo "
-                        <div class='header_right float-right'>
-                        <span class='login-register'>
-                            <a href='login.php'>Login</a>
-                            <a href='register.php'>register</a>
-                        </span>
-                        </div>";
-                    }
-                    ?>
-                    
+if (!$_SESSION['isAdmin']) {
+
+    echo "<div class='header_right float-right'>;
+            <span class='login-register'>;
+            <a href='login.php'>Login</a>;
+            <a href='register.php'>register</a>;
+            </span>;
+        </div>";
+}
+?>
+
                 </div>
             </div>
             <!-- END / HEADER TOP -->
@@ -150,17 +150,17 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>   
-                                <a href="gallery.html">Gallery List</a>     
+                            <li>
+                                <a href="gallery.html">Gallery List</a>
                             </li>
                             <li>
                                 <a href="contact.html">Contact</a>
                             </li>
-                            <?php 
-                            if($_SESSION['isAdmin']){
-                            echo "
+                            <?php
+if ($_SESSION['isAdmin']) {
+    echo "
                             <li>
-                                <a href='#'>Hi ".$userRow['username']."!
+                                <a href='#'>Hi " . $userRow['username'] . "!
                                     <span class='fa fa-caret-down'></span>
                                 </a>
                                 <ul class='sub-menu'>
@@ -169,8 +169,8 @@
                                     </li>
                                 </ul>
                             </li>";
-                            }
-                            ?>
+}
+?>
                         </ul>
                     </nav>
                     <!-- END / HEADER MENU -->
@@ -259,28 +259,30 @@
                         <div class="col-lg-3">
                             <h2>ROOMS & RATES</h2>
                         </div>
+                        <form name="form" action="checkroom.php" method="post" onSubmit="return validateForm(this);">
                         <div class="col-lg-9">
                             <div class="availability-form">
-                                <input type="text" class="awe-calendar from" placeholder="Arrival Date">
-                                <input type="text" class="awe-calendar to" placeholder="Departure Date">
+                                <input type="text" name='checkIn' id='checkIn' required class="awe-calendar from" placeholder="Arrival Date">
+                                <input type="text" name='checkOut' id='checkOut' required class="awe-calendar to" placeholder="Departure Date">
 
-                                <select class="awe-select">
-                                    <option>Adults</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select name='totalAdults' id='totalAdults' class="awe-select" required>
+                                    <option value='0' selected>Adults</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
                                 </select>
-                                <select class="awe-select">
-                                    <option>Children</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select name='totalChildren' id='totalChildren'class="awe-select" required>
+                                    <option value='0' selected>Children</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
                                 </select>
                                 <div class="vailability-submit">
-                                    <button class="awe-btn awe-btn-13">FIND THE BEST RATE</button>
+                                    <button name="submit" href="#" class="awe-btn awe-btn-13">FIND THE BEST RATE</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -706,7 +708,30 @@
 
     </div>
     <!-- END / PAGE WRAP -->
-
+    <script>
+	function validateForm(form) {
+		var checkIn = form.checkIn.value;
+		var checkOut = form.checkOut.value;
+		var totalAdults = form.totalAdults.value;
+		var totalChildren = form.totalChildren.value;
+			if(totalAdults == 0)
+			{
+			 	if(totalChildren == 0)
+				{
+				 alert("Please choose no. of guest");
+				 return false;
+				}
+			}
+			if(totalChildren == 0)
+			{
+			 	if(totalAdults == 0)
+				{
+				 alert("Please choose no. of guest");
+				 return false;
+				}
+			}
+	}
+    </script>
 
     <!-- LOAD JQUERY -->
     <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
