@@ -259,7 +259,7 @@ if ($_SESSION['isAdmin']) {
                         <div class="col-lg-3">
                             <h2>ROOMS & RATES</h2>
                         </div>
-                        <form name="form" action="checkroom.php" method="post" onSubmit="return validateForm(this);">
+                        <form name="form" action="reservation-step-2.php" method="post" onSubmit="return validateForm(this);">
                         <div class="col-lg-9">
                             <div class="availability-form">
                                 <input type="text" name='checkIn' id='checkIn' required class="awe-calendar from" placeholder="Arrival Date">
