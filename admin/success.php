@@ -2,7 +2,7 @@
 session_start();
 include './auth.php';
 if(isset($_SESSION['booking_id'])){
-mysql_query("UPDATE `unleashe_hotel`.`booking` SET `payment_status` = 'confirmed' WHERE `booking`.`booking_id` = ".$_SESSION['booking_id'].";");
+mysql_query("UPDATE `dbhotel`.`booking` SET `payment_status` = 'confirmed' WHERE `booking`.`booking_id` = ".$_SESSION['booking_id'].";");
 }
 
 ?>

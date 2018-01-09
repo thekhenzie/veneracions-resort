@@ -1,10 +1,5 @@
 <?php
 session_start();
-//if(isset($_SESSION['booking_id'])){
-//include './auth.php';
-//mysql_query("DELETE FROM `unleashe_hotel`.`booking` WHERE `booking`.`booking_id` = ".$_SESSION['booking_id'].";");
-//}
-
 
 
 
