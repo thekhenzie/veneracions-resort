@@ -19,7 +19,7 @@ $_SESSION['adults'] = $_POST["totalAdults"];
 }
 
 if(isset( $_POST["totalChildren"] ) ){
-$_SESSION['childrens'] = $_POST["totalChildren"];
+$_SESSION['children'] = $_POST["totalChildren"];
 }
 
 
@@ -115,7 +115,7 @@ $_SESSION['childrens'] = $_POST["totalChildren"];
 							</div>
 							
 							<div class="large-4 columns" style="max-width:100%;">
-								<span class="">: <?php echo $_SESSION['childrens'];?>
+								<span class="">: <?php echo $_SESSION['children'];?>
 								</span>				
 							
 							</div>
