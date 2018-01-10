@@ -441,7 +441,7 @@ $result = mysql_query("SELECT r.room_id, (r.total_room-br.total) as availableroo
 echo mysql_error();
 if (mysql_num_rows($result) > 0) {
     echo '<p><b>Choose Your Room</b></p><hr class="line">';
-    print '<form action="guestform.php" method="post"><div class="availability-form">';
+    print '<form action="#" method="post"><div class="availability-form">';
 
     while ($row = mysql_fetch_array($result)) {
 
