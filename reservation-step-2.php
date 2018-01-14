@@ -14,13 +14,13 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
     $_SESSION['total_night'] = $_SESSION['interval']->format('%d');
 
 }
-if (isset($_POST["totalAdults"])) {
-    $_SESSION['adults'] = $_POST["totalAdults"];
-}
+// if (isset($_POST["totalAdults"])) {
+//     $_SESSION['adults'] = $_POST["totalAdults"];
+// }
 
-if (isset($_POST["totalChildren"])) {
-    $_SESSION['children'] = $_POST["totalChildren"];
-}
+// if (isset($_POST["totalChildren"])) {
+//     $_SESSION['children'] = $_POST["totalChildren"];
+// }
 
 ?>
 
@@ -65,9 +65,9 @@ if (isset($_POST["totalChildren"])) {
 
 
     <!-- PRELOADER -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <span class="preloader-dot"></span>
-    </div>
+    </div> -->
     <!-- END / PRELOADER -->
 
     <!-- PAGE WRAP -->
@@ -380,17 +380,6 @@ if (isset($_POST["totalChildren"])) {
                                         <?php echo $_SESSION['checkout_date']; ?>
                                     </div>
 
-                                    <h6 class="check_availability_title">GUEST</h6>
-
-                                    <div class="check_availability-field">
-                                        <label>Adults</label>
-                                        <?php echo $_SESSION['adults']; ?>
-                                    </div>
-
-                                    <div class="check_availability-field">
-                                        <label>Children</label>
-                                        <?php echo $_SESSION['children']; ?>
-                                    </div>
                                     <form action="sessiondestroy.php" method="post">
                                     <button class="awe-btn awe-btn-13" type='submit'>EDIT RESERVATION</button>
                                     </form>
@@ -441,7 +430,7 @@ $result = mysql_query("SELECT r.room_id, (r.total_room-br.total) as availableroo
 echo mysql_error();
 if (mysql_num_rows($result) > 0) {
     echo '<p><b>Choose Your Room</b></p><hr class="line">';
-    print '<form action="guestform.php" method="post"><div class="availability-form">';
+    print '<form action="reservation-step-5.php" method="post"><div class="availability-form">';
 
     while ($row = mysql_fetch_array($result)) {
 
@@ -464,32 +453,38 @@ if (mysql_num_rows($result) > 0) {
                             </div>
                             <div class="reservation-room_text">
                                 <div class="reservation-room_desc">
-                                    <p>' . $sub_row['description'] . '</p>
-                                    <ul>
-                                        <li>1 King Bed</li>
-                                        <li>Free Wi-Fi in all guest rooms</li>
-                                        <li>Separate sitting area</li>
-
-                                    </ul>
+                                    <p>' . $sub_row['occupancy'] . '</p>
                                 </div><p></p>
                                 <b><span class="reservation-room_amout">' . $row['availableroom'] . ' room available</span></b>
                                 <div class="clear"></div>
                                 <p class="reservation-room_price">
                                     <span class="reservation-room_amout">₱ ' . $sub_row['rate'] . '</span> / days
                                 </p>
-                                <select class="form-control" name="qtyroom' . $sub_row['room_id'] . '" id="room' . $sub_row['room_id'] . '" onChange="selection(' . $sub_row['room_id'] . ')"  style="width:100%; color:black;" ;">
+                                <br/><br/>
+                        <span><b>No. of room: </b></span>
+                        <select class="form-control" name="qtyroom' . $sub_row2['room_id'] . '" id="room' . $sub_row2['room_id'] . '" onChange="selection(' . $sub_row['room_id'] . ')"  style="width:100%; color:black;" ;">
+                        <option  value="0">0</option>';
+                    $i = 1;
+                    while ($i <= $sub_row2['total_room']) {
+                        echo '<option value="' . $i . '">' . $i . '</option>';
+                        $i = $i + 1;
+                    }
+                    echo '</select><br/>
+                    <span><b>No. of guest: </b></span>
+                    <select class="form-control" name="qtyguest' . $sub_row2['room_id'] . '" id="guest' . $sub_row2['room_id'] . '" style="width:100%; color:black;" ;">
                                 <option value="0">0</option>';
                     $i = 1;
-                    while ($i <= $row['availableroom']) {
+                    while ($i <= $sub_row2['occupancy']) {
                         echo '<option value="' . $i . '">' . $i . '</option>';
                         $i = $i + 1;
                     }
                     echo '</select>
                             </div>
+
                             <input type=hidden name="selectedroom' . $sub_row['room_id'] . '"  id="selectedroom' . $sub_row['room_id'] . '" value="' . $sub_row['room_id'] . '">
                             <input type=hidden name="room_name' . $sub_row['room_id'] . '" id="room_name' . $sub_row['room_id'] . '" value="' . $sub_row['room_name'] . '">
                             </div><hr/>';
-                        
+
                 }
 
             }
@@ -509,19 +504,15 @@ if (mysql_num_rows($result) > 0) {
                     </div>
                     <div class="reservation-room_text">
                         <div class="reservation-room_desc">
-                            <p>' . $sub_row2['description'] . '</p>
-                            <ul>
-                                <li>1 King Bed</li>
-                                <li>Free Wi-Fi in all guest rooms</li>
-                                <li>Separate sitting area</li>
-
-                            </ul>
+                            <p>' . $sub_row2['descriptions'] . '</p>
                         </div><p></p>
                         <b><span class="reservation-room_amout">' . $sub_row2['total_room'] . ' room available</span></b>
                         <div class="clear"></div>
                         <p class="reservation-room_price">
                             <span class="reservation-room_amout">₱ ' . $sub_row2['rate'] . '</span> / days
                         </p>
+                        <br/><br/>
+                        <span><b>No. of room: </b></span>
                         <select class="form-control" name="qtyroom' . $sub_row2['room_id'] . '" id="room' . $sub_row2['room_id'] . '" onChange="selection(' . $sub_row['room_id'] . ')"  style="width:100%; color:black;" ;">
                         <option  value="0">0</option>';
                     $i = 1;
@@ -529,11 +520,20 @@ if (mysql_num_rows($result) > 0) {
                         echo '<option value="' . $i . '">' . $i . '</option>';
                         $i = $i + 1;
                     }
+                    echo '</select><br/>
+                    <span><b>No. of guest: </b></span>
+                    <select class="form-control" name="qtyguest' . $sub_row2['room_id'] . '" id="guest' . $sub_row2['room_id'] . '" style="width:100%; color:black;" ;">
+                                <option value="0">0</option>';
+                    $i = 1;
+                    while ($i <= $sub_row2['occupancy']) {
+                        echo '<option value="' . $i . '">' . $i . '</option>';
+                        $i = $i + 1;
+                    }
                     echo '</select>
                     </div>
                     <input type=hidden name="selectedroom' . $sub_row2['room_id'] . '"  id="selectedroom' . $sub_row2['room_id'] . '" value="' . $sub_row2['room_id'] . '">
                     <input type=hidden name="room_name' . $sub_row2['room_id'] . '" id="room_name' . $sub_row2['room_id'] . '" value="' . $sub_row2['room_name'] . '">
-                   
+
                     </div> <hr/>';
                 }
 

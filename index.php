@@ -264,19 +264,6 @@ if ($_SESSION['isAdmin']) {
                             <div class="availability-form">
                                 <input type="text" name='checkIn' id='checkIn' required class="awe-calendar from" placeholder="Arrival Date">
                                 <input type="text" name='checkOut' id='checkOut' required class="awe-calendar to" placeholder="Departure Date">
-
-                                <select name='totalAdults' id='totalAdults' class="awe-select" required>
-                                    <option value='0' selected>Adults</option>
-                                    <option value='1'>1</option>
-                                    <option value='2'>2</option>
-                                    <option value='3'>3</option>
-                                </select>
-                                <select name='totalChildren' id='totalChildren'class="awe-select" required>
-                                    <option value='0' selected>Children</option>
-                                    <option value='1'>1</option>
-                                    <option value='2'>2</option>
-                                    <option value='3'>3</option>
-                                </select>
                                 <div class="vailability-submit">
                                     <button name="submit" href="#" class="awe-btn awe-btn-13">FIND THE BEST RATE</button>
                                 </div>
@@ -714,22 +701,6 @@ if ($_SESSION['isAdmin']) {
 		var checkOut = form.checkOut.value;
 		var totalAdults = form.totalAdults.value;
 		var totalChildren = form.totalChildren.value;
-			if(totalAdults == 0)
-			{
-			 	if(totalChildren == 0)
-				{
-				 alert("Please choose no. of guest");
-				 return false;
-				}
-			}
-			if(totalChildren == 0)
-			{
-			 	if(totalAdults == 0)
-				{
-				 alert("Please choose no. of guest");
-				 return false;
-				}
-			}
 	}
     </script>
 
