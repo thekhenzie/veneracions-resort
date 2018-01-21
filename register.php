@@ -10,15 +10,14 @@ if(isset($_POST['signUp'])) {
 		
 	$username = trim($_POST['username']);
 	$emailAddress = trim($_POST['emailAddress']);
-	$password = trim($_POST['password']);
+	$tpassword = trim($_POST['password']);
 	
 	$username = strip_tags($username);
 	$emailAddress = strip_tags($emailAddress);
-	$upassword = strip_tags($password);
+	$upassword = strip_tags($tpassword);
 	
 	// password encrypt using SHA256();
-	//$password = hash('sha256', $password);
-	$password = $upassword;
+	$password = hash('sha256', $upassword);
 	// check emailAddress exist or not
 	$query = "SELECT emailAddress FROM admin WHERE emailAddress='$emailAddress'";
 	$result = mysql_query($query);

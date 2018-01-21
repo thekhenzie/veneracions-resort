@@ -687,7 +687,13 @@ print '	</form></div>';
 
     <script>
     function selection(id) {
-	var e = document.getElementById('roomselected').style.display='block';
+        debugger;
+        if(this.value!=0){
+            var e = document.getElementById('roomselected').style.display='block';
+        }
+        else
+            var e = document.getElementById('roomselected').style.display='hidden';
+       
     }
     </script>
 

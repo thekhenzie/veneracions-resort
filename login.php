@@ -17,7 +17,7 @@
 		$username = strip_tags(trim($username));
 		$upassword = strip_tags(trim($upassword));
 		
-		//$password = hash('sha256', $upass); // password hashing using SHA256
+		$upassword = hash('sha256', $upassword); // password hashing using SHA256
 		$password = $upassword;
 		$res=mysql_query("SELECT adminID, password FROM admin WHERE username='$username'");
 		
