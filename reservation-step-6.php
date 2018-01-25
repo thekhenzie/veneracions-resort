@@ -287,23 +287,21 @@ session_start();
         <hr>
 		<div class="row">
 			<div class="large-12 columns" >
-					<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="3FWZ42DLC5BJ2">
-					<input type="hidden" name="lc" value="PH">
-					<input type="hidden" name="item_name" value="15% Hotel Deposit Payment for Booking ID #<?php echo $_SESSION['booking_id'];?>">
-					<input type="hidden" name="amount" value="<?php echo $_SESSION['deposit']; ?>">
-					<input type="hidden" name="currency_code" value="PHP">
-					<input type="hidden" name="button_subtype" value="services">
-                    <input type="hidden" name="no_note" value="0">
-					<input type="hidden" name="cancel_return" value="https://facebook.com">                    
-					<input type="hidden" name="custom" value="<? echo $_SESSION['booking_id'];?>">
-					<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
-					<img type="image" src="img/paypal.jpg" style="background-color:white; width:32%; height:14%; padding:2px; " ></img>
+					
+
+<form action='https://www.paypal.com/cgi-bin/webscr' method='post' name='form'>
+  <input type='hidden' name='business' value='testing.envel@gmail.com'>
+  <input type='hidden' name='cmd' value='_xclick'> 
+  <input type='hidden' name='item_name' value='15% Hotel Deposit Payment for Booking ID #<?php echo $_SESSION['booking_id'];?>'>
+  <input type='hidden' name='amount' value='<?php echo $_SESSION['deposit']; ?>'>
+  <input type='hidden' name='no_shipping' value='1'>
+  <input type='hidden' name='currency_code' value='PHP'>
+   <input type='hidden' name='cancel_return' value='http://cancel.com'>
+     <input type='hidden' name='return' value='http://return.com/'>
+     <img type="image" src="img/paypal.jpg" style="background-color:white; width:32%; height:14%; padding:2px; " ></img>
 					<br><button class="awe-btn awe-btn-6" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width:32%">Pay Room Deposit Now</button>
 					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-					</form>
-
+</form>
 
 			</div>
 		</div>
