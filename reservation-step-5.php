@@ -74,9 +74,9 @@ if (mysql_num_rows($result) > 0) {
 
 
         <!-- PRELOADER -->
-        <!-- <div id="preloader">
+        <div id="preloader">
         <span class="preloader-dot"></span>
-        </div> -->
+        </div>
         <!-- END / PRELOADER -->
 
         <!-- PAGE WRAP -->
@@ -85,116 +85,34 @@ if (mysql_num_rows($result) > 0) {
             <!-- HEADER -->
             <header id="header" class="header-v2">
 
-                <!-- HEADER TOP -->
-                <div class="header_top">
-                    <div class="container">
-                        <div class="header_left float-left">
-                            <span>
-                                <i class="lotus-icon-cloud"></i> 27 °C</span>
-                            <span>
-                                <i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</span>
-                            <span>
-                                <i class="lotus-icon-phone"></i> +63 915 6789 321</span>
-                        </div>
-                        <div class="header_right float-right">
-
-                            <span class="login-register">
-                                <a href="login.php">Login</a>
-                                <a href="register.php">register</a>
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- END / HEADER TOP -->
 
                 <!-- HEADER LOGO & MENU -->
                 <div class="header_content" id="header_content">
 
                     <div class="container">
-                        <!-- HEADER LOGO -->
-                        <div class="header_logo">
-                            <a href="#">
-                                <img src="images/logo-header.png" alt="">
-                            </a>
-                        </div>
-                        <!-- END / HEADER LOGO -->
+
 
                         <!-- HEADER MENU -->
                         <nav class="header_menu">
-                            <ul class="menu">
-                                <li class="current-menu-item">
-                                    <a href="index.php">Home</a>
-                                </li>
-                                <li>
-                                    <a href="about.html">About</a>
-                                </li>
+                        <ul class="menu">
+                            <li class="current-menu-item">
+                                <a href="index.php">Home</a>
+                            </li>
+                            <li>
+                                <a href="about.html">About</a>
+                            </li>
 
-                                <li>
-                                    <a href="#">Room
-                                        <span class="fa fa-caret-down"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="room-1.html">Room 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="room-5.html">Room 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="room-6.html">Room 3</a>
-                                        </li>
-                                        <li>
-                                            <a href="room-detail.html">Room Detail</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Reservation
-                                        <span class="fa fa-caret-down"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="reservation-step-1.html">Reservation Step 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="reservation-step-2.html">Reservation Step 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="reservation-step-3.html">Reservation Step 3</a>
-                                        </li>
-                                        <li>
-                                            <a href="reservation-step-4.html">Reservation Step 4</a>
-                                        </li>
-                                        <li>
-                                            <a href="reservation-step-5.html">Reservation Step 5</a>
-                                        </li>
-                                        <li>
-                                            <a href="check-out.html">Check Out</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Gallery
-                                        <span class="fa fa-caret-down"></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="gallery.html">Gallery Style 1</a>
-                                        </li>
-                                        <!-- <li>
-                                        <a href="gallery-2.html">Gallery Style 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="gallery-3.html">Gallery Style 3</a>
-                                    </li> -->
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </nav>
+                            <li>
+                                <a href="room-5.html">Rooms</a>
+                            </li>
+                            <li>
+                                <a href="gallery.html">Gallery</a>
+                            </li>
+                            <li >
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
                         <!-- END / HEADER MENU -->
 
                         <!-- MENU BAR -->
@@ -465,40 +383,6 @@ if (mysql_num_rows($result) > 0) {
                                         <label>Order Notes</label>
                                         <textarea class="input-textarea"  name="specialrequirements" placeholder="Notes about your order, eg. special notes for delivery"><?php if (isset($_SESSION['special_requirement']) && !empty($_SESSION['special_requirement'])) {echo $_SESSION['special_requirement'];}?></textarea>
 
-                                        <label class="label-radio">
-                                            <input type="radio" class="input-radio"> Create an account?
-                                        </label>
-
-                                        <p class="reservation-code">
-                                            You have a coupon?
-                                            <a href="#">Click here to enter your code</a>
-                                        </p>
-
-                                        <ul class="option-bank">
-                                            <li>
-                                                <label class="label-radio">
-                                                    <input type="radio" class="input-radio" name="chose-bank"> Direct Bank Transfer
-                                                </label>
-                                                <p>Make your payment directly into our bank account. Please use your Order ID
-                                                    as the payment reference. Your order won’t be shipped until the funds
-                                                    have cleared in our account.</p>
-                                            </li>
-
-                                            <li>
-                                                <label class="label-radio">
-                                                    <input type="radio" class="input-radio" name="chose-bank"> Cheque Payment
-                                                </label>
-                                            </li>
-
-                                            <li>
-                                                <label class="label-radio">
-                                                    <input type="radio" class="input-radio" name="chose-bank"> Credit Card
-                                                </label>
-
-                                                <img src="images/icon-card.jpg" alt="">
-                                            </li>
-
-                                        </ul>
                                         <button class="awe-btn awe-btn-13" type="submit" >PLACE ORDER</button>
                                     </form>
                                     </div>
@@ -518,147 +402,10 @@ if (mysql_num_rows($result) > 0) {
             <!-- FOOTER -->
             <footer id="footer">
 
-                <!-- FOOTER TOP -->
-                <div class="footer_top">
-                    <div class="container">
-                        <div class="row">
-
-                            <!-- WIDGET MAILCHIMP -->
-                            <div class="col-lg-9">
-                                <div class="mailchimp">
-                                    <h4>News &amp; Offers</h4>
-                                    <div class="mailchimp-form">
-                                        <form action="#" method="POST">
-                                            <input type="text" name="email" placeholder="Your email address" class="input-text">
-                                            <button class="awe-btn">SIGN UP</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END / WIDGET MAILCHIMP -->
-
-                            <!-- WIDGET SOCIAL -->
-                            <div class="col-lg-3">
-                                <div class="social">
-                                    <div class="social-content">
-
-                                        <a href="#">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                        <a href="#">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END / WIDGET SOCIAL -->
-
-                        </div>
-                    </div>
-                </div>
-                <!-- END / FOOTER TOP -->
-
-                <!-- FOOTER CENTER -->
-                <div class="footer_center">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-xs-12 col-lg-5">
-                                <div class="widget widget_logo">
-                                    <div class="widget-logo">
-                                        <div class="img">
-                                            <a href="#">
-                                                <img src="images/logo-footer.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="text">
-                                            <p>
-                                                <i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</p>
-                                            <p>
-                                                <i class="lotus-icon-phone"></i> +63 915 6789 321</p>
-                                            <p>
-                                                <i class="fa fa-envelope-o"></i>
-                                                <a href="mailto:hello@yopmail.com">hello@yopmail.com</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-4 col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">Page site</h4>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Guest Book</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Restaurant</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Event</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-4 col-lg-2">
-                                <div class="widget">
-                                    <h4 class="widget-title">ABOUT</h4>
-                                    <ul>
-                                        <li>
-                                            <a href="">About</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Contact Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="">Coming Soon</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-4 col-lg-3">
-                                <div class="widget widget_tripadvisor">
-                                    <h4 class="widget-title">Tripadvisor</h4>
-                                    <div class="tripadvisor">
-                                        <p>Now with hotel reviews by</p>
-                                        <img src="images/tripadvisor.png" alt="">
-                                        <span class="tripadvisor-circle">
-                                            <i></i>
-                                            <i></i>
-                                            <i></i>
-                                            <i></i>
-                                            <i class="part"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-                <!-- END / FOOTER CENTER -->
-
                 <!-- FOOTER BOTTOM -->
                 <div class="footer_bottom">
                     <div class="container">
-                        <p>&copy; 2017 Veneracion's Resort All rights reserved.</p>
-                        <?php var_dump($_SESSION);?>
+                        <p>&copy; 2017 Montalban Waterpark and Garden Resort All rights reserved.</p>
                     </div>
                 </div>
                 <!-- END / FOOTER BOTTOM -->
@@ -695,11 +442,11 @@ if (mysql_num_rows($result) > 0) {
             $("#phone").intlTelInput({
                 //autoFormat: false,
                 //autoHideDialCode: false,
-                defaultCountry: "my",
+                defaultCountry: "ph",
                 //nationalMode: true,
                 //numberType: "MOBILE",
                 //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-                preferredCountries: ['my', 'us'],
+                preferredCountries: ['ph', 'us'],
                 //responsiveDropdown: true,
                 utilsScript: "lib/libphonenumber/build/utils.js"
             });

@@ -1,6 +1,8 @@
 <?php
 ob_start();
 session_start();
+session_destroy();
+session_start();
 require_once 'dbconnect.php';
 
 // select loggedin users detail
@@ -63,116 +65,35 @@ $userRow = mysql_fetch_array($res);
         <!-- HEADER -->
         <header id="header" class="header-v2">
 
-            <!-- HEADER TOP -->
-            <div class="header_top">
-                <div class="container">
-                    <div class="header_left float-left">
-                        <span>
-                            <i class="lotus-icon-cloud"></i> 27 °C</span>
-                        <span>
-                            <i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</span>
-                        <span>
-                            <i class="lotus-icon-phone"></i> +63 915 6789 321</span>
-                    </div>
-
-                    <?php
-if (!$_SESSION['isAdmin']) {
-
-    echo "<div class='header_right float-right'>;
-            <span class='login-register'>;
-            <a href='login.php'>Login</a>;
-            <a href='register.php'>register</a>;
-            </span>;
-        </div>";
-}
-?>
-
-                </div>
-            </div>
-            <!-- END / HEADER TOP -->
 
             <!-- HEADER LOGO & MENU -->
             <div class="header_content" id="header_content">
                 <div class="container">
                     <!-- HEADER LOGO -->
-                    <div class="header_logo">
-                        <a href="#">
-                            <img src="images/logo-header.png" alt="">
-                        </a>
-                    </div>
+                 
                     <!-- END / HEADER LOGO -->
 
                     <!-- HEADER MENU -->
                     <nav class="header_menu">
-                        <ul class="menu">
-                            <li class="current-menu-item">
-                                <a href="index.php">Home</a>
-                            </li>
-                            <li>
-                                <a href="about.html">About</a>
-                            </li>
+                    <ul class="menu">
+                        <li class="current-menu-item">
+                            <a href="index.php">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
 
-                            <li>
-                                <a href="#">Room
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="room-5.html">Room List</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-detail.html">Room Detail</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Reservation
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="reservation-step-1.html">Reservation Step 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-2.html">Reservation Step 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-3.html">Reservation Step 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-4.html">Reservation Step 4</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-5.html">Reservation Step 5</a>
-                                    </li>
-                                    <li>
-                                        <a href="check-out.html">Check Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="gallery.html">Gallery List</a>
-                            </li>
-                            <li>
-                                <a href="contact.html">Contact</a>
-                            </li>
-                            <?php
-if ($_SESSION['isAdmin']) {
-    echo "
-                            <li>
-                                <a href='#'>Hi " . $userRow['username'] . "!
-                                    <span class='fa fa-caret-down'></span>
-                                </a>
-                                <ul class='sub-menu'>
-                                    <li>
-                                        <a href='logout.php?logout'>Logout</a>
-                                    </li>
-                                </ul>
-                            </li>";
-}
-?>
-                        </ul>
-                    </nav>
+                        <li>
+                            <a href="room-5.html">Rooms</a>
+                        </li>
+                        <li>
+                            <a href="gallery.html">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
                     <!-- END / HEADER MENU -->
 
                     <!-- MENU BAR -->
@@ -208,7 +129,7 @@ if ($_SESSION['isAdmin']) {
                         </div>
 
                         <div class="tp-caption sfb fadeout slider-caption slider-caption-sub-1" data-x="center" data-y="280" data-speed="700" data-easing="easeOutBack"
-                            data-start="2000">VENERACION'S RESORTS</div>
+                            data-start="2000">Montalban Waterpark and Garden ResortS</div>
 
                         <a href="#" class="tp-caption sfb fadeout awe-btn awe-btn-12 awe-btn-slider" data-x="center" data-y="380" data-easing="easeOutBack"
                             data-speed="700" data-start="2200">VIEW NOW</a>
@@ -393,299 +314,15 @@ if ($_SESSION['isAdmin']) {
         </section>
         <!-- ACCOMMODATIONS -->
 
-        <!-- SECTION GUESTBOOK - EVENT DEAD -->
-        <section class="section-guestbook-event bg-white">
-            <div class="container">
-
-                <div class="guestbook-event">
-                    <div class="row">
-
-                        <div class="col-md-6">
-
-                            <h2 class="heading">GUEST BOOK</h2>
-
-                            <div class="guestbook-content_1 owl-single">
-
-                                <!-- ITEM -->
-                                <div class="guestbook-item_1">
-                                    <div class="img">
-                                        <img src="images/avatar/img-5.jpg" alt="">
-                                        <span>
-                                            <strong>Khen</strong>From Metro Manila, Philippines</span>
-                                    </div>
-
-                                    <div class="text">
-                                        <p>Both the outstanding staff and the beautiful room made our first visit such a success!</p>
-                                    </div>
-                                </div>
-                                <!-- END / ITEM -->
-
-                                <!-- ITEM -->
-                                <div class="guestbook-item_1">
-                                    <div class="img">
-                                        <img src="images/avatar/img-5.jpg" alt="">
-                                        <span>
-                                            <strong>Khen</strong>From Metro Manila, Philippines</span>
-                                    </div>
-
-                                    <div class="text">
-                                        <p>Both the outstanding staff and the beautiful room made our first visit such a success!</p>
-                                    </div>
-                                </div>
-                                <!-- END / ITEM -->
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-6">
-                            <h2 class="heading">GUEST BOOK</h2>
-
-                            <div class="event-slide owl-single">
-                                <!-- ITEM -->
-                                <div class="event-item">
-                                    <div class="img hover-zoom">
-                                        <a href="#">
-                                            <img src="images/home/eventdeal/img-1.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- END / ITEM -->
-
-                                <!-- ITEM -->
-                                <div class="event-item">
-                                    <div class="img hover-zoom">
-                                        <a href="#">
-                                            <img src="images/home/eventdeal/img-1.jpg" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- END / ITEM -->
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <!-- END / SECTION GUESTBOOK - EVENT DEAD -->
-
-        <!-- ABOUT -->
-        <section class="section-home-about bg-white">
-            <div class="container">
-                <div class="home-about">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="img">
-                                <a href="#">
-                                    <img src="images/home/about/img-1.jpg" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text">
-                                <h2 class="heading">ABOUT US</h2>
-                                <span>Lorem Ipsum is simply dummy text</span>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                                    of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock,
-                                    a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure
-                                    Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of
-                                    the word in classical literature, discovered the undoubtable source</p>
-                                <a href="#" class="awe-btn awe-btn-default">READ MORE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- END / ABOUT -->
-
-        <!-- OUR BEST -->
-        <section class="section-our-best bg-white">
-            <div class="container">
-
-                <div class="our-best">
-                    <div class="row">
-
-                        <div class="col-md-6 col-md-push-6">
-                            <div class="img">
-                                <img src="images/home/ourbest/img-1.jpg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-md-pull-6 ">
-                            <div class="text">
-                                <h2 class="heading">Our Best</h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                    took a galley of type and scrambled it to make a type specimen book. It has survived
-                                    not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                                    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                                    including versions of Lorem Ipsum.
-                                </p>
-                                <ul>
-                                    <li>
-                                        <img src="images/home/ourbest/icon-3.png" alt="icon">Best Rooms 5 Star</li>
-                                    <li>
-                                        <img src="images/home/ourbest/icon-2.png" alt="icon">Wet Bar with Refrigerator</li>
-                                    <li>
-                                        <img src="images/home/ourbest/icon-1.png" alt="icon">Breakfast each morning</li>
-                                    <li>
-                                        <img src="images/home/ourbest/icon-6.png" alt="icon">Views to Veneracion's Resort</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        <!-- END / OUR BEST -->
+    <br/>
 
         <!-- FOOTER -->
         <footer id="footer">
 
-            <!-- FOOTER TOP -->
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- WIDGET MAILCHIMP -->
-                        <div class="col-lg-9">
-                            <div class="mailchimp">
-                                <h4>News &amp; Offers</h4>
-                                <div class="mailchimp-form">
-                                    <form action="#" method="POST">
-                                        <input type="text" name="email" placeholder="Your email address" class="input-text">
-                                        <button class="awe-btn">SIGN UP</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET MAILCHIMP -->
-
-                        <!-- WIDGET SOCIAL -->
-                        <div class="col-lg-3">
-                            <div class="social">
-                                <div class="social-content">
-
-                                    <a href="#">
-                                        <i class="fa fa-facebook"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="fa fa-instagram"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET SOCIAL -->
-
-                    </div>
-                </div>
-            </div>
-            <!-- END / FOOTER TOP -->
-
-            <!-- FOOTER CENTER -->
-            <div class="footer_center">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-xs-12 col-lg-5">
-                            <div class="widget widget_logo">
-                                <div class="widget-logo">
-                                    <div class="img">
-                                        <a href="#">
-                                            <img src="images/logo-footer.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="text">
-                                        <p>
-                                            <i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</p>
-                                        <p>
-                                            <i class="lotus-icon-phone"></i> +63 915 6789 321</p>
-                                        <p>
-                                            <i class="fa fa-envelope-o"></i>
-                                            <a href="mailto:hello@yopmail.com">hello@yopmail.com</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">Page site</h4>
-                                <ul>
-                                    <li>
-                                        <a href="#">Guest Book</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Gallery</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Event</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">ABOUT</h4>
-                                <ul>
-                                    <li>
-                                        <a href="">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Contact Us</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Coming Soon</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-3">
-                            <div class="widget widget_tripadvisor">
-                                <h4 class="widget-title">Tripadvisor</h4>
-                                <div class="tripadvisor">
-                                    <p>Now with hotel reviews by</p>
-                                    <img src="images/tripadvisor.png" alt="">
-                                    <span class="tripadvisor-circle">
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i class="part"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- END / FOOTER CENTER -->
-
             <!-- FOOTER BOTTOM -->
             <div class="footer_bottom">
                 <div class="container">
-                    <p>&copy; 2017 Veneracion's Resort All rights reserved.</p>
+                    <p>&copy; 2017 Montalban Waterpark and Garden Resort All rights reserved.</p>
                 </div>
             </div>
             <!-- END / FOOTER BOTTOM -->
