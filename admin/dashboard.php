@@ -303,9 +303,10 @@ if (mysql_num_rows($re3) > 0) {
 						</div>
 
 						<div class="col-xs-6" id="statistics" style="display:block;">
-						<h4 class="sub-header">Booking Made</h4>
+						<!-- KHEN REMOVED GRAPH
+              <h4 class="sub-header">Booking Made</h4>
 								<div id="bookingstat" style="height: 250px;"></div>
-						</div>
+						</div> -->
 
 				</div>
 				<div class="row" id="bookindetails" style="display:none;">

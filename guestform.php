@@ -40,9 +40,6 @@ if (mysql_num_rows($result) > 0) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reservation</title>
-<meta name="reservation hotel for malaysia" >
-<meta name="zulkarnain" content="gambohnetwork.com.my">
-<meta name="copyright" content="Hotel Malaysia, inc. Copyright (c) 2014">
 <link rel="stylesheet" href="scss/foundation.css">
 <link rel="stylesheet" href="scss/style.css">
 <link href='http://fonts.googleapis.com/css?family=Slabo+13px' rel='stylesheet' type='text/css'>

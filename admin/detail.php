@@ -162,11 +162,11 @@ function fnSearch()
 					print "				<tr><td>Payment Status</td>\n";
 					print "				<td>".$rows['payment_status']." </td>	</tr>\n";
 					print "				<tr><td>Total Amount</td>\n";
-					print "				<td>RM ".$rows['total_amount']."</td></tr>\n";
+					print "				<td>PHP ".$rows['total_amount']."</td></tr>\n";
 					print "				<tr><td>Deposit</td>\n";
-					print "				<td>RM ".$rows['deposit']."</td></tr>\n";
+					print "				<td>PHP ".$rows['deposit']."</td></tr>\n";
 					print "				<tr><td>Balance</td>\n";
-					print "				<td>RM ".($rows['total_amount']-$rows['deposit'])."</td></tr>\n";
+					print "				<td>PHP ".($rows['total_amount']-$rows['deposit'])."</td></tr>\n";
 					print "				<tr><td>Booking Date</td>\n";
 					print "				<td>".$rows['booking_date']." </td>	</tr>\n";
 					print "				<tr><td>First Name</td>\n";

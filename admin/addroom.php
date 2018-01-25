@@ -30,10 +30,12 @@ if (isset($_POST['total_room'])) {
     $total = $_POST['total_room'];
 }
 if (isset($_POST['view'])) {
-    $view = $_POST['view'];
+    $view = 'na';
+    // $view = $_POST['view'];
 }
 if (isset($_POST['size'])) {
-    $size = $_POST['size'];
+    $size = 'sqft';
+    // $size = $_POST['size'];
 }
 if (isset($_POST['rate'])) {
     $rate = $_POST['rate'];

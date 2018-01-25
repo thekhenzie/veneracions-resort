@@ -126,8 +126,8 @@ function fnSearch()
                   <th>Room Name</th>
                   <th>Thumbnail</th>
                   <th>Total Room</th>
-				  <th>Size</th>
-                  <th>View</th>
+				  <!-- <th>Size</th>
+                  <th>View</th> -->
 			      <th>Occupancy</th>
                   <th>Rate</th>
                   <th>Description</th>
@@ -142,8 +142,8 @@ function fnSearch()
 								print "<tr style=\"\">		 <td>".$row['room_name']."</td>\n";
 								print "                  <td><img src=\"../".$row['imgpath']."\" style=\"height:50px;width:50px;\"\"></td>\n";
 								print "                  <td>".$row['total_room']."</td>\n";
-								print "                  <td>".$row['size']." </td>\n";
-								print "                  <td>".$row['view']."</td>\n";
+								// print "                  <td>".$row['size']." </td>\n";
+								// print "                  <td>".$row['view']."</td>\n";
 								print "                  <td>".$row['occupancy']."</td>\n";
 								print "                  <td>".$row['rate']."</td>\n";
 								print "                  <td>".$row['descriptions']."</td>\n";
@@ -178,15 +178,15 @@ function fnSearch()
 					  </div>
 					  <div class="form-group">
 						<label for="size">Size</label>
-						<input type="text" class="form-control"  name="size" id="size" value="sqft" placeholder="Please write sqft or metre square: example: 250 sqft">
+						<input type="text" class="form-control"  hidden name="size" id="size" value="sqft" placeholder="Please write sqft or metre square: example: 250 sqft">
 					  </div>
 					  <div class="form-group">
 						<label for="view">View</label>
-						<input type="text" class="form-control" name="view" id="view" placeholder="example: city view" value="city">
+						<input type="text" class="form-control" hidden name="view" id="view" placeholder="example: city view" value="city">
 					  </div>
 					  <div class="form-group">
-						<label for="rate">Rate</label>
-						<input type="number" class="form-control"  name="rate" id="rate" placeholder="Write without PHP" required>
+						<label for="rate">Rate in PHP</label>
+						<input type="number" class="form-control"  name="rate" id="rate" placeholder="" required>
 					  </div>
 					  <div class="form-group">
 						<label for="desc">Descriptions</label>
@@ -194,7 +194,7 @@ function fnSearch()
 					  </div>
 					  <div class="form-group">
 						<label for="img">Upload Room Image [recommended size is 400 X 400]</label>
-						<input type="file" id="img" name="img" required>
+						<input type="file" class="form-control" id="img" name="img" required>
 						<!-- p class="help-block">Example block-level help text here.</p-->
 					  </div>
 					  <button type="submit" class="btn btn-default">Submit</button>
