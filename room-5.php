@@ -130,11 +130,11 @@ $res = mysql_query($query);
                             <div class="room_item-5" data-background='images/room/grid2/img-1.jpg'>
 
                                 <div class="img">
-                                    <a href="/room-detail.php?id=6"><img src="images/room/grid2/img-1.jpg" alt=""></a>
+                                    <a href="room-detail.php?id=6"><img src="images/room/grid2/img-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="room_item-forward">
-                                    <h2><a href="/room-detail.php?id=6">STANDARD ROOM</a></h2>
+                                    <h2><a href="room-detail.php?id=6">STANDARD ROOM</a></h2>
                                     <span class="price">Start form ₱2500 per day</span>
                                 </div>
 
@@ -142,7 +142,7 @@ $res = mysql_query($query);
                                     <h3>STANDARD ROOM</h3>
                                     <span class="price">Start form ₱2500 per day</span>
                                     <p>Lorem Ipsum is simply dummy text of the <b>printing</b> and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <a href="/room-detail.php?id=6" class="awe-btn awe-btn-13">VIEW DETAILS</a>
+                                    <a href="room-detail.php?id=6" class="awe-btn awe-btn-13">VIEW DETAILS</a>
                                 </div>
 
                             </div>
@@ -154,11 +154,11 @@ $res = mysql_query($query);
                             <div class="room_item-5" data-background='images/room/grid2/img-1.jpg'>
 
                                 <div class="img">
-                                    <a href="/room-detail.php?id=5"><img src="images/room/grid2/img-1.jpg" alt=""></a>
+                                    <a href="room-detail.php?id=5"><img src="images/room/grid2/img-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="room_item-forward">
-                                    <h2><a href="/room-detail.php?id=5">FAMILY ROOM</a></h2>
+                                    <h2><a href="room-detail.php?id=5">FAMILY ROOM</a></h2>
                                     <span class="price">Start form ₱3000 per day</span>
                                 </div>
 
@@ -166,7 +166,7 @@ $res = mysql_query($query);
                                     <h3>FAMILY ROOM</h3>
                                     <span class="price">Start fromm ₱3000 per day</span>
                                     <p>Lorem Ipsum is simply dummy text of the <b>printing</b> and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <a href="/room-detail.php?id=5" class="awe-btn awe-btn-13">VIEW DETAILS</a>
+                                    <a href="room-detail.php?id=5" class="awe-btn awe-btn-13">VIEW DETAILS</a>
                                 </div>
                             </div>
                         </div>
