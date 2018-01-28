@@ -25,9 +25,16 @@ if (isset($_POST["specialrequirements"])) {
     $_SESSION['special_requirement'] = "";
 }
 
+function generateRandomString($length = 10)
+{
+    return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+}
+
+// echo generateRandomString(24); // OR: generateRandomString(24)
+$_SESSION['reservation_code'] = generateRandomString(24);
 include './dbconnect.php';
-mysql_query("INSERT INTO booking (booking_id, total_adult, total_children, checkin_date, checkout_date, special_requirement, payment_status, total_amount, deposit, first_name, last_name, email, telephone_no, add_line1, add_line2, city, state, postcode, country)
-VALUES (NULL, '" . array_sum($_SESSION['guestqty']) . "' , 0, '" . $_SESSION['checkin_db'] . "', '" . $_SESSION['checkout_db'] . "', '" . $_SESSION['special_requirement'] . "', 'pending', '" . $_SESSION['total_amount'] . "', '" . $_SESSION['deposit'] . "', '" . $_SESSION['firstname'] . "', '" . $_SESSION['lastname'] . "', '" . $_SESSION['email'] . "', '" . $_SESSION['phone'] . "', '" . $_SESSION['addressline1'] . "', '" . $_SESSION['addressline2'] . "', '" . $_SESSION['city'] . "', '" . $_SESSION['state'] . "', '" . $_SESSION['postcode'] . "', '" . $_SESSION['country'] . "')");
+mysql_query("INSERT INTO booking (booking_id, reservation_code, total_adult, total_children, checkin_date, checkout_date, special_requirement, payment_status, total_amount, deposit, first_name, last_name, email, telephone_no, add_line1, add_line2, city, state, postcode, country)
+VALUES (NULL,'" . $_SESSION['reservation_code'] . "', '" . array_sum($_SESSION['guestqty']) . "' , 0, '" . $_SESSION['checkin_db'] . "', '" . $_SESSION['checkout_db'] . "', '" . $_SESSION['special_requirement'] . "', 'pending', '" . $_SESSION['total_amount'] . "', '" . $_SESSION['deposit'] . "', '" . $_SESSION['firstname'] . "', '" . $_SESSION['lastname'] . "', '" . $_SESSION['email'] . "', '" . $_SESSION['phone'] . "', '" . $_SESSION['addressline1'] . "', '" . $_SESSION['addressline2'] . "', '" . $_SESSION['city'] . "', '" . $_SESSION['state'] . "', '" . $_SESSION['postcode'] . "', '" . $_SESSION['country'] . "')");
 echo mysql_error();
 $_SESSION['booking_id'] = mysql_insert_id();
 $count = 0;
@@ -66,7 +73,7 @@ $message .= "								<tr>\n";
 $message .= "									<td class=\"content-block\">\n";
 $message .= "										<table class=\"invoice\">\n";
 $message .= "											<tr>\n";
-$message .= "												<td>Dear " . $_SESSION['firstname'] . " " . $_SESSION['lastname'] . "<br><br><b>Booking ID #" . $_SESSION['booking_id'] . "</b><br><b>" . $_SESSION['total_night'] . "</b> night stay(s) from <b>" . $_SESSION['checkin_date'] . "</b> to <b>" . $_SESSION['checkout_date'] . "</b><br>No. of Guest :<b> " . $_SESSION['guestqty'] . "</b> Adult(s) & <b>" . $_SESSION['childrens'] . "</b> Child(s)<br><br><b>Contact Detail</b><br>" . $_SESSION['addressline1'] . ", " . $_SESSION['addressline2'] . "<br>" . $_SESSION['postcode'] . " " . $_SESSION['city'] . ", <br>" . $_SESSION['state'] . ", " . $_SESSION['country'] . "<br>Phone <b>" . $_SESSION['phone'] . "</b><br>Email <b>" . $_SESSION['email'] . "</b><br><br><br></td>\n";
+$message .= "												<td>Dear " . $_SESSION['firstname'] . " " . $_SESSION['lastname'] . "<br><br><b>Booking ID #" . $_SESSION['booking_id'] . "</b><br><b>" . $_SESSION['total_night'] . "</b> night stay(s) from <b>" . $_SESSION['checkin_date'] . "</b> to <b>" . $_SESSION['checkout_date'] . "</b><br>No. of Guest :<b> " . array_sum($_SESSION['guestqty']) . "</b><br><br><b>Contact Detail</b><br>" . $_SESSION['addressline1'] . ", " . $_SESSION['addressline2'] . "<br>" . $_SESSION['postcode'] . " " . $_SESSION['city'] . ", <br>" . $_SESSION['state'] . ", " . $_SESSION['country'] . "<br>Phone <b>" . $_SESSION['phone'] . "</b><br>Email <b>" . $_SESSION['email'] . "</b><br><br><br></td>\n";
 $message .= "											</tr>\n";
 $message .= "											<tr>\n";
 $message .= "												<td>\n";
@@ -93,21 +100,21 @@ $message .= "														</tr>\n";
 $message .= "														\n";
 $message .= "													</table>\n";
 
-$message .= "													<br><b>";
-$message .= "                     <form action=\"https://www.sandbox.paypal.com/cgi-bin/webscr\" method=\"post\" target=\"_top\">\n";
-$message .= "					<input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\">\n";
-$message .= "					<input type=\"hidden\" name=\"hosted_button_id\" value=\"3FWZ42DLC5BJ2\">\n";
-$message .= "					<input type=\"hidden\" name=\"lc\" value=\"MY\">\n";
-$message .= "					<input type=\"hidden\" name=\"item_name\" value=\"15% Hotel Deposit for Booking ID #" . $_SESSION['booking_id'] . "; \">\n";
-$message .= "					<input type=\"hidden\" name=\"amount\" value=\"" . $_SESSION['deposit'] . "\">\n";
-$message .= "					<input type=\"hidden\" name=\"currency_code\" value=\"MYR\">\n";
-$message .= "					<input type=\"hidden\" name=\"button_subtype\" value=\"services\">\n";
-$message .= "					<input type=\"hidden\" name=\"no_note\" value=\"0\">\n";
-$message .= "					<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest\">\n";
-$message .= "					<input type=\"hidden\" name=\"custom\" value=\"" . $_SESSION['booking_id'] . "\">\n";
-$message .= "					<br><button class=\"button small \" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" style=\"background-color:#2ecc70;border:0px solid #18ab29; display:inline-block; color:#ffffff; font-size:15px; padding:5px 5px;\">Pay Deposit Via Paypal Here</button>\n";
-$message .= "					<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
-$message .= "					</form>";
+$message .= "					<br/><b>Reservation Code: </b>" . $_SESSION['reservation_code'] . "<br/>\n";
+$message .= "					<br/><a href='http://127.0.0.1/veneracions-resort/reserve.php?id=" . $_SESSION['reservation_code'] . "'>Click here to verify your reservation</a>'\n";
+$message .= "<form action='https://www.paypal.com/cgi-bin/webscr' method='post' name='form'>\n";
+$message .= "    <input type='hidden' name='business' value='montalban.waterpark@gmail.com'>\n";
+$message .= "    <input type='hidden' name='cmd' value='_xclick'> \n";
+$message .= "    <input type='hidden' name='item_name' value='15% Hotel Deposit Payment for Booking ID #" . $_SESSION['booking_id'] . "'>\n";
+$message .= "    <input type='hidden' name='amount' value='" . $_SESSION['deposit'] . "'>\n";
+$message .= "    <input type='hidden' name='no_shipping' value='1'>\n";
+$message .= "    <input type='hidden' name='currency_code' value='PHP'>\n";
+$message .= "    <input type='hidden' name='cancel_return' value='http://nacancel.com'>\n";
+$message .= "    <input type='hidden' name='return' value='http://facebook.com/'>\n";
+$message .= "    <img type=\"image\" src=\"img/paypal.jpg\" style=\"background-color:white; width:32%; height:14%; padding:2px; \" ></img>\n";
+$message .= "	<br><button class=\"awe-btn awe-btn-6\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\" style=\"width:32%\">Pay Room Deposit Now</button>\n";
+$message .= "	<img alt=\"\" border=\"0\" src=\"https://www.paypalobjects.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n";
+$message .= "</form>\n";
 $message .= "					<br>Notes & Policy:</b>\n";
 
 $message .= "															<br>\n";

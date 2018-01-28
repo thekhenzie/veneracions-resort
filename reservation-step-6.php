@@ -123,11 +123,11 @@ session_start();
                         <div class="reservation_step">
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="sessiondestroy.php">
                                         <span>1.</span> Choose Date</a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="unsetroomchosen.php">
                                         <span>2.</span> Choose Room</a>
                                 </li>
                                 <li >
@@ -185,7 +185,7 @@ session_start();
                                             <li>
                                                 <span>Total Guests</span>
                                                 <span>
-                                                    <?php echo array_sum($_SESSION['guestqty']);?>
+                                                    <?php echo array_sum($_SESSION['guestqty']); ?>
                                                 </span>
                                             </li>
                                         </ul>
@@ -202,35 +202,35 @@ session_start();
 
                                         <!-- ITEM -->
                                         <?php
-                                        $no = 1;
-                                    for ($i=0; $i < count($_SESSION['room_id']); $i++) { 
-                                    
-                                    echo '
+$no = 1;
+for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
+
+    echo '
                                     <div class="reservation-room-seleted_item">
 
-                                        <h6>ROOM '.$no.'</h6>
-                                        <span class="reservation-option">'.$_SESSION['guestqty'][$i].' Guest</span>&nbsp;
-                                        <span class="reservation-option">'.$_SESSION['roomqty'][$i].' Room</span>&nbsp;
-                                        <span class="reservation-option">'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'/day</span>
+                                        <h6>ROOM ' . $no . '</h6>
+                                        <span class="reservation-option">' . $_SESSION['guestqty'][$i] . ' Guest</span>&nbsp;
+                                        <span class="reservation-option">' . $_SESSION['roomqty'][$i] . ' Room</span>&nbsp;
+                                        <span class="reservation-option">' . ($_SESSION['ind_rate'][$i] / $_SESSION['roomqty'][$i]) . '/day</span>
                                         <div class="reservation-room-seleted_name has-package">
                                             <h2>
-                                                <a>'.$_SESSION['roomname'][$i].'</a>
+                                                <a>' . $_SESSION['roomname'][$i] . '</a>
                                             </h2>
                                         </div>
 
                                         <div class="reservation-room-seleted_package">
                                             <h6>RATE</h6>
                                             <ul>';
-                                            for($x=1; $x<=$_SESSION['total_night'];$x++){
-                                                $date = strtotime('+'.$x.' day', strtotime($_SESSION['checkin_unformat']));
-                                                echo '
+    for ($x = 1; $x <= $_SESSION['total_night']; $x++) {
+        $date = strtotime('+' . $x . ' day', strtotime($_SESSION['checkin_unformat']));
+        echo '
                                                 <li>
-                                                    <span>'.date("M d, Y",$date).'  '.$_SESSION['roomqty'][$i].' x ₱'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'</span>
-                                                    <span>₱'.$_SESSION['ind_rate'][$i].'.00</span>
+                                                    <span>' . date("M d, Y", $date) . '  ' . $_SESSION['roomqty'][$i] . ' x ₱' . ($_SESSION['ind_rate'][$i] / $_SESSION['roomqty'][$i]) . '</span>
+                                                    <span>₱' . $_SESSION['ind_rate'][$i] . '.00</span>
                                                 </li>';
-                                            }
-                                                
-                                    echo '            
+    }
+
+    echo '
                                             </ul>
 
                                             <ul>
@@ -247,21 +247,21 @@ session_start();
                                         </div>
 
                                         <div class="reservation-room-seleted_total-room">
-                                            TOTAL Room '.$no.'
-                                            <span class="reservation-amout">₱'.$_SESSION['ind_rate'][$i]*$_SESSION['total_night'].'.00</span>
+                                            TOTAL Room ' . $no . '
+                                            <span class="reservation-amout">₱' . $_SESSION['ind_rate'][$i] * $_SESSION['total_night'] . '.00</span>
                                         </div>
 
                                     </div> ';
-                                    $no+=1;
-                                    }
-                                    ?>
+    $no += 1;
+}
+?>
                                             <!-- END / ITEM -->
 
                                             <!-- TOTAL -->
                                             <div class="reservation-room-seleted_total bg-blue">
                                                 <label>TOTAL</label>
                                                 <span class="reservation-total">₱
-                                                    <?php echo $_SESSION['total_amount'];?>.00</span>
+                                                    <?php echo $_SESSION['total_amount']; ?>.00</span>
                                             </div>
                                             <!-- END / TOTAL -->
 
@@ -277,7 +277,7 @@ session_start();
                             <div class="col-md-8 col-lg-9">
 
                             <div class="reservation_content">
-                                
+
                                 <div class="reservation-chosen-message bg-gray text-center">
                                     <h4>Reservation Complete</h4>
                                     <p>Details of your reservation have just been sent to you
@@ -287,21 +287,25 @@ session_start();
         <hr>
 		<div class="row">
 			<div class="large-12 columns" >
-					
 
-<form action='https://www.paypal.com/cgi-bin/webscr' method='post' name='form'>
-  <input type='hidden' name='business' value='testing.envel@gmail.com'>
-  <input type='hidden' name='cmd' value='_xclick'> 
-  <input type='hidden' name='item_name' value='15% Hotel Deposit Payment for Booking ID #<?php echo $_SESSION['booking_id'];?>'>
-  <input type='hidden' name='amount' value='<?php echo $_SESSION['deposit']; ?>'>
-  <input type='hidden' name='no_shipping' value='1'>
-  <input type='hidden' name='currency_code' value='PHP'>
-   <input type='hidden' name='cancel_return' value='http://cancel.com'>
-     <input type='hidden' name='return' value='http://return.com/'>
-     <img type="image" src="img/paypal.jpg" style="background-color:white; width:32%; height:14%; padding:2px; " ></img>
-					<br><button class="awe-btn awe-btn-6" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width:32%">Pay Room Deposit Now</button>
-					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post' name='form'>
+    <input type='hidden' name='business' value='montalban.waterpark@gmail.com'>
+    <input type='hidden' name='cmd' value='_xclick'>
+    <input type='hidden' name='item_name' value='15% Hotel Deposit Payment for Booking ID #<?php echo $_SESSION['booking_id']; ?>'>
+    <input type='hidden' name='amount' value='<?php echo $_SESSION['deposit']; ?>'>
+    <input type='hidden' name='no_shipping' value='1'>
+    <input type='hidden' name='currency_code' value='PHP'>
+    <input type='hidden' name='cancel_return' value='http://127.0.0.1/veneracions-resort/paypal-cancel.html'>
+    <input type='hidden' name='return' value='http://127.0.0.1/veneracions-resort/paypal-success.php'>
+    <input type="hidden" name="notify_url" value="http://127.0.0.1/veneracions-resort/paypal-success.php">
+    <img type="image" src="img/paypal.jpg" style="background-color:white; width:32%; height:14%; padding:2px; " ></img>
+	<br><button class="awe-btn awe-btn-6" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width:32%">Pay Room Deposit Now</button>
+	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
+<br/>
+<a class='pull-right' href='printpage.php' target="_blank">Click here to print</a><br/>
+
 
 			</div>
 		</div>
