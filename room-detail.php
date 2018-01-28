@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+session_start();
+include_once 'dbconnect.php';
+
+$id = $_GET['id'];
+
+// select loggedin users detail
+$res = mysql_query("SELECT * FROM room WHERE room_id=" . $id);
+$roomRow = mysql_fetch_array($res);
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -25,7 +35,7 @@
 
     <!-- MAIN STYLE -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
@@ -49,234 +59,36 @@
 
         <!-- HEADER -->
          <header id="header" class="header-v2">
-            
-            <!-- HEADER TOP -->
-            <div class="header_top">
-                <div class="container">
-                    <div class="header_left float-left">
-                        <span><i class="lotus-icon-cloud"></i> 27 °C</span>
-                        <span><i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</span>
-                        <span><i class="lotus-icon-phone"></i> +63 915 6789 321</span>
-                    </div>
-                    <div class="header_right float-right">
 
-                        <span class="login-register">
-                            <a href="login.php">Login</a>
-                            <a href="register.php">register</a>
-                        </span>
-
-                    </div>
-                </div>
-            </div>
             <!-- END / HEADER TOP -->
-            
+
             <!-- HEADER LOGO & MENU -->
             <div class="header_content" id="header_content">
 
                 <div class="container">
-                    <!-- HEADER LOGO -->
-                    <div class="header_logo">
-                        <a href="#"><img src="images/logo-header.png" alt=""></a>
-                    </div>
-                    <!-- END / HEADER LOGO -->
-                    
+
+
                     <!-- HEADER MENU -->
-                    <nav class="header_menu">
-                        <ul class="menu">
-                            <li class="current-menu-item">
-                                <a href="index.php">Home</a>
-                            </li>
-                            <li>
-                                <a href="about.html">About</a>
-                            </li>
+                <nav class="header_menu">
+                    <ul class="menu">
+                        <li>
+                            <a href="index.php">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
 
-                            <li>
-                                <a href="#">Room
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="room-1.html">Room 1</a>
-                                    </li>
-                                    <!-- <li>
-                                        <a href="room-2.html">Room 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-3.html">Room 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-4.html">Room 4</a>
-                                    </li> -->
-                                    <li>
-                                        <a href="room-5.html">Room 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-6.html">Room 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="room-detail.html">Room Detail</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- <li>
-                                <a href="#">Restaurant
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="restaurants-1.html">Restaurant 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="restaurants-2.html">Restaurant 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="restaurants-3.html">Restaurant 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="restaurants-4.html">Restaurant 4</a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <li>
-                                <a href="#">Reservation
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="reservation-step-1.html">Reservation Step 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-2.html">Reservation Step 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-3.html">Reservation Step 3</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-4.html">Reservation Step 4</a>
-                                    </li>
-                                    <li>
-                                        <a href="reservation-step-5.html">Reservation Step 5</a>
-                                    </li>
-                                    <li>
-                                        <a href="check-out.html">Check Out</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- <li>
-                                <a href="#">Page
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="#">Guest Book
-                                            <span class="fa fa-caret-right"></span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="guest-book.html">Guest Book 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="guest-book-2.html">Guest Book 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li>
-                                        <a href="#">Event
-                                            <span class="fa fa-caret-right"></span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="events.html">Events</a>
-                                            </li>
-                                            <li>
-                                                <a href="events-fullwidth.html">Events Fullwidth</a>
-                                            </li>
-                                            <li>
-                                                <a href="events-detail.html">Events Detail</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="attractions.html">Attractions</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Term Condition
-                                            <span class="fa fa-caret-right"></span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="term-condition.html">Term Condition 1</a>
-                                            </li>
-                                            <li>
-                                                <a href="term-condition-2.html">Term Condition 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="">Activiti
-                                            <span class="fa fa-caret-down"></span>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a href="activiti.html">Activiti</a>
-                                            </li>
-                                            <li>
-                                                <a href="activiti-detail.html">Activiti Detail</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="check-out.html">Check Out</a>
-                                    </li>
-                                    <li>
-                                        <a href="shortcode.html">ShortCode</a>
-                                    </li>
-                                    <li>
-                                        <a href="page-404.html">404 Page</a>
-                                    </li>
-                                    <li>
-                                        <a href="comingsoon.html">Coming Soon</a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <li>
-                                <a href="#">Gallery
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="gallery.html">Gallery Style 1</a>
-                                    </li>
-                                    <!-- <li>
-                                        <a href="gallery-2.html">Gallery Style 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="gallery-3.html">Gallery Style 3</a>
-                                    </li> -->
-                                </ul>
-                            </li>
-                            <!-- <li>
-                                <a href="#">Blog
-                                    <span class="fa fa-caret-down"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="blog.html">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail.html">Blog Detail</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail-fullwidth.html">Blog Detail Fullwidth</a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                            <li>
-                                <a href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
+                        <li class="current-menu-item">
+                            <a href="room-5.php">Rooms</a>
+                        </li>
+                        <li>
+                            <a href="cottages.html">Cottages</a>
+                        </li>
+                        <li >
+                            <a href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
                     <!-- END / HEADER MENU -->
 
                     <!-- MENU BAR -->
@@ -291,15 +103,15 @@
 
         </header>
         <!-- END / HEADER -->
-        
+
         <!-- SUB BANNER -->
         <section class="section-sub-banner bg-9">
             <div class="awe-overlay"></div>
             <div class="sub-banner">
                 <div class="container">
                     <div class="text text-center">
-                        <h2>LUXURY ROOM</h2>
-                        <p>Lorem Ipsum is simply dummy text</p>
+                        <h2><?php echo $roomRow['room_name'] ?></h2>
+                        <p><?php echo $roomRow['descriptions'] ?></p>
                     </div>
                 </div>
 
@@ -307,52 +119,52 @@
 
         </section>
         <!-- END / SUB BANNER -->
-        
+
         <!-- ROOM DETAIL -->
         <section class="section-room-detail bg-white">
             <div class="container">
-                
+
                 <!-- DETAIL -->
                 <div class="room-detail">
                     <div class="row">
                         <div class="col-lg-9">
-                            
+
                             <!-- LAGER IMGAE -->
                             <div class="room-detail_img">
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="<?php echo $roomRow['imgpath'] ?>" style="height:496px;width:870px;"alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                                 <div class="room_img-item">
-                                    <img src="images/room/detail/lager/img-1.jpg" alt="">    
+                                    <img src="images/room/detail/lager/img-1.jpg" alt="">
                                     <h6>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h6>
                                 </div>
                             </div>
                             <!-- END / LAGER IMGAE -->
-                            
+
                             <!-- THUMBNAIL IMAGE -->
                             <div class="room-detail_thumbs">
-                                <a href="#"><img src="images/room/detail/img-2.jpg" alt=""></a>
+                                <a href="#"><img src="<?php echo $roomRow['imgpath'] ?>" alt=""></a>
                                 <a href="#"><img src="images/room/detail/img-2.jpg" alt=""></a>
                                 <a href="#"><img src="images/room/detail/img-2.jpg" alt=""></a>
                                 <a href="#"><img src="images/room/detail/img-2.jpg" alt=""></a>
@@ -372,27 +184,20 @@
 
                                 <div class="room-detail_total">
                                     <img src="images/icon-logo.png" alt="" class="icon-logo">
-                                    
+
                                     <h6>STARTING ROOM FROM</h6>
-                                    
+
                                     <p class="price">
-                                        <span class="amout">₱260</span>  /days
+                                        <span class="amout">₱<?php echo $roomRow['rate']?><span>  /days
                                     </p>
                                 </div>
-                                
+
                                 <div class="room-detail_form">
                                     <label>Arrive</label>
-                                    <input type="text" class="awe-calendar" placeholder="Arrive Date">
+                                    <input type="text" class="awe-calendar from" placeholder="Arrive Date">
                                     <label>Depature</label>
-                                    <input type="text" class="awe-calendar" placeholder="Departure Date">
+                                    <input type="text" class="awe-calendar to" placeholder="Departure Date">
                                     <label>Adult</label>
-                                    <select class="awe-select">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option selected>3</option>
-                                        <option>4</option>
-                                    </select>
-                                    <label>Chirld</label>
                                     <select class="awe-select">
                                         <option>1</option>
                                         <option>2</option>
@@ -409,10 +214,10 @@
                     </div>
                 </div>
                 <!-- END / DETAIL -->
-                
+
                 <!-- TAB -->
                 <div class="room-detail_tab">
-                    
+
                     <div class="row">
                         <div class="col-md-3">
                             <ul class="room-detail_tab-header">
@@ -423,10 +228,10 @@
                                 <li><a href="#calendar" data-toggle="tab">Calendar</a></li>
                             </ul>
                         </div>
-                                        
+
                         <div class="col-md-9">
                             <div class="room-detail_tab-content tab-content">
-                                
+
                                 <!-- OVERVIEW -->
                                 <div class="tab-pane fade" id="overview">
 
@@ -462,10 +267,10 @@
 
                                 <!-- AMENITIES -->
                                 <div class="tab-pane fade active in" id="amenities">
-                                    
+
                                     <div class="room-detail_amenities">
                                         <p>Located in the heart of Aspen with a unique blend of contemporary luxury and historic heritage, deluxe accommodations, superb amenities, genuine hospitality and dedicated service for an elevated experience in the Rocky Mountains.</p>
-                                        
+
                                         <div class="row">
                                             <div class="col-xs-6 col-lg-4">
                                                 <h6>LIVING ROOM</h6>
@@ -528,16 +333,16 @@
 
                                 <!-- PACKAGE -->
                                 <div class="tab-pane fade" id="package">
-                            
+
                                     <div class="room-detail_package">
 
                                         <!-- ITEM package -->
                                         <div class="room-package_item">
-                                        
+
                                             <div class="text">
                                                 <h4><a href="#">package standar</a></h4>
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
-                                                                    
+
                                                 <div class="room-package_price">
                                                     <p class="price">
                                                         <span class="amout">₱260</span> / Package
@@ -547,14 +352,14 @@
                                             </div>
                                         </div>
                                         <!-- END / ITEM package -->
-                                                                    
+
                                         <!-- ITEM package -->
                                         <div class="room-package_item">
-                                        
+
                                             <div class="text">
                                                 <h4><a href="#">package standar</a></h4>
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
-                                                                    
+
                                                 <div class="room-package_price">
                                                     <p class="price">
                                                         <span class="amout">₱260</span> / Package
@@ -564,14 +369,14 @@
                                             </div>
                                         </div>
                                         <!-- END / ITEM package -->
-                                        
+
                                         <!-- ITEM package -->
                                         <div class="room-package_item">
-                                        
+
                                             <div class="text">
                                                 <h4><a href="#">package standar</a></h4>
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
-                                                                    
+
                                                 <div class="room-package_price">
                                                     <p class="price">
                                                         <span class="amout">₱260</span> / Package
@@ -582,7 +387,7 @@
                                         </div>
                                         <!-- END / ITEM package -->
                                     </div>
-                            
+
                                 </div>
                                 <!-- END / PACKAGE -->
 
@@ -687,14 +492,14 @@
                                         <div class="col-sm-6">
                                             <!-- CALENDAR ITEM -->
                                             <div class="calendar_custom">
-                                        
+
                                                 <div class="calendar_title">
                                                     <span class="calendar_month">JUNE</span>
                                                     <span class="calendar_year">2015</span>
-                                            
+
                                                     <a href="#" class="calendar_prev calendar_corner"><i class="lotus-icon-left-arrow"></i></a>
                                                 </div>
-                                            
+
                                                 <table class="calendar_tabel">
 
                                                     <thead>
@@ -762,7 +567,7 @@
                                                     </tr>
 
                                                 </table>
-                                            
+
                                             </div>
                                             <!-- END CALENDAR ITEM -->
                                         </div>
@@ -771,14 +576,14 @@
 
                                             <!-- CALENDAR ITEM -->
                                             <div class="calendar_custom">
-                                        
+
                                                 <div class="calendar_title">
                                                     <span class="calendar_month">JUNE</span>
                                                     <span class="calendar_year">2015</span>
-                                            
+
                                                     <a href="#" class="calendar_next calendar_corner"><i class="lotus-icon-right-arrow"></i></a>
                                                 </div>
-                                            
+
                                                 <table class="calendar_tabel">
 
                                                     <thead>
@@ -846,11 +651,11 @@
                                                     </tr>
 
                                                 </table>
-                                            
+
                                             </div>
                                             <!-- END CALENDAR ITEM -->
                                         </div>
-                                        
+
                                         <div class="calendar_status text-center col-sm-12">
                                             <span>Available</span>
                                             <span class="not-available">Not Available</span>
@@ -868,113 +673,6 @@
                 </div>
                 <!-- END / TAB -->
 
-                <!-- COMPARE ACCOMMODATION -->
-                <div class="room-detail_compare">
-                    <h2 class="room-compare_title">COMPARE ACCOMMODATION</h2>
-
-                    <div class="room-compare_content">
-                        
-                        <div class="row">
-                            <!-- ITEM -->
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="room-compare_item">
-                                    <div class="img">
-                                        <a href="#"><img src="images/room/detail/compare/img-1.jpg" alt=""></a>
-                                    </div>  
-                                
-                                    <div class="text">
-                                        <h2><a href="">LUxury room</a></h2>
-                                
-                                        <ul>
-                                            <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                            <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                            <li><i class="lotus-icon-view"></i> View: Ocen</li>
-                                        </ul>
-                                
-                                        <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-                            
-                            <!-- ITEM -->
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="room-compare_item">
-                                    <div class="img">
-                                        <a href="#"><img src="images/room/detail/compare/img-1.jpg" alt=""></a>
-                                    </div>  
-                                
-                                    <div class="text">
-                                        <h2><a href="">Family Room</a></h2>
-                                
-                                        <ul>
-                                            <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                            <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                            <li><i class="lotus-icon-view"></i> View: Ocen</li>
-                                        </ul>
-                                
-                                        <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-                            
-                            <!-- ITEM -->
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="room-compare_item">
-                                    <div class="img">
-                                        <a href="#"><img src="images/room/detail/compare/img-1.jpg" alt=""></a>
-                                    </div>  
-                                
-                                    <div class="text">
-                                        <h2><a href="">standard Room</a></h2>
-                                
-                                        <ul>
-                                            <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                            <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                            <li><i class="lotus-icon-view"></i> View: Ocen</li>
-                                        </ul>
-                                
-                                        <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-                            
-                            <!-- ITEM -->
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="room-compare_item">
-                                    <div class="img">
-                                        <a href="#"><img src="images/room/detail/compare/img-1.jpg" alt=""></a>
-                                    </div>  
-                                
-                                    <div class="text">
-                                        <h2><a href="">couple Room</a></h2>
-                                
-                                        <ul>
-                                            <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                            <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                            <li><i class="lotus-icon-view"></i> View: Ocen</li>
-                                        </ul>
-                                
-                                        <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                
-                                    </div>
-                                
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-                        </div>
-
-                    </div>
-                </div>
-                <!-- END / COMPARE ACCOMMODATION -->
 
             </div>
         </section>
@@ -982,111 +680,6 @@
 
         <!-- FOOTER -->
         <footer id="footer">
-
-            <!-- FOOTER TOP -->
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- WIDGET MAILCHIMP -->
-                        <div class="col-lg-9">
-                            <div class="mailchimp">
-                                <h4>News &amp; Offers</h4>
-                                <div class="mailchimp-form">
-                                    <form action="#" method="POST">
-                                        <input type="text" name="email" placeholder="Your email address" class="input-text">
-                                        <button class="awe-btn">SIGN UP</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET MAILCHIMP -->
-                        
-                        <!-- WIDGET SOCIAL -->
-                        <div class="col-lg-3">
-                            <div class="social">
-                                <div class="social-content">
-                                     
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET SOCIAL -->
-
-                    </div>
-                </div>
-            </div>
-            <!-- END / FOOTER TOP -->
-
-            <!-- FOOTER CENTER -->
-            <div class="footer_center">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-xs-12 col-lg-5">
-                            <div class="widget widget_logo">
-                                <div class="widget-logo">
-                                    <div class="img">
-                                        <a href="#"><img src="images/logo-footer.png" alt=""></a>
-                                    </div>
-                                    <div class="text">
-                                        <p><i class="lotus-icon-location"></i> Montalban, Rodriguez Rizal, PH</p>
-                                        <p><i class="lotus-icon-phone"></i> +63 915 6789 321</p>
-                                        <p><i class="fa fa-envelope-o"></i> <a href="mailto:hello@yopmail.com">hello@yopmail.com</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">Page site</h4>
-                                <ul>
-                                    <li><a href="#">Guest Book</a></li>
-                                    <li><a href="#">Gallery</a></li>
-                                    <li><a href="#">Restaurant</a></li>
-                                    <li><a href="#">Event</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-2">
-                            <div class="widget">
-                                <h4 class="widget-title">ABOUT</h4>
-                                <ul>
-                                    <li><a href="">About</a></li>
-                                    <li><a href="">Blog</a></li>
-                                    <li><a href="">Contact Us</a></li>
-                                    <li><a href="">Coming Soon</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 col-lg-3">
-                            <div class="widget widget_tripadvisor">
-                                <h4 class="widget-title">Tripadvisor</h4>
-                                <div class="tripadvisor">
-                                    <p>Now with hotel reviews by</p>
-                                    <img src="images/tripadvisor.png" alt="">
-                                    <span class="tripadvisor-circle">
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i></i>
-                                        <i class="part"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- END / FOOTER CENTER -->
 
             <!-- FOOTER BOTTOM -->
             <div class="footer_bottom">
