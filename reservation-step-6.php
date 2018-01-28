@@ -70,10 +70,10 @@ session_start();
                             </li>
 
                             <li>
-                                <a href="room-5.html">Rooms</a>
+                                <a href="room-5.php">Rooms</a>
                             </li>
                             <li>
-                                <a href="gallery.html">Gallery</a>
+                                <a href="cottages.html">Cottages</a>
                             </li>
                             <li >
                                 <a href="contact.html">Contact</a>

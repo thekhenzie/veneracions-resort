@@ -115,10 +115,10 @@ if(isset($_POST['signUp'])) {
                         </li>
 
                         <li>
-                            <a href="room-5.html">Rooms</a>
+                            <a href="room-5.php">Rooms</a>
                         </li>
                         <li>
-                            <a href="gallery.html">Gallery</a>
+                            <a href="cottages.html">Cottages</a>
                         </li>
                         <li class="current-menu-item">
                             <a href="contact.html">Contact</a>

@@ -70,7 +70,7 @@ $userRow = mysql_fetch_array($res);
             <div class="header_content" id="header_content">
                 <div class="container">
                     <!-- HEADER LOGO -->
-                 
+
                     <!-- END / HEADER LOGO -->
 
                     <!-- HEADER MENU -->
@@ -84,10 +84,10 @@ $userRow = mysql_fetch_array($res);
                         </li>
 
                         <li>
-                            <a href="room-5.html">Rooms</a>
+                            <a href="room-5.php">Rooms</a>
                         </li>
                         <li>
-                            <a href="gallery.html">Gallery</a>
+                            <a href="cottages.html">Cottages</a>
                         </li>
                         <li>
                             <a href="contact.html">Contact</a>
@@ -129,10 +129,10 @@ $userRow = mysql_fetch_array($res);
                         </div>
 
                         <div class="tp-caption sfb fadeout slider-caption slider-caption-sub-1" data-x="center" data-y="280" data-speed="700" data-easing="easeOutBack"
-                            data-start="2000">Montalban Waterpark and Garden ResortS</div>
+                            data-start="2000"><div class='row' style='text-align: center;'>Montalban Waterpark <br/>and<br/> Garden ResortS</div></div>
 
-                        <a href="#" class="tp-caption sfb fadeout awe-btn awe-btn-12 awe-btn-slider" data-x="center" data-y="380" data-easing="easeOutBack"
-                            data-speed="700" data-start="2200">VIEW NOW</a>
+                        <!-- <a href="#" class="tp-caption sfb fadeout awe-btn awe-btn-12 awe-btn-slider" data-x="center" data-y="380" data-easing="easeOutBack"
+                            data-speed="700" data-start="2200">VIEW NOW</a> -->
                     </li>
 
                     <li data-transition="fade">
