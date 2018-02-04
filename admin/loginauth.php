@@ -9,7 +9,7 @@ $re = mysql_query("SELECT * from admin WHERE username='".$_SESSION['username']."
 echo mysql_error();
 if(mysql_num_rows($re) > 0)
 {
-header('Refresh: 0;url=starter.html');
+header('Refresh: 0;url=starter.php');
 } 
 else
 {
