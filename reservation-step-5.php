@@ -322,7 +322,7 @@ if (mysql_num_rows($result) > 0) {
                                         <label>Country
                                             <sup>*</sup>
                                         </label>
-                                        <select class="awe-select" name="country" id="country" disabled>
+                                        <select class="awe-select" name="country" id="country">
                                             <option>Philippines</option>
                                             <option>United States</option>
                                         </select>
@@ -332,13 +332,13 @@ if (mysql_num_rows($result) > 0) {
                                                 <label>First Name
                                                     <sup>*</sup>
                                                 </label>
-                                                <input required class="input-text" name="firstname" type="text" value="<?php if (isset($_SESSION['firstname']) && !empty($_SESSION['firstname'])) {echo $_SESSION['firstname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters are allowed" placeholder="e.g. Juan" />
+                                                <input required class="input-text" name="firstname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['firstname']) && !empty($_SESSION['firstname'])) {echo $_SESSION['firstname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters are allowed" placeholder="e.g. Juan" />
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Last Name
                                                     <sup>*</sup>
                                                 </label>
-                                                <input required class="input-text" name="lastname" type="text" value="<?php if (isset($_SESSION['lastname']) && !empty($_SESSION['lastname'])) {echo $_SESSION['lastname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters allowed" placeholder="e.g. Dela Cruz" />
+                                                <input required class="input-text" name="lastname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['lastname']) && !empty($_SESSION['lastname'])) {echo $_SESSION['lastname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters allowed" placeholder="e.g. Dela Cruz" />
                                             </div>
                                         </div>
 
@@ -361,7 +361,7 @@ if (mysql_num_rows($result) > 0) {
                                                 <label>Zip/Postcode
                                                     <sup>*</sup>
                                                 </label>
-                                                <input required class="input-text" name="postcode" type="number"  value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>" placeholder="e.g. 1600"/ />
+                                                <input required class="input-text" name="postcode" type="number" pattern="[0-9]{4}"  value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>" placeholder="e.g. 1600"/ />
                                             </div>
                                         </div>
 
@@ -379,10 +379,6 @@ if (mysql_num_rows($result) > 0) {
                                                 <input required class="input-text" name="phone" type="number" value="<?php if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {echo $_SESSION['phone'];}?>" pattern= "[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"  placeholder=""/ />
                                             </div>
                                         </div>
-
-                                        <label>Order Notes</label>
-                                        <textarea class="input-textarea"  name="specialrequirements" placeholder="Notes about your order, eg. special notes for delivery"><?php if (isset($_SESSION['special_requirement']) && !empty($_SESSION['special_requirement'])) {echo $_SESSION['special_requirement'];}?></textarea>
-
                                         <button class="awe-btn awe-btn-13" type="submit" >PLACE ORDER</button>
                                     </form>
                                     </div>
