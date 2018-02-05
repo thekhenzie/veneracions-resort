@@ -17,7 +17,7 @@ if (mysql_num_rows($re) > 0) {
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Montalban Waterpark | Dashboard</title>
+	<title>Montalban Waterpark | Rooms</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -36,15 +36,20 @@ if (mysql_num_rows($re) > 0) {
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.4/sl-1.2.5/datatables.min.css"/>
- 
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.4/sl-1.2.5/datatables.min.js"></script>
- 
+
 	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-	<!-- Google Font -->
+    
+    <!-- fancyBox files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+    
+    <!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -124,8 +129,8 @@ if (mysql_num_rows($re) > 0) {
 				<ul class="sidebar-menu" data-widget="tree">
 					<li class="header">HEADER</li>
 					<!-- Optionally, you can add icons to the links -->
-					<li class="active">
-						<a href="#">
+					<li>
+						<a href="starter.php">
 							<i class="fa fa-link"></i>
 							<span>Dashboard</span>
 						</a>
@@ -147,7 +152,7 @@ if (mysql_num_rows($re) > 0) {
 							</li>
 						</ul>
 					</li>
-					<li class="treeview">
+					<li class="treeview active">
 						<a href="#">
 							<i class="fa fa-bars"></i>
 							<span>Reservation</span>
@@ -156,7 +161,7 @@ if (mysql_num_rows($re) > 0) {
 							</span>
 						</a>
 						<ul class="treeview-menu">
-							<li>
+                            <li>
 								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
@@ -192,65 +197,55 @@ if (mysql_num_rows($re) > 0) {
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Reservation > Cancelled
+				</h1>
+			</section>
+
 			<!-- Main content -->
 			<section class="content container-fluid">
-			
-			<div class="row">
-				<div id="MyDateDisplay" class="dateDisplay"></div>
-				<div id="MyClockDisplay" class="clock"></div>
-			</div>
 
-			<!-- <div class="form-group">
-                <label>Date range:</label>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="current">
+                                <thead>
+                                    <tr>
+                                        <th>Reservation Code</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Check In</th>
+                                        <th>Check Out</th>
+                                        <th>Booking Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                include './auth.php';
+                                $re = mysql_query("SELECT * FROM booking WHERE isCancelled = 1");
 
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-				  <input type="text" name="daterange" class="form-control pull-right" value=""/>
+                                if(mysql_num_rows($re) > 0){
+                                    while($row = mysql_fetch_array($re)){
+                                        echo '
+                                            <tr>
+                                                <td>'.$row['reservation_code'].'</td>
+                                                <td>'.$row['first_name'].'</td>
+                                                <td>'.$row['last_name'].'</td>
+                                                <td>'.$row['checkin_date'].'</td>
+                                                <td>'.$row['checkout_date'].'</td>
+                                                <td>'.$row['booking_date'].'</td>                                                
+                                            </tr>
+                                            ';
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                
-			</div> -->
 
-			<div class="row">
-				<div class="col-md-5 col-md-offset-3">
-				<br/><h3 class="text-center">Current Reservations</h3>
-					<div class="table-responsive">
-						<table class="table table-striped" id="current">
-							<thead>
-								<tr>
-									<th>Reservation Code</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Check In</th>
-									<th>Check Out</th>
-								</tr>
-							</thead>
-							<tbody>
-							<?php 
-							include './auth.php';
-							$re = mysql_query("SELECT * FROM booking WHERE isActive = 1 AND isReserved=1");
-
-							if(mysql_num_rows($re) > 0){
-								while($row = mysql_fetch_array($re)){
-									echo '
-										<tr>
-											<td>'.$row['reservation_code'].'</td>
-											<td>'.$row['first_name'].'</td>
-											<td>'.$row['last_name'].'</td>
-											<td>'.$row['checkin_date'].'</td>
-											<td>'.$row['checkout_date'].'</td>
-										</tr>
-										';
-								}
-							}
-							?>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			
 			</section>
 			<!-- /.content -->
 		</div>
@@ -266,70 +261,16 @@ if (mysql_num_rows($re) > 0) {
 
 	</div>
 	<!-- ./wrapper -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#current').DataTable();
+    });
 
+    $('.deletebtn').click (function () {
+		return confirm ("Are you sure you want to delete?") ;
+	}); 
+    </script>
 	<!-- REQUIRED JS SCRIPTS -->
-
-<script type="text/javascript">
-$(function() {
-    $('input[name="daterange"]').daterangepicker({
-		opens: "center"
-		// ranges: {
-        //    'Today': [moment(), moment()],
-        //    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        //    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        //    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        //    'This Month': [moment().startOf('month'), moment().endOf('month')],
-        //    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        // }
-	}, function(start,end,label){
-		console.log(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD',label))
-	});
-});
-
-$(document).ready(function() {
-    $('#current').DataTable();
-} );
-</script>
-<script>
-	function showTime(){
-
-	var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-    var dayNames= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    var date = new Date();
-    var h = date.getHours(); // 0 - 23
-    var m = date.getMinutes(); // 0 - 59
-    var s = date.getSeconds(); // 0 - 59
-	var d = date.getDay();
-    var a = date.getDate();
-	var mo = date.getMonth();
-	var y = date.getFullYear();
-    var session = "AM";
-
-    if(h == 0){
-        h = 12;
-    }
-
-    if(h > 12){
-        h = h - 12;
-        session = "PM";
-    }
-
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
-
-    var time = h + ":" + m + ":" + s + " " + session;
-	var date = dayNames[d] + " " + monthNames[mo] + " " + a + ", " + y;
-    document.getElementById("MyClockDisplay").innerText = time;
-    document.getElementById("MyClockDisplay").textContent = time;
-    document.getElementById("MyDateDisplay").innerText = date;
-    document.getElementById("MyDateDisplay").textContent = date;
-    setTimeout(showTime, 1000);
-
-	}
-
-	showTime();
-</script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->

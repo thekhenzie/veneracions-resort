@@ -10,7 +10,7 @@ if (isset($_POST['submitCode'])) {
     $res = mysql_query($query);
     $count = mysql_num_rows($res);
 
-    $queryDelete = "DELETE FROM booking WHERE reservation_code='$code'";
+    $queryDelete = "UPDATE booking SET isCancelled = 1, isActive = 0 WHERE reservation_code='$code'";
     $resDelete = mysql_query($queryDelete);
     if ($count == 1) {
         $errTyp = "success";

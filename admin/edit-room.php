@@ -58,7 +58,7 @@ if (mysql_num_rows($re) > 0) {
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="index2.html" class="logo">
+			<a href="starter.php" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">
 					<b>ADM</b></span>
@@ -152,26 +152,40 @@ if (mysql_num_rows($re) > 0) {
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="#">
-							<i class="fa fa-link"></i>
-							<span>Rooms</span>
-						</a>
-					</li>
 					<li class="treeview">
 						<a href="#">
-							<i class="fa fa-link"></i>
-							<span>Multilevel</span>
+							<i class="fa fa-bars"></i>
+							<span>Reservation</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="#">Link in level 2</a>
+								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
-								<a href="#">Link in level 2</a>
+								<a href="modified-reservation.php">Modified</a>
+							</li>
+							<li>
+								<a href="cancelled-reservation.php">Cancelled</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-bar-chart"></i>
+							<span>Reports</span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="sales-report.php">Sales</a>
+							</li>
+							<li>
+								<a href="request-report.php">Request</a>
 							</li>
 						</ul>
 					</li>
