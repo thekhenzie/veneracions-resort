@@ -75,7 +75,7 @@ if (mysql_num_rows($result) > 0) {
 
         <!-- PRELOADER -->
         <div id="preloader">
-        <span class="preloader-dot"></span>
+            <span class="preloader-dot"></span>
         </div>
         <!-- END / PRELOADER -->
 
@@ -94,25 +94,25 @@ if (mysql_num_rows($result) > 0) {
 
                         <!-- HEADER MENU -->
                         <nav class="header_menu">
-                        <ul class="menu">
-                            <li class="current-menu-item">
-                                <a href="index.php">Home</a>
-                            </li>
-                            <li>
-                                <a href="about.html">About</a>
-                            </li>
+                            <ul class="menu">
+                                <li class="current-menu-item">
+                                    <a href="index.php">Home</a>
+                                </li>
+                                <li>
+                                    <a href="about.html">About</a>
+                                </li>
 
-                            <li>
-                                <a href="room-5.php">Rooms</a>
-                            </li>
-                            <li>
-                                <a href="cottages.html">Cottages</a>
-                            </li>
-                            <li >
-                                <a href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
+                                <li>
+                                    <a href="room-5.php">Rooms</a>
+                                </li>
+                                <li>
+                                    <a href="cottages.html">Cottages</a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
                         <!-- END / HEADER MENU -->
 
                         <!-- MENU BAR -->
@@ -178,7 +178,7 @@ if (mysql_num_rows($result) > 0) {
                         <div class="row">
 
                             <!-- SIDEBAR -->
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-3">
 
                                 <div class="reservation-sidebar">
 
@@ -225,89 +225,13 @@ if (mysql_num_rows($result) > 0) {
 
                                     </div>
                                     <!-- END / RESERVATION DATE -->
-
-                                    <!-- ROOM SELECT -->
-                                    <div class="reservation-room-selected bg-gray">
-
-                                        <!-- HEADING -->
-                                        <h2 class="reservation-heading">Selected Rooms</h2>
-                                        <!-- END / HEADING -->
-
-                                        <!-- ITEM -->
-                                        <?php
-                                        $no = 1;
-                                    for ($i=0; $i < count($_SESSION['room_id']); $i++) { 
-                                    
-                                    echo '
-                                    <div class="reservation-room-seleted_item">
-
-                                        <h6>ROOM '.$no.'</h6>
-                                        <span class="reservation-option">'.$_SESSION['guestqty'][$i].' Guest</span>&nbsp;
-                                        <span class="reservation-option">'.$_SESSION['roomqty'][$i].' Room</span>&nbsp;
-                                        <span class="reservation-option">'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'/day</span>
-                                        <div class="reservation-room-seleted_name has-package">
-                                            <h2>
-                                                <a>'.$_SESSION['roomname'][$i].'</a>
-                                            </h2>
-                                        </div>
-
-                                        <div class="reservation-room-seleted_package">
-                                            <h6>RATE</h6>
-                                            <ul>';
-                                            for($x=1; $x<=$_SESSION['total_night'];$x++){
-                                                $date = strtotime('+'.$x.' day', strtotime($_SESSION['checkin_unformat']));
-                                                echo '
-                                                <li>
-                                                    <span>'.date("M d, Y",$date).'  '.$_SESSION['roomqty'][$i].' x ₱'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'</span>
-                                                    <span>₱'.$_SESSION['ind_rate'][$i].'.00</span>
-                                                </li>';
-                                            }
-                                                
-                                    echo '            
-                                            </ul>
-
-                                            <ul>
-                                                <li>
-                                                    <span>Service</span>
-                                                    <span>Free</span>
-                                                </li>
-                                                <li>
-                                                    <span>Tax</span>
-                                                    <span--</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="reservation-room-seleted_total-room">
-                                            TOTAL Room '.$no.'
-                                            <span class="reservation-amout">₱'.$_SESSION['ind_rate'][$i]*$_SESSION['total_night'].'.00</span>
-                                        </div>
-
-                                    </div> ';
-                                    $no+=1;
-                                    }
-                                    ?>
-                                            <!-- END / ITEM -->
-
-                                            <!-- TOTAL -->
-                                            <div class="reservation-room-seleted_total bg-blue">
-                                                <label>TOTAL</label>
-                                                <span class="reservation-total">₱
-                                                    <?php echo $_SESSION['total_amount'];?>.00</span>
-                                            </div>
-                                            <!-- END / TOTAL -->
-
-                                    </div>
-                                    <!-- END / ROOM SELECT -->
-
                                 </div>
 
                             </div>
                             <!-- END / SIDEBAR -->
 
                             <!-- CONTENT -->
-                            <div class="col-md-8 col-lg-9">
+                            <div class="col-md-6">
 
                                 <div class="reservation_content">
 
@@ -316,75 +240,164 @@ if (mysql_num_rows($result) > 0) {
                                         <!-- <p class="reservation-login">Returning customer?
                                         <a href="#">Click here to login</a>
                                     </p> -->
-                                    <form action='insertandemail.php' method='post' onSubmit='return validateForm(this);'>
-                                        <h4>BILLING DETAILS</h4>
-                                       
-                                        <label>Country
-                                            <sup>*</sup>
-                                        </label>
-                                        <select class="awe-select" name="country" id="country">
-                                            <option>Philippines</option>
-                                            <option>United States</option>
-                                        </select>
+                                        <form action='insertandemail.php' method='post' onSubmit='return validateForm(this);'>
+                                            <h4>BILLING DETAILS</h4>
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label>First Name
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="firstname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['firstname']) && !empty($_SESSION['firstname'])) {echo $_SESSION['firstname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters are allowed" placeholder="e.g. Juan" />
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label>Last Name
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="lastname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['lastname']) && !empty($_SESSION['lastname'])) {echo $_SESSION['lastname'];}?>" pattern="[a-zA-Z\s]+" Title="Only alphabet characters allowed" placeholder="e.g. Dela Cruz" />
-                                            </div>
-                                        </div>
+                                            <label>Country
+                                                <sup>*</sup>
+                                            </label>
+                                            <select class="awe-select" name="country" id="country">
+                                                <option>Philippines</option>
+                                                <option>United States</option>
+                                            </select>
 
-                                        <label>Address Line 1
-                                            <sup>*</sup>
-                                        </label>
-                                        <input required class="input-text" name="addressline1" type="text" value="<?php if (isset($_SESSION['addressline1']) && !empty($_SESSION['addressline1'])) {echo $_SESSION['addressline1'];}?>"   placeholder=""/>
-                                        <label>Address Line 2
-                                        </label>
-                                        <input class="input-text" name="addressline2" type="text" value="<?php if (isset($_SESSION['addressline2']) && !empty($_SESSION['addressline2'])) {echo $_SESSION['addressline2'];}?>"  placeholder=""/ />
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label>First Name
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="firstname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['firstname']) && !empty($_SESSION['firstname'])) {echo $_SESSION['firstname'];}?>"
+                                                        pattern="[a-zA-Z\s]+" Title="Only alphabet characters are allowed" placeholder="e.g. Juan"
+                                                    />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Last Name
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="lastname" pattern="[A-Za-z]{3,}" type="text" value="<?php if (isset($_SESSION['lastname']) && !empty($_SESSION['lastname'])) {echo $_SESSION['lastname'];}?>"
+                                                        pattern="[a-zA-Z\s]+" Title="Only alphabet characters allowed" placeholder="e.g. Dela Cruz"
+                                                    />
+                                                </div>
+                                            </div>
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label>Town / City
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="city" type="text"  value="<?php if (isset($_SESSION['city']) && !empty($_SESSION['city'])) {echo $_SESSION['city'];}?>" pattern= "[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"  placeholder=""/ />
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label>Zip/Postcode
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="postcode" type="number" pattern="[0-9]{4}"  value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>" placeholder="e.g. 1600"/ />
-                                            </div>
-                                        </div>
+                                            <label>Address Line 1
+                                                <sup>*</sup>
+                                            </label>
+                                            <input required class="input-text" name="addressline1" type="text" value="<?php if (isset($_SESSION['addressline1']) && !empty($_SESSION['addressline1'])) {echo $_SESSION['addressline1'];}?>"
+                                                placeholder="" />
+                                            <label>Address Line 2
+                                            </label>
+                                            <input class="input-text" name="addressline2" type="text" value="<?php if (isset($_SESSION['addressline2']) && !empty($_SESSION['addressline2'])) {echo $_SESSION['addressline2'];}?>"
+                                                placeholder="" / />
 
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <label>Email Address
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="email" type="email" value="<?php if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {echo $_SESSION['email'];}?>" placeholder="" />
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label>Town / City
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="city" type="text" value="<?php if (isset($_SESSION['city']) && !empty($_SESSION['city'])) {echo $_SESSION['city'];}?>"
+                                                        pattern="[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"
+                                                        placeholder="" / />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Zip/Postcode
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="postcode" type="number" pattern="[0-9]{4}" value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>"
+                                                        placeholder="e.g. 1600" / />
+                                                </div>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <label>Phone
-                                                    <sup>*</sup>
-                                                </label>
-                                                <input required class="input-text" name="phone" type="number" value="<?php if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {echo $_SESSION['phone'];}?>" pattern= "[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"  placeholder=""/ />
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <label>Email Address
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="email" type="email" value="<?php if (isset($_SESSION['email']) && !empty($_SESSION['email'])) {echo $_SESSION['email'];}?>"
+                                                        placeholder="" />
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Phone
+                                                        <sup>*</sup>
+                                                    </label>
+                                                    <input required class="input-text" name="phone" type="number" value="<?php if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {echo $_SESSION['phone'];}?>"
+                                                        pattern="[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"
+                                                        placeholder="" / />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button class="awe-btn awe-btn-13" type="submit" >PLACE ORDER</button>
-                                    </form>
+                                            <button class="awe-btn awe-btn-13" type="submit">PLACE ORDER</button>
+                                        </form>
                                     </div>
 
                                 </div>
 
+                            </div>
+
+                            <div class="col-md-3">
+                                <!-- ROOM SELECT -->
+                                <div class="reservation-room-selected bg-gray">
+
+                                    <!-- HEADING -->
+                                    <h2 class="reservation-heading">Selected Rooms</h2>
+                                    <!-- END / HEADING -->
+
+                                    <!-- ITEM -->
+                                    <?php
+                                            $no = 1;
+                                            for ($i=0; $i < count($_SESSION['room_id']); $i++) { 
+
+                                            echo '
+                                            <div class="reservation-room-seleted_item">
+
+                                            <h6>ROOM '.$no.'</h6>
+                                            <span class="reservation-option">'.$_SESSION['guestqty'][$i].' Guest</span>&nbsp;
+                                            <span class="reservation-option">'.$_SESSION['roomqty'][$i].' Room</span>&nbsp;
+                                            <span class="reservation-option">'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'/day</span>
+                                            <div class="reservation-room-seleted_name has-package">
+                                                <h2>
+                                                    <a>'.$_SESSION['roomname'][$i].'</a>
+                                                </h2>
+                                            </div>
+
+                                            <div class="reservation-room-seleted_package">
+                                                <h6>RATE</h6>
+                                                <ul>';
+                                                for($x=1; $x<=$_SESSION['total_night'];$x++){
+                                                    $date = strtotime('+'.$x.' day', strtotime($_SESSION['checkin_unformat']));
+                                                    echo '
+                                                    <li>
+                                                        <span>'.date("M d, Y",$date).'  '.$_SESSION['roomqty'][$i].' x ₱'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'</span>
+                                                        <span>₱'.$_SESSION['ind_rate'][$i].'.00</span>
+                                                    </li>';
+                                                }
+                                                    
+                                            echo '            
+                                                </ul>
+
+                                                <ul>
+                                                    <li>
+                                                        <span>Service</span>
+                                                        <span>Free</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>Tax</span>
+                                                        <span--</span>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+                                            <div class="reservation-room-seleted_total-room">
+                                                TOTAL Room '.$no.'
+                                                <span class="reservation-amout">₱'.$_SESSION['ind_rate'][$i]*$_SESSION['total_night'].'.00</span>
+                                            </div>
+
+                                            </div> ';
+                                            $no+=1;
+                                            }
+                                    ?>
+                                        <!-- END / ITEM -->
+
+                                        <!-- TOTAL -->
+                                        <div class="reservation-room-seleted_total bg-blue">
+                                            <label>TOTAL</label>
+                                            <span class="reservation-total">₱
+                                                <?php echo $_SESSION['total_amount'];?>.00</span>
+                                        </div>
+                                        <!-- END / TOTAL -->
+
+                                </div>
+                                <!-- END / ROOM SELECT -->
                             </div>
                             <!-- END / CONTENT -->
 

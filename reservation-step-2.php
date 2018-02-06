@@ -149,7 +149,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                     <div class="row">
 
                         <!-- SIDEBAR -->
-                        <div class="col-md-4 col-lg-3">
+                        <div class="col-md-3">
 
                             <div class="reservation-sidebar">
 
@@ -176,10 +176,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                                     <button class="awe-btn awe-btn-13" type='submit'>EDIT RESERVATION</button>
                                     </form>
                                 </div>
-                                <div class="reservation-sidebar_availability bg-gray" id="roomselected" style="display:none;">
-                                <label for="submit-form" class="awe-btn awe-btn-13">Proceed To Book
-                                </label>
-                                </div>
+                                
                                 <!-- END / SIDEBAR AVAILBBILITY -->
                             </div>
 
@@ -187,7 +184,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                         <!-- END / SIDEBAR -->
 
                         <!-- CONTENT -->
-                        <div class="col-md-8 col-lg-9">
+                        <div class="col-md-6">
 
                             <div class="reservation_content">
 
@@ -342,12 +339,17 @@ print '	</form></div>';
 
                                 </div>
                                 <!-- END / RESERVATION ROOM -->
-
+                                
                             </div>
 
                         </div>
                         <!-- END / CONTENT -->
-
+                        <div class="col-md-3">
+                                    <div class="reservation-sidebar_availability bg-gray" id="roomselected" style="display:none;">
+                                    <label for="submit-form" class="awe-btn awe-btn-13">Proceed To Book
+                                    </label>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
