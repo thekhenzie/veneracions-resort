@@ -98,7 +98,7 @@ if (mysql_num_rows($re) > 0) {
 								</li>
 								<li class="user-footer">
 									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
+										<a href="profile.php" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
 										<a href="signout.php" class="btn btn-default btn-flat">Sign out</a>
