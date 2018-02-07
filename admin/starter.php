@@ -160,6 +160,9 @@ if (mysql_num_rows($re) > 0) {
 								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
+								<a href="waiting-reservation.php">Waiting for confirmation</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>
@@ -213,7 +216,7 @@ if (mysql_num_rows($re) > 0) {
 			</div> -->
 
 			<div class="row">
-				<div class="col-md-5 col-md-offset-3">
+				<div class="col-md-6 col-md-offset-3">
 				<br/><h3 class="text-center">Current Reservations</h3>
 					<div class="table-responsive">
 						<table class="table table-striped" id="current">
@@ -224,6 +227,7 @@ if (mysql_num_rows($re) > 0) {
 									<th>Last Name</th>
 									<th>Check In</th>
 									<th>Check Out</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -240,6 +244,9 @@ if (mysql_num_rows($re) > 0) {
 											<td>'.$row['last_name'].'</td>
 											<td>'.$row['checkin_date'].'</td>
 											<td>'.$row['checkout_date'].'</td>
+											<td>
+												<a href="edit-reservation.php?booking_id='.$row['booking_id'].'" class="btn btn-primary">Modify</a>
+											</td>
 										</tr>
 										';
 								}

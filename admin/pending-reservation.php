@@ -165,6 +165,9 @@ if (mysql_num_rows($re) > 0) {
 								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
+								<a href="waiting-reservation.php">Waiting for confirmation</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>
@@ -217,13 +220,14 @@ if (mysql_num_rows($re) > 0) {
                                         <th>Last Name</th>
                                         <th>Check In</th>
                                         <th>Check Out</th>
-                                        <th>Booking Date</th>
+										<th>Booking Date</th>
+										<th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <?php 
                                 include './auth.php';
-                                $re = mysql_query("SELECT * FROM booking WHERE isReserved = 0 AND isCancelled = 0");
+                                $re = mysql_query("SELECT * FROM booking WHERE isReserved = 1 AND isCancelled = 0 AND isActive = 0");
 
                                 if(mysql_num_rows($re) > 0){
                                     while($row = mysql_fetch_array($re)){
@@ -234,7 +238,11 @@ if (mysql_num_rows($re) > 0) {
                                                 <td>'.$row['last_name'].'</td>
                                                 <td>'.$row['checkin_date'].'</td>
                                                 <td>'.$row['checkout_date'].'</td>
-                                                <td>'.$row['booking_date'].'</td>                                                
+												<td>'.$row['booking_date'].'</td>         
+												<td>
+												<a href="adminconfirmreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-primary confirmbtn">Confirm</a>&nbsp;&nbsp; 
+												<a href="admincancelreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-danger deletebtn">Delete</a>
+												</td>                                      
                                             </tr>
                                             ';
                                     }
@@ -269,6 +277,9 @@ if (mysql_num_rows($re) > 0) {
     $('.deletebtn').click (function () {
 		return confirm ("Are you sure you want to delete?") ;
 	}); 
+	$('.confirmbtn').click (function () {
+		return confirm ("Are you sure you want to confirm?") ;
+	});
     </script>
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- Bootstrap 3.3.7 -->

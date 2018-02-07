@@ -35,6 +35,9 @@ if (mysql_num_rows($re) > 0) {
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/jszip-2.5.0/dt-1.10.16/af-2.2.2/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/cr-1.4.1/fc-3.2.4/fh-3.1.3/kt-2.3.2/r-2.2.1/rg-1.0.2/rr-1.2.3/sc-1.4.4/sl-1.2.5/datatables.min.css"/>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
@@ -44,11 +47,11 @@ if (mysql_num_rows($re) > 0) {
 	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-    
+
     <!-- fancyBox files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-    
+
     <!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -148,7 +151,7 @@ if (mysql_num_rows($re) > 0) {
 								<a href="rooms.php">Rooms</a>
 							</li>
 							<li>
-								<a href="#">Link in level 2</a>
+								<a href="cottages.php">Cottages</a>
 							</li>
 						</ul>
 					</li>
@@ -163,6 +166,9 @@ if (mysql_num_rows($re) > 0) {
 						<ul class="treeview-menu">
 							<li>
 								<a href="pending-reservation.php">Pending</a>
+							</li>
+							<li>
+								<a href="waiting-reservation.php">Waiting for confirmation</a>
 							</li>
 							<li>
 								<a href="modified-reservation.php">Modified</a>
@@ -207,7 +213,7 @@ if (mysql_num_rows($re) > 0) {
 			<section class="content container-fluid">
 
                 <div class="row">
-                
+
                     <div class="col-md-10 col-md-offset-1">
                         <div class="table-responsive">
                             <a href="add-room.php" class="btn btn-primary"><i class="fa fa-plus"></i> Add Room</a><br/><br/>
@@ -226,11 +232,11 @@ if (mysql_num_rows($re) > 0) {
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include './auth.php';
-                                    $re = mysql_query("SELECT * from room");
-                                    if (mysql_num_rows($re) > 0) {
-                                        while ($row = mysql_fetch_array($re)) {
-                                            echo '
+include './auth.php';
+$re = mysql_query("SELECT * from room WHERE isCottage=0");
+if (mysql_num_rows($re) > 0) {
+    while ($row = mysql_fetch_array($re)) {
+        echo '
                                                     <tr>
                                                         <td>' . $row['room_name'] . '</td>
                                                         <td><a data-fancybox="gallery" href="../' . $row['imgpath'] . '"><img src="../' . $row['imgpath'] . '" style="height:150px;width:150px;"></a></td>
@@ -242,9 +248,9 @@ if (mysql_num_rows($re) > 0) {
                                                         <td><a class="btn btn-danger deletebtn" id="deletebtn" href="deleteroom.php?room_id=' . $row['room_id'] . '">Delete</a></td>
                                                     </tr>
                                                 ';
-                                            }
-                                        }
-                                    ?>
+    }
+}
+?>
                                 </tbody>
                             </table>
                         </div>
@@ -264,7 +270,9 @@ if (mysql_num_rows($re) > 0) {
 			<strong>Copyright &copy; 2017
 				<a href="#">Montalban Waterpark and Garden Resort</a>.</strong> All rights reserved.
 		</footer>
-
+		<div id="dialog-confirm" title="Empty the recycle bin?">
+  			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+		</div>
 	</div>
 	<!-- ./wrapper -->
     <script type="text/javascript">
@@ -274,7 +282,8 @@ if (mysql_num_rows($re) > 0) {
 
     $('.deletebtn').click (function () {
 		return confirm ("Are you sure you want to delete?") ;
-	}); 
+	});
+
     </script>
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- Bootstrap 3.3.7 -->

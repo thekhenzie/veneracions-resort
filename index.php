@@ -186,7 +186,7 @@ $userRow = mysql_fetch_array($res);
                                 <input type="text" name='checkIn' id='checkIn' required class="awe-calendar from" placeholder="Arrival Date">
                                 <input type="text" name='checkOut' id='checkOut' required class="awe-calendar to" placeholder="Departure Date">
                                 <div class="vailability-submit">
-                                    <button name="submit" href="#" class="awe-btn awe-btn-13">FIND THE BEST RATE</button>
+                                    <button name="submit" href="#" class="awe-btn awe-btn-13">BOOK NOW</button>
                                 </div>
                             </div>
                         </div>

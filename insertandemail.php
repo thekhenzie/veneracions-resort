@@ -31,7 +31,7 @@ function generateRandomString($length = 10)
 }
 
 // echo generateRandomString(24); // OR: generateRandomString(24)
-$_SESSION['reservation_code'] = generateRandomString(24);
+$_SESSION['reservation_code'] = generateRandomString(8);
 include './dbconnect.php';
 mysql_query("INSERT INTO booking (booking_id, reservation_code, total_adult, total_children, checkin_date, checkout_date, special_requirement, payment_status, total_amount, deposit, first_name, last_name, email, telephone_no, add_line1, add_line2, city, state, postcode, country)
 VALUES (NULL,'" . $_SESSION['reservation_code'] . "', '" . array_sum($_SESSION['guestqty']) . "' , 0, '" . $_SESSION['checkin_db'] . "', '" . $_SESSION['checkout_db'] . "', '" . $_SESSION['special_requirement'] . "', 'pending', '" . $_SESSION['total_amount'] . "', '" . $_SESSION['deposit'] . "', '" . $_SESSION['firstname'] . "', '" . $_SESSION['lastname'] . "', '" . $_SESSION['email'] . "', '" . $_SESSION['phone'] . "', '" . $_SESSION['addressline1'] . "', '" . $_SESSION['addressline2'] . "', '" . $_SESSION['city'] . "', '" . $_SESSION['state'] . "', '" . $_SESSION['postcode'] . "', '" . $_SESSION['country'] . "')");

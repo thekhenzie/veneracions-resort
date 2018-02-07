@@ -237,7 +237,7 @@ if (mysql_num_rows($re) > 0) {
                                         </div>
                                         <div class="form-group">
                                             <label for="rate">Rate</label>
-                                            <input type="number" class="form-control" name="rate" id="rate" placeholder="Write without MYR or RM" value="' . $rows['rate'] . '" required>
+                                            <input type="number" class="form-control" name="rate" id="rate" placeholder="Rate of the room" value="' . $rows['rate'] . '" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="desc">Descriptions</label>

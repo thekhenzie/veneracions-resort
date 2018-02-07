@@ -165,6 +165,9 @@ if (mysql_num_rows($re) > 0) {
 								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
+								<a href="waiting-reservation.php">Waiting for confirmation</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>
@@ -223,7 +226,7 @@ if (mysql_num_rows($re) > 0) {
                                 <tbody>
                                 <?php 
                                 include './auth.php';
-                                $re = mysql_query("SELECT * FROM booking WHERE isCancelled = 1");
+                                $re = mysql_query("SELECT * FROM booking WHERE isCancelled = 1 AND isActive =0");
 
                                 if(mysql_num_rows($re) > 0){
                                     while($row = mysql_fetch_array($re)){

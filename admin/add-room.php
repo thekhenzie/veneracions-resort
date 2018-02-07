@@ -143,7 +143,7 @@ if (mysql_num_rows($re) > 0) {
 								<a href="rooms.php">Rooms</a>
 							</li>
 							<li>
-								<a href="#">Link in level 2</a>
+								<a href="cottages.php">Cottages</a>
 							</li>
 						</ul>
 					</li>
@@ -232,7 +232,7 @@ if (mysql_num_rows($re) > 0) {
                                 </div>
                                 <div class="form-group">
                                     <label for="img">Upload Room Image [recommended size is 400 X 400]</label>
-                                    <input type="file" class="form-control" id="img" name="img" required>
+                                    <input type="file" accept="image/*" class="form-control" id="img" name="img" required>
                                     <!-- p class="help-block">Example block-level help text here.</p-->
                                 </div>
                                 <button type="submit" class="btn btn-default">Submit</button>
