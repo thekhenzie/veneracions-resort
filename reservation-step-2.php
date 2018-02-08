@@ -13,6 +13,8 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
 
     $_SESSION['total_night'] = $_SESSION['interval']->format('%d');
 
+} else {
+    header("location: index.php");
 }
 
 ?>
@@ -42,6 +44,10 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
     <link rel="stylesheet" type="text/css" href="css/lib/settings.css">
     <link rel="stylesheet" type="text/css" href="css/lib/bootstrap-select.min.css">
 
+        <!-- fancyBox files -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
     <!-- MAIN STYLE -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -74,7 +80,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
             <div class="header_content" id="header_content">
 
                 <div class="container">
-                  
+
                     <!-- HEADER MENU -->
                     <nav class="header_menu">
                     <ul class="menu">
@@ -89,7 +95,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                             <a href="room-5.php">Rooms</a>
                         </li>
                         <li>
-                            <a href="cottages.html">Cottages</a>
+                            <a href="cottages.php">Cottages</a>
                         </li>
                         <li >
                             <a href="contact.html">Contact</a>
@@ -176,7 +182,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                                     <button class="awe-btn awe-btn-13" type='submit'>EDIT RESERVATION</button>
                                     </form>
                                 </div>
-                                
+
                                 <!-- END / SIDEBAR AVAILBBILITY -->
                             </div>
 
@@ -236,9 +242,7 @@ if (mysql_num_rows($result) > 0) {
                             <a href="#">' . $sub_row['room_name'] . '</a>
                             </h2>
                             <div class="reservation-room_img">
-                                <a href="#">
-                                    <img src="' . $sub_row['imgpath'] . '" alt="">
-                                </a>
+                                <a data-fancybox="gallery" href="' . $sub_row['imgpath'] . '"><img src="' . $sub_row['imgpath'] . '"></a>
                             </div>
                             <div class="reservation-room_text">
                                 <div class="reservation-room_desc">
@@ -259,15 +263,6 @@ if (mysql_num_rows($result) > 0) {
                         $i = $i + 1;
                     }
                     echo '</select><br/>
-                    <span><b>No. of guest: </b></span>
-                    <select class="form-control" name="qtyguest' . $sub_row2['room_id'] . '" id="guest' . $sub_row2['room_id'] . '" style="width:100%; color:black;" ;">
-                                <option value="0">0</option>';
-                    $i = 1;
-                    while ($i <= $sub_row2['occupancy']) {
-                        echo '<option value="' . $i . '">' . $i . '</option>';
-                        $i = $i + 1;
-                    }
-                    echo '</select>
                             </div>
 
                             <input type=hidden name="selectedroom' . $sub_row['room_id'] . '"  id="selectedroom' . $sub_row['room_id'] . '" value="' . $sub_row['room_id'] . '">
@@ -287,9 +282,7 @@ if (mysql_num_rows($result) > 0) {
                     <a href="#">' . $sub_row2['room_name'] . '</a>
                     </h2>
                     <div class="reservation-room_img">
-                        <a href="#">
-                            <img src="' . $sub_row2['imgpath'] . '" alt="">
-                        </a>
+                        <a data-fancybox="gallery" href="' . $sub_row2['imgpath'] . '"><img src="' . $sub_row2['imgpath'] . '"></a>
                     </div>
                     <div class="reservation-room_text">
                         <div class="reservation-room_desc">
@@ -310,15 +303,6 @@ if (mysql_num_rows($result) > 0) {
                         $i = $i + 1;
                     }
                     echo '</select><br/>
-                    <span><b>No. of guest: </b></span>
-                    <select class="form-control" name="qtyguest' . $sub_row2['room_id'] . '" id="guest' . $sub_row2['room_id'] . '" style="width:100%; color:black;" ;">
-                                <option value="0">0</option>';
-                    $i = 1;
-                    while ($i <= $sub_row2['occupancy']) {
-                        echo '<option value="' . $i . '">' . $i . '</option>';
-                        $i = $i + 1;
-                    }
-                    echo '</select>
                     </div>
                     <input type=hidden name="selectedroom' . $sub_row2['room_id'] . '"  id="selectedroom' . $sub_row2['room_id'] . '" value="' . $sub_row2['room_id'] . '">
                     <input type=hidden name="room_name' . $sub_row2['room_id'] . '" id="room_name' . $sub_row2['room_id'] . '" value="' . $sub_row2['room_name'] . '">
@@ -332,14 +316,14 @@ if (mysql_num_rows($result) > 0) {
 } else {
     echo '<p><b>No room available</b></p><hr>';
 }
-print '<button type="submit" id="submit-form" class="hidden" style="display:none">Book</button>';
+print '<button type="submit" id="submit-form">Book</button>';
 print '	</form></div>';
 
 ?>
 
                                 </div>
                                 <!-- END / RESERVATION ROOM -->
-                                
+
                             </div>
 
                         </div>
@@ -381,13 +365,14 @@ print '	</form></div>';
         }
         else
             var e = document.getElementById('roomselected').style.display='hidden';
-       
+
     }
     </script>
 
     <!-- LOAD JQUERY -->
-    <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+
+    <!-- <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script> -->
     <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap-select.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;signed_in=true"></script>

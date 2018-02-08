@@ -118,10 +118,10 @@ $message .= "</form>\n";
 $message .= "					<br>Notes & Policy:</b>\n";
 
 $message .= "															<br>\n";
-$message .= "															<b>1. Please pay 15% deposit to confirmed your booking.</b><br>\n";
+$message .= "															<b>1. Please pay 15% deposit to confirm your booking.</b><br>\n";
 $message .= "															2. This hotel are not allowed etc etc<br>\n";
 $message .= "															3. Please check in before bla bla<br>\n";
-$message .= "															4. The hotel management has right to cancelled the booking\n";
+$message .= "															4. The hotel management has right to cancel the booking\n";
 $message .= "															<br>\n";
 $message .= "															\n";
 $message .= "												</td>\n";

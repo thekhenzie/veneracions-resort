@@ -87,7 +87,7 @@ $userRow = mysql_fetch_array($res);
                             <a href="room-5.php">Rooms</a>
                         </li>
                         <li>
-                            <a href="cottages.html">Cottages</a>
+                            <a href="cottages.php">Cottages</a>
                         </li>
                         <li>
                             <a href="contact.html">Contact</a>
@@ -177,12 +177,20 @@ $userRow = mysql_fetch_array($res);
             <div class="container">
                 <div class="check-availability">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-md-3">
                             <h2>ROOMS & RATES</h2>
                         </div>
                         <form name="form" action="reservation-step-2.php" method="post" onSubmit="return validateForm(this);">
-                        <div class="col-lg-9">
+                        <div class="col-md-9">
+                        <!-- <div class="col-lg-3"> -->
+                            
+                        <!-- </div> -->
                             <div class="availability-form">
+                            <a href="deposit.php" class='awe-btn awe-btn-13' style="margin-right: 10px"> Upload Deposit slip </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!-- </div> -->
+                        <!-- <div class="col-lg-3"> -->
+                            <a href="cancellation.php" class='awe-btn awe-btn-13' style="margin-right: 50px"> Cancel reservation </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            
                                 <input type="text" name='checkIn' id='checkIn' required class="awe-calendar from" placeholder="Arrival Date">
                                 <input type="text" name='checkOut' id='checkOut' required class="awe-calendar to" placeholder="Departure Date">
                                 <div class="vailability-submit">
