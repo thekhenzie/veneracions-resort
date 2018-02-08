@@ -17,7 +17,7 @@ if (mysql_num_rows($re) > 0) {
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Montalban Waterpark | Rooms</title>
+	<title>Montalban Waterpark | Reservation</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -166,8 +166,8 @@ if (mysql_num_rows($re) > 0) {
 							</li>
 							<li>
 								<a href="waiting-reservation.php">Waiting for confirmation</a>
-							</li>
-							<li>
+                            </li>
+                            <li>
 								<a href="checkedout-reservation.php">Checked-out</a>
 							</li>
 							<li>
@@ -205,7 +205,7 @@ if (mysql_num_rows($re) > 0) {
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Reservation > Modified
+					Reservation > Checked-out
 				</h1>
 			</section>
 
@@ -229,7 +229,7 @@ if (mysql_num_rows($re) > 0) {
                                 <tbody>
                                 <?php 
                                 include './auth.php';
-                                $re = mysql_query("SELECT * FROM booking WHERE isModified = 1 AND isCancelled=0");
+                                $re = mysql_query("SELECT * FROM booking WHERE isCancelled = 0 AND isActive = 0");
 
                                 if(mysql_num_rows($re) > 0){
                                     while($row = mysql_fetch_array($re)){

@@ -157,6 +157,15 @@ if (mysql_num_rows($re) > 0) {
 						</a>
 						<ul class="treeview-menu">
 							<li>
+								<a href="pending-reservation.php">Pending</a>
+							</li>
+							<li>
+								<a href="waiting-reservation.php">Waiting for confirmation</a>
+							</li>
+							<li>
+								<a href="checkedout-reservation.php">Checked-out</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>

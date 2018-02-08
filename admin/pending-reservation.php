@@ -168,6 +168,9 @@ if (mysql_num_rows($re) > 0) {
 								<a href="waiting-reservation.php">Waiting for confirmation</a>
 							</li>
 							<li>
+								<a href="checkedout-reservation.php">Checked-out</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>

@@ -163,6 +163,9 @@ if (mysql_num_rows($re) > 0) {
 								<a href="waiting-reservation.php">Waiting for confirmation</a>
 							</li>
 							<li>
+								<a href="checkedout-reservation.php">Checked-out</a>
+							</li>
+							<li>
 								<a href="modified-reservation.php">Modified</a>
 							</li>
 							<li>
@@ -216,7 +219,7 @@ if (mysql_num_rows($re) > 0) {
 			</div> -->
 
 			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-8 col-md-offset-2">
 				<br/><h3 class="text-center">Current Reservations</h3>
 					<div class="table-responsive">
 						<table class="table table-striped" id="current">
@@ -245,7 +248,8 @@ if (mysql_num_rows($re) > 0) {
 											<td>'.$row['checkin_date'].'</td>
 											<td>'.$row['checkout_date'].'</td>
 											<td>
-												<a href="edit-reservation.php?booking_id='.$row['booking_id'].'" class="btn btn-primary">Modify</a>
+												<a href="edit-reservation.php?booking_id='.$row['booking_id'].'" class="btn btn-primary">Modify</a>&nbsp;&nbsp;
+												<a href="checkout.php?booking_id='.$row['booking_id'].'" class="btn btn-danger checkout">Checkout</a>
 											</td>
 										</tr>
 										';
@@ -336,7 +340,12 @@ $(document).ready(function() {
 	}
 
 	showTime();
+
+	$('.checkout').click (function () {
+		return confirm ("Are you sure you want to checkout?") ;
+	});
 </script>
+
 	<!-- Bootstrap 3.3.7 -->
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- AdminLTE App -->
