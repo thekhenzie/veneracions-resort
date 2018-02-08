@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,52 +117,40 @@
                 <div class="room-wrap-5">
                     <div class="row">
                         
+                        <?php
+                            include './dbconnect.php';
+                            $re = mysql_query("SELECT * from room WHERE isCottage=1");
+                            if (mysql_num_rows($re) > 0) {
+                                while ($row = mysql_fetch_array($re)) {
+                                    echo '
+                                        <div class="col-xs-6">
+                                            <div class="room_item-5" data-background="'.$row['imgpath'].'">
+                                                <div class="img">
+                                                    <a href="#"><img src="'.$row['imgpath'].'" alt=""></a>
+                                                </div>
+
+                                                <div class="room_item-forward">
+                                                    <h2><a href="#">'.$row['room_name'].'</a></h2>
+                                                    <span class="price">Start from ₱ '.$row['rate'].' per day</span>
+                                                </div>
+
+                                                <div class="room_item-back">
+                                                    <h3>'.$row['room_name'].'</h3>
+                                                    <span class="price">Start from ₱ '.$row['rate'].' per day</span>
+                                                    <p>'.$row['descriptions.'].'</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        ';
+                                        }};
+                            
+                        ?>
                         <!-- ITEM -->
-                        <div class="col-xs-6">
-                            <div class="room_item-5" data-background='images/room/grid2/img-1.jpg'>
-
-                                <div class="img">
-                                    <a href="#"><img src="images/room/grid2/img-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="room_item-forward">
-                                    <h2><a href="#">STANDARD ROOM</a></h2>
-                                    <span class="price">Start form ₱2500 per day</span>
-                                </div>
-
-                                <div class="room_item-back">
-                                    <h3>STANDARD ROOM</h3>
-                                    <span class="price">Start form ₱2500 per day</span>
-                                    <p>Lorem Ipsum is simply dummy text of the <b>printing</b> and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <a href="#" class="awe-btn awe-btn-13">VIEW DETAILS</a>
-                                </div>
-
-                            </div>
-                        </div>
+                        
+                        
                         <!-- END / ITEM -->
 
-                        <!-- ITEM -->
-                        <div class="col-xs-6">
-                            <div class="room_item-5" data-background='images/room/grid2/img-1.jpg'>
-
-                                <div class="img">
-                                    <a href="#"><img src="images/room/grid2/img-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="room_item-forward">
-                                    <h2><a href="#">FAMILY ROOM</a></h2>
-                                    <span class="price">Start form ₱3000 per day</span>
-                                </div>
-
-                                <div class="room_item-back">
-                                    <h3>FAMILY ROOM</h3>
-                                    <span class="price">Start fromm ₱3000 per day</span>
-                                    <p>Lorem Ipsum is simply dummy text of the <b>printing</b> and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book ...</p>
-                                    <a href="#" class="awe-btn awe-btn-13">VIEW DETAILS</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
 
                 
 

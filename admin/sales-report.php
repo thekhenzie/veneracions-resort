@@ -210,7 +210,7 @@ if (mysql_num_rows($re) > 0) {
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Reports > Reservation
+					Reports > Bills
 				</h1>
 			</section>
 
@@ -242,8 +242,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -254,14 +256,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -269,6 +287,10 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking"));
+                                                echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>' 
+                                                ?>
                                             </div>
                                         </div>
                                         <div id="annual">
@@ -279,8 +301,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -291,14 +315,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -306,6 +346,10 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 YEAR)) and (NOW())"));
+                                                echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>' 
+                                                ?>
                                             </div>
                                         </div>
                                         <div id="monthly">
@@ -316,8 +360,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -328,14 +374,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -343,6 +405,10 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 MONTH)) and (NOW())"));
+                                                echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>' 
+                                                ?>
                                             </div>
                                         </div>
                                         <div id="weekly">
@@ -353,8 +419,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -365,14 +433,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -380,6 +464,10 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 WEEK)) and (NOW())"));
+                                                echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>' 
+                                                ?>
                                             </div>
                                         </div>
                                         <div id="daily">
@@ -390,8 +478,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -402,14 +492,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -417,6 +523,10 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and (NOW())"));
+                                                echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>' 
+                                                ?>
                                             </div>
                                         </div>
                                         <div id="custom">
@@ -440,8 +550,10 @@ if (mysql_num_rows($re) > 0) {
                                                             <th>Reservation Code</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Check In</th>
-                                                            <th>Check Out</th>
+                                                            <th>Total bill</th>
+                                                            <th>Amount Paid</th>
+                                                            <th>Payment Status</th>
+                                                            <th>Bank Slip</th>
                                                             <th>Booking Date</th>
                                                         </tr>
                                                     </thead>
@@ -456,14 +568,30 @@ if (mysql_num_rows($re) > 0) {
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
+                                                            if($row['bank_slip']!=null)
                                                             echo '
                                                                 <tr>
                                                                     <td>'.$row['reservation_code'].'</td>
                                                                     <td>'.$row['first_name'].'</td>
                                                                     <td>'.$row['last_name'].'</td>
-                                                                    <td>'.$row['checkin_date'].'</td>
-                                                                    <td>'.$row['checkout_date'].'</td>
-                                                                    <td>'.$row['booking_date'].'</td>                                                
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td><a data-fancybox="gallery" href="../' . $row['bank_slip'] . '"><img src="../' . $row['bank_slip'] . '" style="height:50px;width:50px;"></a></td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
+                                                                </tr>
+                                                                ';
+                                                            else
+                                                            echo '
+                                                                <tr>
+                                                                    <td>'.$row['reservation_code'].'</td>
+                                                                    <td>'.$row['first_name'].'</td>
+                                                                    <td>'.$row['last_name'].'</td>
+                                                                    <td>₱ '.$row['total_amount'].'</td>
+                                                                    <td>₱ '.$row['amount_paid'].'</td>
+                                                                    <td>'.$row['payment_status'].'</td>
+                                                                    <td>None</td>             
+                                                                    <td>'.$row['booking_date'].'</td>          
                                                                 </tr>
                                                                 ';
                                                         }
@@ -472,6 +600,16 @@ if (mysql_num_rows($re) > 0) {
                                                     ?>
                                                     </tbody>
                                                 </table>
+                                                <?php
+                                                if(isset($_POST)){
+                                                    $rangeFrom = date_format(date_create($_POST['rangeFrom']),"Y-m-d");
+                                                    $rangeTo = date_format(date_create($$_POST['rangeTo']),"Y-m-d");
+
+
+                                                    $row = mysql_fetch_array(mysql_query("SELECT SUM(amount_paid) FROM booking WHERE booking_date BETWEEN '$rangeFrom' and '$rangeTo'"));
+                                                    echo '<h5>TOTAL: ₱ <b>'.number_format(array_sum($row)).'</b></h5>';
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
