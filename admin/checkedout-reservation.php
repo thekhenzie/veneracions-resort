@@ -229,7 +229,7 @@ if (mysql_num_rows($re) > 0) {
                                 <tbody>
                                 <?php 
                                 include './auth.php';
-                                $re = mysql_query("SELECT * FROM booking WHERE isCancelled = 0 AND isActive = 0");
+                                $re = mysql_query("SELECT * FROM booking WHERE isReserved=1 AND isCancelled = 0 AND isActive = 2");
 
                                 if(mysql_num_rows($re) > 0){
                                     while($row = mysql_fetch_array($re)){

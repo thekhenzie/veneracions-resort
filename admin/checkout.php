@@ -12,7 +12,7 @@ if (mysql_num_rows($re) > 0) {
 
 $booking_id = $_GET['booking_id'];
 include './auth.php';
-$sql = "UPDATE booking SET isActive =0, isCancelled=0 WHERE booking_id=" . $booking_id . "";
+$sql = "UPDATE booking SET isActive =2, isCancelled=0 WHERE booking_id=" . $booking_id . "";
 $result = mysql_query($sql);
 
 header('Refresh: 2; url=starter.php');
