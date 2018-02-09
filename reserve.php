@@ -9,9 +9,9 @@ $res = mysql_query($query);
 $count = mysql_num_rows($res);
 
 if ($count == 1) {
-    $queryDelete = "UPDATE booking SET isReserved = true WHERE reservation_code = '$id'";
+    $queryDelete = "UPDATE booking SET isReserved = 1 WHERE reservation_code = '$id'";
     $resDelete = mysql_query($queryDelete);
     if ($resDelete) {
-        header("location: verifiedreservation.html");
+        header("location: verifiedreservation.php?id=".$id);
     }
 }
