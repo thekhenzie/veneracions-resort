@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['checkin_date'])){
+if (!isset($_SESSION['checkin_date'])) {
     header('Location: index.php');
 }
 ?>
@@ -129,7 +129,7 @@ if(!isset($_SESSION['checkin_date'])){
                                         <span>1.</span> Choose Date</a>
                                 </li>
                                 <li>
-                                    <a href="unsetroomchosen.php">
+                                    <a href="#">
                                         <span>2.</span> Choose Room</a>
                                 </li>
                                 <li >
@@ -242,7 +242,7 @@ for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
                                                 </li>
                                                 <li>
                                                     <span>Tax</span>
-                                                    <span--</span>
+                                                    <span>₱ ' . number_format(($_SESSION['total_amount'] * .12), 2) . '</span>
                                                 </li>
                                             </ul>
 
@@ -291,6 +291,7 @@ for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
 			<div class="large-12 columns" >
 
 
+<!-- PAYPAL
 <form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post' name='form'>
     <input type='hidden' name='business' value='montalban.waterpark@gmail.com'>
     <input type='hidden' name='cmd' value='_xclick'>
@@ -304,7 +305,7 @@ for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
     <img type="image" src="img/paypal.jpg" style="background-color:white; width:32%; height:14%; padding:2px; " ></img>
 	<br><button class="awe-btn awe-btn-6" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="width:32%">Pay Room Deposit Now</button>
 	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+</form> -->
 <br/>
 <a class='pull-right' href='printpage.php' target="_blank">Click here to print</a><br/>
 

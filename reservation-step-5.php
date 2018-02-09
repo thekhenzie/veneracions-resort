@@ -1,7 +1,13 @@
 <?php
 session_start();
 include './dbconnect.php';
-
+function console_log($data)
+{
+    echo '<script>';
+    echo 'console.log(' . json_encode($data) . ')';
+    echo '</script>';
+}
+console_log($_POST);
 if (!isset($_SESSION['room_id'])) {
     $_SESSION['room_id'] = array();
     $_SESSION['roomname'] = array();
@@ -14,27 +20,24 @@ if (!isset($_SESSION['room_id'])) {
 
 $result = mysql_query("SELECT * from room");
 if (mysql_num_rows($result) > 0) {
-
     $count = 0;
-
     while ($row = mysql_fetch_array($result)) {
-
         if (isset($_POST["qtyroom" . $row['room_id'] . ""]) && !empty($_POST["qtyroom" . $row['room_id'] . ""])) {
-            if (isset($_POST["qtyguest" . $row['room_id'] . ""]) && !empty($_POST["qtyguest" . $row['room_id'] . ""])) {
-                $_SESSION['room_id'][$count] = $_POST["selectedroom" . $row['room_id'] . ""];
-                $_SESSION['roomqty'][$count] = $_POST["qtyroom" . $row['room_id'] . ""];
-                $_SESSION['guestqty'][$count] = $_POST["qtyguest" . $row['room_id'] . ""];
-                $_SESSION['roomname'][$count] = $_POST["room_name" . $row['room_id'] . ""];
-                $_SESSION['ind_rate'][$count] = $row['rate'] * $_POST["qtyroom" . $row['room_id'] . ""];
-                $_SESSION['total_amount'] = ($row['rate'] * $_POST["qtyroom" . $row['room_id'] . ""] * $_SESSION['total_night']) + $_SESSION['total_amount'];
-                $_SESSION['deposit'] = $_SESSION['total_amount'] * 0.15;
-                $count = $count + 1;
-            }
+            // if (isset($_POST["qtyguest" . $row['room_id'] . ""]) && !empty($_POST["qtyguest" . $row['room_id'] . ""])) {
+            $_SESSION['room_id'][$count] = $_POST["selectedroom" . $row['room_id'] . ""];
+            $_SESSION['roomqty'][$count] = $_POST["qtyroom" . $row['room_id'] . ""];
+            $_SESSION['guestqty'][$count] = 1;
+            $_SESSION['roomname'][$count] = $_POST["room_name" . $row['room_id'] . ""];
+            $_SESSION['ind_rate'][$count] = $row['rate'] * $_POST["qtyroom" . $row['room_id'] . ""];
+            $_SESSION['total_amount'] = ($row['rate'] * $_POST["qtyroom" . $row['room_id'] . ""] * $_SESSION['total_night']) + $_SESSION['total_amount'];
+            $_SESSION['deposit'] = $_SESSION['total_amount'] * 0.20;
+            $count = $count + 1;
+            // }
         }
     }
 
 }
-
+console_log($_SESSION);
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -218,7 +221,7 @@ if (mysql_num_rows($result) > 0) {
                                             <li>
                                                 <span>Total Guests</span>
                                                 <span>
-                                                    <?php echo array_sum($_SESSION['guestqty']);?>
+                                                    <?php echo array_sum($_SESSION['guestqty']); ?>
                                                 </span>
                                             </li>
                                         </ul>
@@ -240,16 +243,16 @@ if (mysql_num_rows($result) > 0) {
                                         <!-- <p class="reservation-login">Returning customer?
                                         <a href="#">Click here to login</a>
                                     </p> -->
-                                        <form action='insertandemail.php' method='post' onSubmit='return validateForm(this);'>
+                                        <form action='emailconfirmation.php' method='post' onSubmit='return validateForm(this);'>
                                             <h4>BILLING DETAILS</h4>
 
-                                            <label>Country
+                                            <!-- <label>Country
                                                 <sup>*</sup>
                                             </label>
-                                            <select class="awe-select" name="country" id="country">
+                                            <select class="awe-select hidden" name="country" id="country">
                                                 <option>Philippines</option>
                                                 <option>United States</option>
-                                            </select>
+                                            </select> -->
 
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -333,66 +336,62 @@ if (mysql_num_rows($result) > 0) {
 
                                     <!-- ITEM -->
                                     <?php
-                                            $no = 1;
-                                            for ($i=0; $i < count($_SESSION['room_id']); $i++) { 
+$no = 1;
+for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
 
-                                            echo '
+    echo '
                                             <div class="reservation-room-seleted_item">
 
-                                            <h6>ROOM '.$no.'</h6>
-                                            <span class="reservation-option">'.$_SESSION['guestqty'][$i].' Guest</span>&nbsp;
-                                            <span class="reservation-option">'.$_SESSION['roomqty'][$i].' Room</span>&nbsp;
-                                            <span class="reservation-option">'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'/day</span>
+                                            <h6>ROOM ' . $no . '</h6>
+                                            <span class="reservation-option">' . $_SESSION['guestqty'][$i] . ' Guest</span>&nbsp;
+                                            <span class="reservation-option">' . $_SESSION['roomqty'][$i] . ' Room</span>&nbsp;
+                                            <span class="reservation-option">' . ($_SESSION['ind_rate'][$i] / $_SESSION['roomqty'][$i]) . '/day</span>
                                             <div class="reservation-room-seleted_name has-package">
                                                 <h2>
-                                                    <a>'.$_SESSION['roomname'][$i].'</a>
+                                                    <a>' . $_SESSION['roomname'][$i] . '</a>
                                                 </h2>
                                             </div>
 
                                             <div class="reservation-room-seleted_package">
                                                 <h6>RATE</h6>
                                                 <ul>';
-                                                for($x=1; $x<=$_SESSION['total_night'];$x++){
-                                                    $date = strtotime('+'.$x.' day', strtotime($_SESSION['checkin_unformat']));
-                                                    echo '
+    for ($x = 1; $x <= $_SESSION['total_night']; $x++) {
+        $date = strtotime('+' . $x . ' day', strtotime($_SESSION['checkin_unformat']));
+        echo '
                                                     <li>
-                                                        <span>'.date("M d, Y",$date).'  '.$_SESSION['roomqty'][$i].' x ₱'.($_SESSION['ind_rate'][$i]/$_SESSION['roomqty'][$i]).'</span>
-                                                        <span>₱'.$_SESSION['ind_rate'][$i].'.00</span>
+                                                        <span>' . date("M d, Y", $date) . '  ' . $_SESSION['roomqty'][$i] . ' x ₱' . ($_SESSION['ind_rate'][$i] / $_SESSION['roomqty'][$i]) . '</span>
+                                                        <span>₱' . $_SESSION['ind_rate'][$i] . '.00</span>
                                                     </li>';
-                                                }
-                                                    
-                                            echo '            
+    }
+
+    echo '
                                                 </ul>
 
                                                 <ul>
                                                     <li>
-                                                        <span>Service</span>
-                                                        <span>Free</span>
-                                                    </li>
-                                                    <li>
                                                         <span>Tax</span>
-                                                        <span--</span>
+                                                        <span>₱ ' . number_format(($_SESSION['total_amount'] * .12), 2) . '</span>
                                                     </li>
                                                 </ul>
 
                                             </div>
 
                                             <div class="reservation-room-seleted_total-room">
-                                                TOTAL Room '.$no.'
-                                                <span class="reservation-amout">₱'.$_SESSION['ind_rate'][$i]*$_SESSION['total_night'].'.00</span>
+                                                TOTAL Room ' . $no . '
+                                                <span class="reservation-amout">₱' . $_SESSION['ind_rate'][$i] * $_SESSION['total_night'] . '.00</span>
                                             </div>
 
                                             </div> ';
-                                            $no+=1;
-                                            }
-                                    ?>
+    $no += 1;
+}
+?>
                                         <!-- END / ITEM -->
 
                                         <!-- TOTAL -->
                                         <div class="reservation-room-seleted_total bg-blue">
                                             <label>TOTAL</label>
                                             <span class="reservation-total">₱
-                                                <?php echo $_SESSION['total_amount'];?>.00</span>
+                                                <?php echo $_SESSION['total_amount']; ?>.00</span>
                                         </div>
                                         <!-- END / TOTAL -->
 
@@ -446,20 +445,6 @@ if (mysql_num_rows($result) > 0) {
             }
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="build/js/intlTelInput.js"></script>
-        <script>
-            $("#phone").intlTelInput({
-                //autoFormat: false,
-                //autoHideDialCode: false,
-                defaultCountry: "ph",
-                //nationalMode: true,
-                //numberType: "MOBILE",
-                //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-                preferredCountries: ['ph', 'us'],
-                //responsiveDropdown: true,
-                utilsScript: "lib/libphonenumber/build/utils.js"
-            });
-        </script>
 
         <!-- LOAD JQUERY -->
         <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
