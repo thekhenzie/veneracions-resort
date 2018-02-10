@@ -1,5 +1,11 @@
 <?php
 session_start();
+function console_log($data)
+{
+    echo '<script>';
+    echo 'console.log(' . json_encode($data) . ')';
+    echo '</script>';
+}
 if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["checkOut"]) && !empty($_POST["checkOut"])) {
     $_SESSION['checkin_date'] = date('M d, Y', strtotime($_POST['checkIn']));
     $_SESSION['checkout_date'] = date('M d, Y', strtotime($_POST['checkOut']));
@@ -12,11 +18,12 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
     $_SESSION['interval'] = $_SESSION['datetime1']->diff($_SESSION['datetime2']);
 
     $_SESSION['total_night'] = $_SESSION['interval']->format('%d');
-
+    if ($_SESSION['total_night'] == 0) {
+        $_SESSION['total_night'] = 1;
+    }
 } else {
     header("location: index.php");
 }
-
 ?>
 
 <!DOCTYPE html>
