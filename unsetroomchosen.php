@@ -7,5 +7,5 @@ unset($_SESSION['roomqty']);
 unset($_SESSION['ind_rate']);
 unset($_SESSION['total_amount']);
 unset($_SESSION['deposit']);
-header("location: reservation-step-2.php");
+header("location: choose-room.php");
 ?>

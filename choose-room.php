@@ -99,7 +99,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                         </li>
 
                         <li>
-                            <a href="room-5.php">Rooms</a>
+                            <a href="rooms.php">Rooms</a>
                         </li>
                         <li>
                             <a href="cottages.php">Cottages</a>
@@ -228,7 +228,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                                     echo mysql_error();
                                     if (mysql_num_rows($result) > 0) {
                                         echo '<p><b>Choose Your Room</b></p><hr class="line">';
-                                        print '<form action="reservation-step-5.php" method="post"><div class="availability-form">';
+                                        print '<form action="billing-details.php" method="post"><div class="availability-form">';
                                         while ($row = mysql_fetch_array($result)) {
                                             if ($row['availableroom'] != null && $row['availableroom'] > 0) {
                                                 $sub_result = mysql_query("SELECT room.* from room where room.room_id = " . $row['room_id'] . " ");

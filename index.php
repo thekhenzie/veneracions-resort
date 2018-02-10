@@ -84,7 +84,7 @@ $userRow = mysql_fetch_array($res);
                         </li>
 
                         <li>
-                            <a href="room-5.php">Rooms</a>
+                            <a href="rooms.php">Rooms</a>
                         </li>
                         <li>
                             <a href="cottages.php">Cottages</a>
@@ -180,7 +180,7 @@ $userRow = mysql_fetch_array($res);
                         <div class="col-md-3">
                             <h2>ROOMS & RATES</h2>
                         </div>
-                        <form name="form" action="reservation-step-2.php" method="post" onSubmit="return validateForm(this);">
+                        <form name="form" action="choose-room.php" method="post" onSubmit="return validateForm(this);">
                         <div class="col-md-9">
                         <!-- <div class="col-lg-3"> -->
                             

@@ -106,7 +106,7 @@ if (isset($_POST['submitCode'])) {
                         </li>
 
                         <li>
-                            <a href="room-5.php">Rooms</a>
+                            <a href="rooms.php">Rooms</a>
                         </li>
                         <li>
                             <a href="cottages.php">Cottages</a>
