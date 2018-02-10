@@ -148,7 +148,7 @@ if (mysql_num_rows($re) > 0) {
 								<a href="rooms.php">Rooms</a>
 							</li>
 							<li>
-								<a href="#">Link in level 2</a>
+								<a href="cottages.php">Cottages</a>
 							</li>
 						</ul>
 					</li>
