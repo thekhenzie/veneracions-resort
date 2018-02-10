@@ -103,7 +103,6 @@ session_start();
                 <div class="container">
                     <div class="text text-center">
                         <h2>COTTAGES &amp; RATES</h2>
-                        <p>Lorem Ipsum is simply dummy text</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +118,7 @@ session_start();
                         
                         <?php
                             include './dbconnect.php';
-                            $re = mysql_query("SELECT * from room WHERE isCottage=1");
+                            $re = mysql_query("SELECT * from room WHERE isCottage=1 AND isCocoylandia=0");
                             if (mysql_num_rows($re) > 0) {
                                 while ($row = mysql_fetch_array($re)) {
                                     echo '

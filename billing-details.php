@@ -18,7 +18,7 @@ if (!isset($_SESSION['room_id'])) {
     $_SESSION['deposit'] = 0;
 }
 
-$result = mysql_query("SELECT * from room");
+$result = mysql_query("SELECT * from room AND isCocoylandia=0");
 if (mysql_num_rows($result) > 0) {
     $count = 0;
     while ($row = mysql_fetch_array($result)) {
@@ -140,7 +140,6 @@ console_log($_SESSION);
                     <div class="container">
                         <div class="text text-center">
                             <h2>RESERVATION</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing</p>
                         </div>
                     </div>
 

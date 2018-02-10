@@ -2,7 +2,7 @@
 session_start();
 include_once 'dbconnect.php';
 
-$query = "SELECT * FROM room";
+$query = "SELECT * FROM room WHERE isCocoylandia=0";
 $res = mysql_query($query);
 ?><!DOCTYPE html>
 <html lang="en">
@@ -111,7 +111,6 @@ $res = mysql_query($query);
                 <div class="container">
                     <div class="text text-center">
                         <h2>ROOMS &amp; RATES</h2>
-                        <p>Lorem Ipsum is simply dummy text</p>
                     </div>
                 </div>
             </div>
@@ -127,7 +126,7 @@ $res = mysql_query($query);
 
                     <?php
                             include './dbconnect.php';
-                            $re = mysql_query("SELECT * from room WHERE isCottage=0");
+                            $re = mysql_query("SELECT * from room WHERE isCottage=0 AND isCocoylandia=0");
                             if (mysql_num_rows($re) > 0) {
                                 while ($row = mysql_fetch_array($re)) {
                                     echo '

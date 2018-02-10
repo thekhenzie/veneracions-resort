@@ -212,7 +212,7 @@ if (mysql_num_rows($re) > 0) {
                             <?php 
                                 $booking_id= $_GET['booking_id'];
                                 include './auth.php';
-                                $re = mysql_query("SELECT * from booking WHERE booking_id='" . $booking_id . "'");
+                                $re = mysql_query("SELECT * from booking WHERE booking_id='" . $booking_id . "' AND isCocoylandia=0");
                                 if(mysql_num_rows($re)> 0){
                                     while($rows = mysql_fetch_array($re)){
                                         echo'

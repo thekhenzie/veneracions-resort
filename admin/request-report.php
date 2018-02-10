@@ -253,7 +253,7 @@ if (mysql_num_rows($re) > 0) {
                                                     <tbody>
                                                     <?php 
                                                     include './auth.php';
-                                                    $re = mysql_query("SELECT * FROM booking");
+                                                    $re = mysql_query("SELECT * FROM booking WHERE isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
@@ -290,7 +290,7 @@ if (mysql_num_rows($re) > 0) {
                                                     <tbody>
                                                     <?php 
                                                     include './auth.php';
-                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 YEAR)) and (NOW())");
+                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 YEAR)) and (NOW()) AND isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
@@ -327,7 +327,7 @@ if (mysql_num_rows($re) > 0) {
                                                     <tbody>
                                                     <?php 
                                                     include './auth.php';
-                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 MONTH)) and (NOW())");
+                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 MONTH)) and (NOW()) AND isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
@@ -364,7 +364,7 @@ if (mysql_num_rows($re) > 0) {
                                                     <tbody>
                                                     <?php 
                                                     include './auth.php';
-                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 WEEK)) and (NOW())");
+                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 WEEK)) and (NOW()) AND isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
@@ -401,7 +401,7 @@ if (mysql_num_rows($re) > 0) {
                                                     <tbody>
                                                     <?php 
                                                     include './auth.php';
-                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and (NOW())");
+                                                    $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN (DATE_ADD(NOW(), INTERVAL -1 DAY)) and (NOW()) AND isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){
@@ -455,7 +455,7 @@ if (mysql_num_rows($re) > 0) {
                                                     if(isset($_POST)){
                                                         $rangeFrom = date_format(date_create($_POST['rangeFrom']),"Y-m-d");
                                                         $rangeTo = date_format(date_create($$_POST['rangeTo']),"Y-m-d");
-                                                        $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN '$rangeFrom' and '$rangeTo'");
+                                                        $re = mysql_query("SELECT * FROM booking WHERE booking_date BETWEEN '$rangeFrom' and '$rangeTo' AND isCocoylandia=0");
 
                                                     if(mysql_num_rows($re) > 0){
                                                         while($row = mysql_fetch_array($re)){

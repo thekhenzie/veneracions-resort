@@ -86,7 +86,7 @@ if (mysql_num_rows($re) > 0) {
 		<?php
 $room_id = $_GET['room_id'];
 include './auth.php';
-$result = mysql_query("SELECT * from room where room_id ='" . $room_id . "' ");
+$result = mysql_query("SELECT * from room where room_id ='" . $room_id . "' AND isCocoylandia=0 ");
 if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_array($result)) {
         print "					<form role=\"form\" id=\"formnew\" action=\"updateroom.php\" method=\"post\" enctype=\"multipart/form-data\">\n";

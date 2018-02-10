@@ -1,6 +1,6 @@
 <?php
 include './auth.php';
-$re = mysql_query("select * from admin where username = '".$_SESSION['username']."'  AND password = '".$_SESSION['password']."' " );
+$re = mysql_query("SELECT * from admin where username = '".$_SESSION['username']."'  AND password = '".$_SESSION['password']."' " );
 echo mysql_error();
 if(mysql_num_rows($re) < 0)
 {

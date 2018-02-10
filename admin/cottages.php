@@ -236,7 +236,7 @@ if (mysql_num_rows($re) > 0) {
                                 <tbody>
                                     <?php
 include './auth.php';
-$re = mysql_query("SELECT * from room WHERE isCottage=1");
+$re = mysql_query("SELECT * from room WHERE isCottage=1 AND isCocoylandia=0");
 if (mysql_num_rows($re) > 0) {
     while ($row = mysql_fetch_array($re)) {
         echo '

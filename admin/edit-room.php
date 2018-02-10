@@ -223,7 +223,7 @@ if (mysql_num_rows($re) > 0) {
                             <?php 
                             $room_id= $_GET['room_id'];
                             include './auth.php';
-                            $re = mysql_query("SELECT * from room WHERE room_id =$room_id");
+                            $re = mysql_query("SELECT * from room WHERE room_id =$room_id AND isCocoylandia=0");
                             if(mysql_num_rows($re)> 0){
                                 while($rows = mysql_fetch_array($re)){
                                     echo'

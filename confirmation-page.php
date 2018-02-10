@@ -106,7 +106,6 @@ if (!isset($_SESSION['checkin_date'])) {
                     <div class="container">
                         <div class="text text-center">
                             <h2>RESERVATION</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing</p>
                         </div>
                     </div>
 

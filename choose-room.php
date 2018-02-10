@@ -133,7 +133,6 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                 <div class="container">
                     <div class="text text-center">
                         <h2>RESERVATION</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing</p>
                     </div>
                 </div>
 
@@ -211,20 +210,23 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                                     $datestart = date('y-m-d', strtotime($_SESSION['checkin_unformat']));
                                     $dateend   = date('y-m-d', strtotime($_SESSION['checkout_unformat']));
                                     $result    = mysql_query("SELECT
-                                        r.room_id,
-                                        (r.total_room - br.total) AS availableroom
-                                    FROM room AS r
-                                    LEFT JOIN (SELECT
-                                        roombook.room_id,
-                                        SUM(roombook.totalroombook) AS total
-                                    FROM roombook
-                                    WHERE roombook.booking_id IN (SELECT
-                                        b.booking_id AS bookingID
-                                    FROM booking AS b
-                                    WHERE (b.checkin_date BETWEEN '" . $datestart . "' AND '" . $dateend . "')
-                                    OR (b.checkout_date BETWEEN '" . $dateend . "' AND '" . $datestart . "'))
-                                    GROUP BY roombook.room_id) AS br
-                                        ON r.room_id = br.room_id");
+                                            r.room_id,
+                                            (r.total_room - br.total) AS availableroom,
+                                            isCocoylandia
+                                        FROM room AS r
+                                        LEFT JOIN (SELECT
+                                            roombook.room_id,
+                                            SUM(roombook.totalroombook) AS total
+                                        FROM roombook
+                                        WHERE roombook.booking_id IN (SELECT
+                                            b.booking_id AS bookingID
+                                        FROM booking AS b
+                                        WHERE isCocoylandia = 0 AND ((b.checkin_date BETWEEN '" . $datestart . "' AND '" . $dateend . "')
+                                        OR (b.checkout_date BETWEEN '" . $dateend . "' AND '" . $datestart . "')))
+                                        
+                                        GROUP BY roombook.room_id) AS br
+                                            ON r.room_id = br.room_id
+                                        WHERE isCocoylandia = 0");
                                     echo mysql_error();
                                     if (mysql_num_rows($result) > 0) {
                                         echo '<p><b>Choose Your Room</b></p><hr class="line">';
@@ -308,7 +310,7 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                                     } else {
                                         echo '<p><b>No room available</b></p><hr>';
                                     }
-                                    print '<button type="submit">Book</button></form></div>';
+                                    print '</form></div>';
 
                                 ?>
 
@@ -321,8 +323,8 @@ if (isset($_POST["checkIn"]) && !empty($_POST["checkIn"]) && isset($_POST["check
                         <!-- END / CONTENT -->
                         <div class="col-md-3">
                                     <div class="reservation-sidebar_availability bg-gray" id="roomselected" style="display:none;">
-                                    <label for="submit-form" class="awe-btn awe-btn-13" onClick="submitForm()">Proceed To Book
-                                    </label>
+                                    <!-- <label for="submit-form" class="awe-btn awe-btn-13" onClick="submitForm()">Proceed To Book
+                                    </label> -->
                                     <button name="submit" class="awe-btn awe-btn-13">BOOK NOW</button>
                                     </div>
                                 </div>
