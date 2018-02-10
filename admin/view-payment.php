@@ -135,7 +135,7 @@ if (mysql_num_rows($re) > 0) {
 							<span>Dashboard</span>
 						</a>
 					</li>
-					<li class="treeview">
+					<li class="treeview active">
 						<a href="#">
 							<i class="fa fa-bed"></i>
 							<span>Accommodations</span>
@@ -152,7 +152,7 @@ if (mysql_num_rows($re) > 0) {
 							</li>
 						</ul>
 					</li>
-					<li class="treeview active">
+					<li class="treeview">
 						<a href="#">
 							<i class="fa fa-bars"></i>
 							<span>Reservation</span>
@@ -161,7 +161,7 @@ if (mysql_num_rows($re) > 0) {
 							</span>
 						</a>
 						<ul class="treeview-menu">
-                            <li>
+							<li>
 								<a href="pending-reservation.php">Pending</a>
 							</li>
 							<li>
@@ -205,65 +205,80 @@ if (mysql_num_rows($re) > 0) {
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Reservation > Pending
+					View payment
 				</h1>
 			</section>
 
 			<!-- Main content -->
 			<section class="content container-fluid">
 
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="current">
-                                <thead>
-                                    <tr>
-                                        <th>Reservation Code</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Check In</th>
-                                        <th>Check Out</th>
-										<th>Booking Date</th>
-										<th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php 
-                                include './auth.php';
-                                $re = mysql_query("SELECT * FROM booking WHERE isReserved = 1 AND isCancelled = 0 AND isActive = 0");
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="pending-reservation.php" class="btn btn-primary">Back</a>
+                        </div>
+                        <div class="panel-body">
+                            <?php 
+                            $booking_id= $_GET['booking_id'];
+                            include './auth.php';
+                            $re = mysql_query("SELECT * from booking WHERE booking_id =$booking_id");
+                            if(mysql_num_rows($re)> 0){
+                                while($rows = mysql_fetch_array($re)){
+                                    echo'
+                                    <form role="form" id="formnew" action="updatepayment.php" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" class="form-control" name="booking_id" id="booking_id" placeholder="Room ID" value="' . $booking_id . '" required>
+                                        <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label for="first_name">First Name</label>
+                                                <p>' . $rows['first_name'] . '</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="last_name">Last Name</label>
+                                                <p>' . $rows['last_name'] . '</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="last_name">Total Bill</label>
+                                                <p>₱ ' . number_format($rows['total_amount']) . '</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="last_name">Amount Paid</label>
+                                                <p>₱ ' . number_format($rows['amount_paid']) . '</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rate">Bank slip</label><br/>
+                                            <a data-fancybox="gallery" href="../' . $rows['bank_slip'] . '"><img src="../' . $rows['bank_slip'] . '" style="height:200px; width:200px; " /></a>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="desc">Payment Status</label>
+                                            <p>'.$rows['payment_status'].'</p>
+                                        </div>';
 
-                                if(mysql_num_rows($re) > 0){
-                                    while($row = mysql_fetch_array($re)){
-                                        echo '
-                                            <tr>
-                                                <td>'.$row['reservation_code'].'</td>
-                                                <td>'.$row['first_name'].'</td>
-                                                <td>'.$row['last_name'].'</td>
-                                                <td>'.$row['checkin_date'].'</td>
-                                                <td>'.$row['checkout_date'].'</td>
-												<td>'.$row['booking_date'].'</td>         
-												<td>
-												<a href="adminconfirmreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-primary confirmbtn">Confirm</a>&nbsp;&nbsp; 
-												<a href="admincancelreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-danger deletebtn">Delete</a>&nbsp;&nbsp;
-												';
-												if(strtolower($row['payment_status'])=='fully paid'){
-													echo'<a href="view-payment.php?booking_id='.$row['booking_id'].'"class="btn btn-success paybtn">Paid</a>';
-												}
-												else{
-													echo'<a href="view-payment.php?booking_id='.$row['booking_id'].'"class="btn btn-default paybtn">Payment</a>';
-												}
-										echo '
-												</td>                                      
-                                            </tr>
-                                            ';
-                                    }
+                                            if(strtolower($rows['payment_status'])=='fully paid'){
+                                                echo '</form>';
+                                            }
+                                            else{
+                                                echo '
+                                                    <div class="form-group">
+                                                        <label for="desc">Amount paid</label>
+                                                        <input type="number" min="0" class="form-control" name="amount_paid" id="amount_paid" value="' . $rows['amount_paid'] . '" placeholder="">
+                                                        <input type="number" min="0" class="form-control hidden" name="total_amount" id="total_amount" value="' . $rows['total_amount'] . '" placeholder="">                                                            
+                                                    </div>
+                                                    <button type="submit" class="btn btn-default">Update Room Detail</button>
+                                                    </form>
+                                                ';
+                                            }
                                 }
-                                ?>
-                                </tbody>
-                            </table>
+                            }
+                            ?>
+                           
                         </div>
                     </div>
                 </div>
+            </div>
 
 			</section>
 			<!-- /.content -->
@@ -280,17 +295,6 @@ if (mysql_num_rows($re) > 0) {
 
 	</div>
 	<!-- ./wrapper -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#current').DataTable();
-    });
-
-    $('.deletebtn').click (function () {
-		return confirm ("Are you sure you want to delete?") ;
-	}); 
-	$('.confirmbtn').click (function () {
-		return confirm ("Are you sure you want to confirm?") ;
-	});
     </script>
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- Bootstrap 3.3.7 -->
