@@ -1,27 +1,46 @@
 <?php
 session_start();
 include './dbconnect.php';
-
+function console_log($data)
+{
+    echo '<script>';
+    echo 'console.log(' . json_encode($data) . ')';
+    echo '</script>';
+}
 if (isset($_POST['submitCode'])) {
     $code = $_POST['reservation_code'];
-    $query = "SELECT * FROM booking WHERE reservation_code = '$code'";
-    // $query = "INSERT INTO reports(reportName,reportStatus,reportDate,reportCreated,reportStep,reportConcern,reportLevel,deptId) VALUES('$reportName','$reportStatus','$reportDate','$printdate','$reportStep','$reportConcern','$reportLevel','$deptId')";
+    $reference_number = $_POST['reference_number'];
+    $imgpath = "";
+    $imageFileType = pathinfo($imgpath, PATHINFO_EXTENSION);
+    $uploadDir = "./img/bankslips/";
+    $imagename = $_FILES['deposit_slip']['name'];
+    $imgpath = $uploadDir . $imagename . $imageFileType;
+    $uploadDirForSql = "img/bankslips/";
+    $imgpathForSQL = $uploadDirForSql . $imagename . $imageFileType;
 
+    $query = "SELECT * FROM booking WHERE reservation_code = '$code'";
     $res = mysql_query($query);
     $count = mysql_num_rows($res);
-
-    $queryDelete = "DELETE FROM booking WHERE reservation_code='$code'";
-    $resDelete = mysql_query($queryDelete);
-    if ($count == 1) {
-        $errTyp = "success";
-        $errMSG = "Successfully cancelled reservation";
+    if ($count > 0) {
+        $queryInsert = "UPDATE booking SET isReserved =1, bank_slip = '$imgpathForSQL', reference_number = '$reference_number' WHERE reservation_code='$code'";
+        $resInsert = mysql_query($queryInsert);
+        if (mysql_error() == "") {
+            move_uploaded_file($_FILES["deposit_slip"]["tmp_name"], $imgpath);
+            $errTyp = "Success";
+            $errMSG = "Successfully uploaded bank slip";
+        } else {
+            $errTyp = "danger";
+            $errMSG = "Error on uploading your bank slip";
+        }
     } else {
         $errTyp = "danger";
         $errMSG = "Reservation code not existing";
     }
+
 }
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -136,31 +155,31 @@ if (isset($errMSG)) {
     echo '<div class="alert alert-' . $errTyp . ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . $errMSG . '</div>';
 }
 ?>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                 <div>
                     <p>Deposit Reference number:  </p>
                     <div class='row'>
                         <div class='col-md-4'>
-                            <input class="form-control" type="text" name="reference_number">
+                            <input class="form-control" type="text" name="reference_number" required>
                         </div>
                     </div>
                     <p>Reservation Code:  </p>
                     <div class='row'>
                         <div class='col-md-4'>
-                            <input class="form-control" type="text" name="reservation_code">
+                            <input class="form-control" type="text" name="reservation_code" required>
                         </div>
                     </div>
                     <p>Deposit Slip:  </p>
                     <div class='row'>
                         <div class='col-md-4'>
-                            <input class="form-control" type="file" name="deposit_slip">
+                            <input class="form-control" type="file" accept="image/*" name="deposit_slip" required>
                         </div>
                     </div>
                     <br/>
-                    <button type="submit" class="awe-btn awe-btn-6" name="submitCode" onclick="return confirm('Are you sure to cancel your reservation?')">Upload</button>
+                    <button type="submit" class="awe-btn awe-btn-6" name="submitCode">Upload</button>
                     <br/>
                     <i>Note: Upload only image file type that are allowed<br>Example:  .jpg .jpeg .png .bmp .gif</i>
- 
+
 
                 </form>
                 </div>

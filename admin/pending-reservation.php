@@ -244,7 +244,8 @@ if (mysql_num_rows($re) > 0) {
 												<td>'.$row['booking_date'].'</td>         
 												<td>
 												<a href="adminconfirmreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-primary confirmbtn">Confirm</a>&nbsp;&nbsp; 
-												<a href="admincancelreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-danger deletebtn">Delete</a>
+												<a href="admincancelreservation.php?booking_id='.$row['booking_id'].'"class="btn btn-danger deletebtn">Delete</a>&nbsp;&nbsp;
+												<a href="viewpayment.php?booking_id='.$row['booking_id'].'"class="btn btn-success paybtn">Payment</a>
 												</td>                                      
                                             </tr>
                                             ';
