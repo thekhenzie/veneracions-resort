@@ -190,6 +190,12 @@ if (mysql_num_rows($re) > 0) {
 							</li>
 						</ul>
 					</li>
+					<li>
+						<a href="../../cocoylandia/admin/starter.php">
+							<i class="fa fa-link"></i>
+							<span>Cocoylandia Admin</span>
+						</a>
+					</li>
 				</ul>
 				<!-- /.sidebar-menu -->
 			</section>
