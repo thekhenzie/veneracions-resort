@@ -67,7 +67,7 @@ console_log($_SESSION);
 
         <!-- MAIN STYLE -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     </head>
 
@@ -295,7 +295,7 @@ console_log($_SESSION);
                                                     <label>Zip/Postcode
                                                         <sup>*</sup>
                                                     </label>
-                                                    <input required class="input-text" name="postcode" type="number" pattern="[0-9]{4}" value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>"
+                                                    <input required class="input-text" name="postcode" id="postcode" type="number" pattern="[0-9]{4}" value="<?php if (isset($_SESSION['postcode']) && !empty($_SESSION['postcode'])) {echo $_SESSION['postcode'];}?>"
                                                         placeholder="e.g. 1600" / />
                                                 </div>
                                             </div>
@@ -312,7 +312,7 @@ console_log($_SESSION);
                                                     <label>Phone
                                                         <sup>*</sup>
                                                     </label>
-                                                    <input required class="input-text" name="phone" type="number" value="<?php if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {echo $_SESSION['phone'];}?>"
+                                                    <input required class="input-text" name="phone" id="phone" type="number" value="<?php if (isset($_SESSION['phone']) && !empty($_SESSION['phone'])) {echo $_SESSION['phone'];}?>"
                                                         pattern="[a-zA-Z0-9\s]+" Title="Special characters such as ( ) * & ^ % $ & etc are not allowed"
                                                         placeholder="" / />
                                                 </div>
@@ -443,7 +443,26 @@ for ($i = 0; $i < count($_SESSION['room_id']); $i++) {
 
             }
         </script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <script>
+            $(function() {
+                $('#postcode').keyup( function(e){
+                if ($(this).val().length >= 4) { 
+                    $(this).val($(this).val().substr(0, 4));
+                }
+                });
+                $('#phone').keyup( function(e){
+                    if ($(this).val().length >= 11) { 
+                        $(this).val($(this).val().substr(0, 11));
+                    }
+                });
+                $("#postcode").keypress(function(event) {
+                    if (event.which != 8 && event.which != 0 && (event.which < 48 || event.which > 57)) {
+                        return false;
+                    }
+                });
+            });
+        </script>
+
 
         <!-- LOAD JQUERY -->
         <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
